@@ -1,16 +1,37 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>ItemChecker</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>イベント管理アプリ</title>
+  <%= csrf_meta_tags %>  <!-- CSRFトークンを生成 -->
+  <%= stylesheet_pack_tag 'application' %>
+  <!-- JavaScriptの読み込みを<head>内に移動 -->
+  <%= javascript_pack_tag 'application' %>
+</head>
+<body>
+<header>
+  <nav>
+    <%= link_to 'トップ', root_path %>
+    <%= link_to 'About', about_path %>
+    <% if user_signed_in? %>
+      <%= link_to 'マイページ', user_path(current_user) %>
+      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to 'ログイン', new_user_session_path %>
+      <%= link_to '新規登録', new_user_registration_path %>
+      <%= button_to 'ゲストログイン', guest_login_path, method: :post, class: 'btn btn-secondary' %>
+    <% end %>
+  </nav>
+</header>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<main>
+  <%= yield %>
+</main>
 
-  <body>
-    <%= yield %>
-  </body>
+<footer>
+  <p>© 2024 イベント管理アプリ</p>
+</footer>
+
+</body>
 </html>

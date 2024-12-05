@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root 'home#top'  # トップページ
+  get 'about', to: 'home#about'  # アバウトページ
+  devise_for :users  # Deviseのルート
+  resources :users, only: [:show]
+  post 'users/guest_login', to: 'users#guest_login', as: 'guest_login'  # ゲストログイン用ルート
 end
