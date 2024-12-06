@@ -1,3 +1,4 @@
+<!-- app/views/layouts/application.html.erb -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -10,28 +11,15 @@
   <%= javascript_pack_tag 'application' %>
 </head>
 <body>
-<header>
-  <nav>
-    <%= link_to 'トップ', root_path %>
-    <%= link_to 'About', about_path %>
-    <% if user_signed_in? %>
-      <%= link_to 'マイページ', user_path(current_user) %>
-      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%= link_to 'ログイン', new_user_session_path %>
-      <%= link_to '新規登録', new_user_registration_path %>
-      <%= button_to 'ゲストログイン', guest_login_path, method: :post, class: 'btn btn-secondary' %>
-    <% end %>
-  </nav>
-</header>
+  <%= render 'layouts/header' %> <!-- ヘッダー部分の呼び出し -->
 
-<main>
-  <%= yield %>
-</main>
+  <main>
+    <%= yield %>
+  </main>
 
-<footer>
-  <p>© 2024 イベント管理アプリ</p>
-</footer>
+  <footer>
+    <p>© 2024 イベント管理アプリ</p>
+  </footer>
 
 </body>
 </html>
