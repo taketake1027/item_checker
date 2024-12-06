@@ -1,0 +1,9 @@
+ja:
+  devise:
+    sessions:
+      invalid: 'メールアドレスまたはパスワードが間違っています。'
+    registrations:
+      user:
+        email: 'メールアドレス'
+        password: 'パスワード'
+        # 他のフィールドの翻訳も必要に応じて追加
