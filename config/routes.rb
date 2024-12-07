@@ -1,27 +1,49 @@
 Rails.application.routes.draw do
-  # Deviseのルート設定（1回にまとめる）
-  devise_for :users, controllers: {
-    sessions: 'users/sessions'
+ # 管理者用トップページ
+namespace :admin do
+  get 'homes/top', to: 'homes#top'
+end
+  # ユーザー用のDevise設定
+  devise_for :users
+
+  # 管理者用のDevise設定（ログインページのURLをadmin/sign_inに変更）
+  devise_for :admins, path: 'admin', controllers: {
+    sessions: 'admin/sessions'  
   }
-  
-  # サインアウトルートのカスタマイズ（必要ならdevise_scopeを使用）
-  devise_scope :user do
-    delete '/users/sign_out', to: 'devise/sessions#destroy'  # GETからDELETEに変更
-    get '/users/sign_out' => 'devise/sessions#destroy'
+
+  # ユーザー関連のルート
+  resources :users, only: [:show, :edit, :update, :destroy]
+
+  # トップページ（イベント一覧ページ）
+  root 'homes#top'
+
+  # アバウトページ
+  get '/about', to: 'homes#about'
+
+  # ユーザー関連
+  get 'mypage', to: 'users#show', as: 'mypage'  # マイページ
+  get '/mypage/edit', to: 'users#edit'  # ユーザー登録情報編集画面
+  patch '/mypage', to: 'users#update'  # ユーザー登録情報更新
+
+  # ログイン・会員登録関連
+  # ゲストログイン専用ルート
+  post 'guest_login', to: 'users#guest_login', as: :guest_login
+
+  # イベント関連
+  resources :events, only: [:show] do
+    # イベントに対する投稿・コメント関連
+    resources :posts, only: [:create, :destroy]
+    resources :comments, only: [:create, :destroy]
   end
 
-  # アプリケーションのルート
-  root 'home#top'  # トップページ
-  get 'about', to: 'home#about'  # アバウトページ
+  # アイテム関連
+  resources :items, only: [:index, :show]
 
-  # ユーザー関連ルート
-  resources :users, only: [:new, :create, :show, :edit, :update, :destroy]
-  post 'users/guest_login', to: 'users#guest_login', as: 'guest_login'  # ゲストログイン用ルート
+  # 通知関連
+  get '/notices', to: 'notices#index'  # 通知一覧ページ（ユーザー専用）
 
-  # イベント関連ルート
-  resources :events, only: [:index, :show] do
-    member do
-      post 'join'
-    end
+  # グループ参加関連
+  resources :groups, only: [:show] do
+    resources :group_users, only: [:create, :destroy]
   end
 end

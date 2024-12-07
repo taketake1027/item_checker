@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  start_time: 2024-12-06 13:44:12
+  end_time: 2024-12-06 13:44:12
+  group: one
+
+two:
+  name: MyString
+  description: MyText
+  start_time: 2024-12-06 13:44:12
+  end_time: 2024-12-06 13:44:12
+  group: two

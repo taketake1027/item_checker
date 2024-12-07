@@ -1,4 +1,10 @@
 class Users::SessionsController < Devise::SessionsController
+  # ゲストログイン用のアクション
+  def guest_login
+    user = User.find_by(email: 'guest@example.com')
+    sign_in user
+    redirect_to root_path, notice: 'ゲストログインしました。'
+  end
   def create
     # Deviseのデフォルト認証メソッドを使用
     self.resource = warden.authenticate(auth_options)
