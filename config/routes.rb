@@ -1,12 +1,24 @@
 Rails.application.routes.draw do
+ # 管理者用トップページ
+namespace :admin do
+  get 'homes/top', to: 'homes#top'
+end
+  # ユーザー用のDevise設定
   devise_for :users
-  devise_for :admins
+
+  # 管理者用のDevise設定（ログインページのURLをadmin/sign_inに変更）
+  devise_for :admins, path: 'admin', controllers: {
+    sessions: 'admin/sessions'  
+  }
 
   # ユーザー関連のルート
   resources :users, only: [:show, :edit, :update, :destroy]
-  
-  root 'homes#top'  # トップページ（イベント一覧ページ）
-  get '/about', to: 'homes#about'  # アバウトページ
+
+  # トップページ（イベント一覧ページ）
+  root 'homes#top'
+
+  # アバウトページ
+  get '/about', to: 'homes#about'
 
   # ユーザー関連
   get 'mypage', to: 'users#show', as: 'mypage'  # マイページ
