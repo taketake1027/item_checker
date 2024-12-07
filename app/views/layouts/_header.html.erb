@@ -13,19 +13,21 @@
               <span class="nav-link">ようこそ、<%= current_user.name %>さん</span>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<%= user_path(current_user) %>">マイページ</a>
+              <a class="nav-link" href="<%= mypage_path(current_user) %>">マイページ</a>
             </li>
           <% end %>
           
           <!-- ログイン後にアバウトリンクを表示 -->
           <li class="nav-item">
-            <a class="nav-link" href="<%= about_path %>">アバウト</a> <!-- アバウトページへのリンク -->
+            <a class="nav-link" href="<%= about_path %>">アバウト</a>
           </li>
 
+          <!-- ログアウトリンク -->
           <li class="nav-item">
             <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-link" %>
           </li>
         <% else %>
+          <!-- 未ログイン状態の場合 -->
           <li class="nav-item">
             <%= link_to 'ログイン', new_user_session_path, class: "nav-link" %>
           </li>

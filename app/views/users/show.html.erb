@@ -1,5 +1,7 @@
 <h1><%= @user.name %>さんのプロフィール</h1>
 <p><strong>メールアドレス:</strong> <%= @user.email %></p>
 
-<%= link_to 'プロフィール編集', edit_user_path(@user), class: 'btn btn-primary' %>
-<%= link_to 'アカウント削除', user_path(@user), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+<% unless current_user.email == 'guest@example.com' %>
+  <!-- ゲストユーザーでない場合にプロフィール編集リンクを表示 -->
+  <%= link_to 'プロフィール編集', mypage_edit_path(@user), class: 'btn btn-primary' %>
+<% end %>
