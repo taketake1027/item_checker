@@ -1,0 +1,18 @@
+<!-- app/views/admin/groups/show.html.erb -->
+<div class="container">
+  <h1><%= @group.name %>の詳細</h1>
+
+  <div class="form-group mb-3">
+    <%= label_tag :name, 'グループ名' %>
+    <%= @group.name %>
+  </div>
+
+  <div class="form-group mb-3">
+    <%= label_tag :introduction, 'グループ紹介' %>
+    <%= @group.introduction.present? ? @group.introduction : '紹介文はありません' %>
+  </div>
+
+  <div class="mb-3">
+    <%= link_to '戻る', admin_groups_path, class: 'btn btn-secondary' %>
+  </div>
+</div>

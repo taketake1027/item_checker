@@ -1,0 +1,32 @@
+<div class="container">
+  <h1>グループ一覧</h1>
+
+  <!-- 新規グループ作成ボタン -->
+  <div class="mb-3">
+    <%= link_to '新規グループ作成', new_admin_group_path, class: 'btn btn-primary' %>
+  </div>
+
+  <!-- グループの一覧 -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>グループ名</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @groups.each do |group| %>
+        <tr>
+          <td><%= group.name %></td>
+          <td>
+            <!-- 編集ボタン -->
+            <%= link_to '編集', edit_admin_group_path(group), class: 'btn btn-secondary' %>
+
+            <!-- 詳細ページボタン -->
+            <%= link_to '詳細', admin_group_path(group), class: 'btn btn-info ml-2' %> <!-- 詳細ボタンを追加 -->
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
