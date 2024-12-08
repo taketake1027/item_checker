@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'homes#top'
     get 'homes/top', to: 'homes#top'
-    resources :groups, only: [:index, :show, :edit, :update, :new, :create]   # 管理者グループ一覧ページなど
+    resources :groups
   end
 
   # ユーザー用のDevise設定

@@ -19,11 +19,11 @@
         <tr>
           <td><%= group.name %></td>
           <td>
-            <!-- 編集ボタン -->
-            <%= link_to '編集', edit_admin_group_path(group), class: 'btn btn-secondary' %>
-
             <!-- 詳細ページボタン -->
-            <%= link_to '詳細', admin_group_path(group), class: 'btn btn-info ml-2' %> <!-- 詳細ボタンを追加 -->
+            <%= link_to '詳細', admin_group_path(group), class: 'btn btn-info' %>
+
+            <!-- 編集ボタン -->
+            <%= link_to '編集', edit_admin_group_path(group), class: 'btn btn-secondary ml-2' %>
           </td>
         </tr>
       <% end %>
