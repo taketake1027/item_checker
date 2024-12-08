@@ -42,6 +42,9 @@ end
   # 通知関連
   get '/notices', to: 'notices#index'  # 通知一覧ページ（ユーザー専用）
 
+  # グループ一覧ページへのルート設定
+  resources :groups, only: [:index]
+  
   # グループ参加関連
   resources :groups, only: [:show] do
     resources :group_users, only: [:create, :destroy]

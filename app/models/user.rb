@@ -11,5 +11,5 @@ class User < ApplicationRecord
   validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
 
   # パスワードのバリデーション（空でないこと、6文字以上であること）
-  validates :password, presence: true, length: { minimum: 6 }, confirmation: true
+  validates :password, presence: true, length: { minimum: 6 }
 end
