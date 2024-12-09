@@ -1,51 +1,55 @@
 <div class="container my-4">
-  <h1 class="text-center mb-4">
-    <%= @group.present? ? @group.name : 'グループ名が設定されていません' %>の詳細
-  </h1>
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10 col-sm-12">
 
-  <!-- グループ名 -->
-  <div class="form-group mb-3">
-    <%= label_tag :name, 'グループ名', class: 'form-label' %>
-    <p><%= @group.present? ? @group.name : 'グループ名が設定されていません' %></p>
-  </div>
+      <h1 class="text-center mb-4">
+        <%= @group.present? ? @group.name : 'グループ名が設定されていません' %>の詳細
+      </h1>
 
-  <!-- グループ紹介 -->
-  <div class="form-group mb-3">
-    <%= label_tag :introduction, 'グループ紹介', class: 'form-label' %>
-    <p><%= @group.introduction.present? ? @group.introduction : '紹介文はありません' %></p>
-  </div>
+      <!-- グループ名 -->
+      <div class="form-group mb-3">
+        <p><%= @group.present? ? @group.name : 'グループ名が設定されていません' %></p>
+      </div>
 
-  <!-- グループに追加された人数 -->
-  <h3>グループに追加された人数: <%= @group_users.count %>人</h3>
+      <!-- グループ紹介 -->
+      <div class="form-group mb-3">
+        <p><%= @group.introduction.present? ? @group.introduction : '紹介文はありません' %></p>
+      </div>
 
-  <!-- グループに追加された人の名前 -->
-  <h4>グループメンバー</h4>
-  <ul>
-    <% @group_users.each do |group_user| %>
-      <li>
-        <% if group_user.user.present? %>
-          <%= group_user.user.name %>（<%= group_user.status %>） 
-          <!-- ユーザー削除ボタン -->
-          <%= link_to '削除', admin_group_remove_user_path(@group, group_user), method: :delete, data: { confirm: '本当にこのユーザーを削除しますか？' }, class: 'btn btn-danger btn-sm' %>
-        <% else %>
-          <%= "ユーザー情報がありません" %>
+      <!-- グループに追加された人数 -->
+      <h3>グループに追加された人数: <%= @group_users.count %>人</h3>
+
+      <!-- グループに追加された人の名前 -->
+      <h4>グループメンバー</h4>
+      <ul>
+        <% @group_users.each do |group_user| %>
+          <li>
+            <% if group_user.user.present? %>
+              <%= group_user.user.name %>（<%= group_user.status %>） 
+              <!-- ユーザー削除ボタン -->
+              <%= link_to '削除', admin_group_remove_user_path(@group, group_user), method: :delete, data: { confirm: '本当にこのユーザーを削除しますか？' }, class: 'btn btn-danger btn-sm' %>
+            <% else %>
+              <%= "ユーザー情報がありません" %>
+            <% end %>
+          </li>
         <% end %>
-      </li>
-    <% end %>
-  </ul>
+      </ul>
 
-  <!-- ユーザー追加フォーム（自動招待） -->
-  <h3>ユーザー追加</h3>
-  <%= form_with url: add_user_to_group_admin_group_path(@group), method: :post, local: true do |f| %>
-    <div class="form-group mb-3">
-      <%= f.label :email, '追加するユーザーのメールアドレス', class: 'form-label' %>
-      <%= f.email_field :email, class: 'form-control', required: true %>
+      <!-- ユーザー追加フォーム（自動招待） -->
+      <h3>ユーザー追加</h3>
+      <%= form_with url: add_user_to_group_admin_group_path(@group), method: :post, local: true do |f| %>
+        <div class="form-group mb-3">
+          <%= f.label :email, '追加するユーザーのメールアドレス', class: 'form-label', for: "user_email" %>
+          <%= f.email_field :email, class: 'form-control', id: 'user_email', required: true %>
+        </div>
+        <%= f.submit 'ユーザー追加', class: 'btn btn-primary' %>
+      <% end %>
+
+      <!-- 戻るボタン -->
+      <div class="text-center">
+        <%= link_to '戻る', admin_groups_path, class: 'btn btn-secondary' %>
+      </div>
+      
     </div>
-    <%= f.submit 'ユーザー追加', class: 'btn btn-primary' %>
-  <% end %>
-
-  <!-- 戻るボタン -->
-  <div class="text-center">
-    <%= link_to '戻る', admin_groups_path, class: 'btn btn-secondary' %>
   </div>
 </div>
