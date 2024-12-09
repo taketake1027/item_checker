@@ -38,6 +38,12 @@ class Admin::GroupsController < ApplicationController
     end
   end
 
+  def destroy
+    @group = Group.find(params[:id])
+    @group.destroy
+    redirect_to admin_groups_path, notice: 'グループが削除されました。'
+  end
+
   private
 
   def set_group

@@ -4,4 +4,11 @@
 <% unless current_user.email == 'guest@example.com' %>
   <!-- ゲストユーザーでない場合にプロフィール編集リンクを表示 -->
   <%= link_to 'プロフィール編集', mypage_edit_path(@user), class: 'btn btn-primary' %>
+
+  <!-- アカウント削除ボタンを表示 -->
+  <%= form_for(@user, url: user_registration_path, html: { method: :delete }) do |f| %>
+    <div class="form-group">
+      <%= f.submit 'アカウントを削除する', class: 'btn btn-danger', data: { confirm: '本当にアカウントを削除しますか？ この操作は取り消せません。' } %>
+    </div>
+  <% end %>
 <% end %>

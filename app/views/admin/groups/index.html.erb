@@ -24,6 +24,9 @@
 
             <!-- 編集ボタン -->
             <%= link_to '編集', edit_admin_group_path(group), class: 'btn btn-secondary ml-2' %>
+
+            <!-- 削除ボタン -->
+            <%= link_to '削除', admin_group_path(group), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: 'btn btn-danger ml-2' %>
           </td>
         </tr>
       <% end %>

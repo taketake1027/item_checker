@@ -10,16 +10,61 @@
   <%= stylesheet_pack_tag 'application' %>
   <!-- JavaScriptの読み込みを<head>内に移動 -->
   <%= javascript_pack_tag 'application' %>
+  
+  <style>
+    /* 背景色を白に設定 */
+    body {
+      background-color: #FFFFFF; /* 背景色を白 (#FFFFFF) に変更 */
+      color: #333333; /* 文字色を濃いグレー (#333333) に変更 */
+      margin: 0;
+    }
+
+    /* ヘッダーとフッターの色 */
+    footer, header {
+      background-color: #004986; /* ヘッダーとフッターの背景色を濃い青 (#004986) に変更 */
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    /* 中央寄せ */
+    .container {
+      width: 100%;
+      max-width: 1200px; /* 最大幅 */
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* フッターを画面下部に固定 */
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+
+    main {
+      padding-bottom: 80px; /* フッター分の余白 */
+    }
+  </style>
 </head>
 <body>
+  <!-- ヘッダー部分 -->
+  <header>
+    <div class="container">
+      <h1>イベント管理アプリ</h1>
+    </div>
+  </header>
+
   <%= render 'layouts/header' %> <!-- ヘッダー部分の呼び出し -->
 
   <main>
     <%= yield %>
   </main>
 
+  <!-- フッター部分 -->
   <footer>
-    <p>© 2024 イベント管理アプリ</p>
+    <div class="container">
+      <p>© 2024 イベント管理アプリ</p>
+    </div>
   </footer>
 
 </body>
