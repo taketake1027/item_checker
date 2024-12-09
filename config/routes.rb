@@ -1,9 +1,18 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'group_users/destroy'
+  end
   # 管理者用トップページ
   namespace :admin do
     root to: 'homes#top'
     get 'homes/top', to: 'homes#top'
-    resources :groups
+    
+    resources :groups do
+      # グループにユーザーを追加するためのルート
+      post 'add_user_to_group', on: :member
+      # ユーザー削除用のルート設定
+      resources :group_users, only: [:destroy], as: 'remove_user'
+    end
   end
 
   # ユーザー用のDevise設定
