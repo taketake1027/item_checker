@@ -13,4 +13,5 @@ Turbolinks.start()
 ActiveStorage.start()
 
 import 'bootstrap'
+import "@popperjs/core"
 //= require rails-ujs

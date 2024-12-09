@@ -1,10 +1,12 @@
 <div class="container my-4">
-  <h1 class="text-center mb-4"><%= @group.name %>の詳細</h1>
+  <h1 class="text-center mb-4">
+    <%= @group.present? ? @group.name : 'グループ名が設定されていません' %>の詳細
+  </h1>
 
   <!-- グループ名 -->
   <div class="form-group mb-3">
     <%= label_tag :name, 'グループ名', class: 'form-label' %>
-    <p><%= @group.name %></p>
+    <p><%= @group.present? ? @group.name : 'グループ名が設定されていません' %></p>
   </div>
 
   <!-- グループ紹介 -->
@@ -21,9 +23,13 @@
   <ul>
     <% @group_users.each do |group_user| %>
       <li>
-        <%= group_user.user.name %>（<%= group_user.status %>） 
-        <!-- ユーザー削除ボタン -->
-        <%= link_to '削除', admin_group_remove_user_path(@group, group_user.user), method: :delete, data: { confirm: '本当にこのユーザーを削除しますか？' }, class: 'btn btn-danger btn-sm' %>
+        <% if group_user.user.present? %>
+          <%= group_user.user.name %>（<%= group_user.status %>） 
+          <!-- ユーザー削除ボタン -->
+          <%= link_to '削除', admin_group_remove_user_path(@group, group_user), method: :delete, data: { confirm: '本当にこのユーザーを削除しますか？' }, class: 'btn btn-danger btn-sm' %>
+        <% else %>
+          <%= "ユーザー情報がありません" %>
+        <% end %>
       </li>
     <% end %>
   </ul>
