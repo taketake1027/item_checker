@@ -7,6 +7,9 @@
   <%= csrf_meta_tags %>  
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= stylesheet_pack_tag 'admin' %> <!-- 管理者専用スタイルを読み込み -->
+
+  <!-- JavaScriptを<head>内に移動 -->
+  <%= javascript_pack_tag 'application' %> <!-- JavaScriptをヘッダーに読み込み -->
 </head>
 <body>
   <%= render 'layouts/header_admin' %> <!-- ヘッダー -->
@@ -18,7 +21,5 @@
   <footer>
     <p>© 2024 イベント管理アプリ</p>
   </footer>
-
-  <%= javascript_pack_tag 'application' %> <!-- JavaScriptをフッター直前に移動 -->
 </body>
 </html>
