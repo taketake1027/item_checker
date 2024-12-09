@@ -1,0 +1,64 @@
+<!-- app/views/layouts/_header_admin.html.erb -->
+<nav class="navbar navbar-expand-lg navbar-light custom-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="<%= root_path %>">アイテムチェッカー管理者ページ</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <% if admin_signed_in? %>
+          <!-- ログアウトリンク -->
+          <li class="nav-item">
+            <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "nav-link" %>
+          </li>
+        <% else %>
+          <!-- 未ログイン状態の場合 -->
+          <li class="nav-item">
+            <%= link_to 'ログイン', new_admin_session_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '新規登録', new_admin_registration_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<style>
+  /* ナビゲーションバーの背景色 */
+  .custom-navbar {
+    background-color: #004986 !important; /* 背景色を濃い青 (#004986) に変更 */
+    border-bottom: 2px solid #004986; /* 下に濃い青色の枠を追加 */
+  }
+
+  /* ナビゲーションリンクの色とフォント調整 */
+  .custom-navbar .nav-link {
+    color: white !important; /* リンク文字色を白に */
+    font-size: 1.1rem; /* フォントサイズ調整 */
+    font-weight: bold; /* フォントを太く */
+  }
+
+  /* ホバー時のリンク色 */
+  .custom-navbar .nav-link:hover {
+    color: #ffd700 !important; /* ホバー時の文字色をゴールドに */
+  }
+
+  /* ナビゲーションバーの高さ調整 */
+  .custom-navbar {
+    padding: 10px 0; /* 上下のパディング */
+  }
+
+  /* スマホなどの小さい画面でも中央寄せ */
+  @media (max-width: 767px) {
+    .custom-navbar .navbar-nav {
+      text-align: center;
+    }
+  }
+
+  /* ナビゲーションバーのブランド名の文字色 */
+  .navbar-brand {
+    color: white !important; /* ブランド名の文字色を白に変更 */
+  }
+</style>

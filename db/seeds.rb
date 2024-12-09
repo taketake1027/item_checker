@@ -1,10 +1,7 @@
-# db/seeds.rb
+Admin.find_or_create_by(email: "aa@aa") do |admin|
+  admin.password= 'aaaaaa'
+  admin.password_confirmation= 'aaaaaa'
+  admin.role= 'admin'
+end
 
-# 管理者ユーザーを作成（メールアドレスとパスワードは適宜変更してください）
-Admin.create!(
-  email: 'admin@example.com',
-  password: 'password123',
-  password_confirmation: 'password123'
-)
-
-puts '管理者ユーザーが作成されました。'
+puts "管理者アカウントを作成しました"

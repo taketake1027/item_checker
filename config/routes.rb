@@ -1,14 +1,17 @@
 Rails.application.routes.draw do
- # 管理者用トップページ
-namespace :admin do
-  get 'homes/top', to: 'homes#top'
-end
+  # 管理者用トップページ
+  namespace :admin do
+    root to: 'homes#top'
+    get 'homes/top', to: 'homes#top'
+    resources :groups
+  end
+
   # ユーザー用のDevise設定
   devise_for :users
 
   # 管理者用のDevise設定（ログインページのURLをadmin/sign_inに変更）
   devise_for :admins, path: 'admin', controllers: {
-    sessions: 'admin/sessions'  
+    sessions: 'admin/sessions'
   }
 
   # ユーザー関連のルート
@@ -42,8 +45,8 @@ end
   # 通知関連
   get '/notices', to: 'notices#index'  # 通知一覧ページ（ユーザー専用）
 
-  # グループ参加関連
-  resources :groups, only: [:show] do
-    resources :group_users, only: [:create, :destroy]
+  # グループ一覧ページへのルート設定
+  resources :groups, only: [:index, :show] do
+    resources :group_users, only: [:create, :destroy]  # グループへの参加・脱退
   end
 end

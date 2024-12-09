@@ -1,0 +1,22 @@
+<!-- app/views/admin/groups/edit.html.erb -->
+<div class="container">
+  <h1>グループ情報編集</h1>
+
+  <%= form_with model: @group, url: admin_group_path(@group), method: :patch, local: true do |f| %>
+    <div class="form-group mb-3">
+      <%= f.label :name, 'グループ名' %>
+      <%= f.text_field :name, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= f.label :introduction, 'グループ紹介' %>
+      <%= f.text_area :introduction, class: 'form-control' %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= f.submit '更新', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+
+  <%= link_to '戻る', admin_group_path(@group), class: 'btn btn-secondary' %>
+</div>

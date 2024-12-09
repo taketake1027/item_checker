@@ -1,6 +1,26 @@
 class Admin::SessionsController < Devise::SessionsController
-  # 管理者用ログイン画面にカスタマイズしたい場合は、このクラスに処理を追加します
+  layout 'admin'
+
   def new
-    super
+  end
+
+  #def create
+    #super do |admin|
+      # ログイン後にデバッグで確認
+      #Rails.logger.debug("Admin signed in: #{admin_signed_in?}")
+      
+      #if admin_signed_in?
+      #  redirect_to admin_homes_top_path and return
+      #end
+    #end
+  #end
+
+  private
+
+  def after_sign_in_path_for(resource)
+    admin_root_path
+  end
+  def after_sign_out_path_for(resource)
+    admin_root_path
   end
 end

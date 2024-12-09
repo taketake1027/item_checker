@@ -1,6 +1,5 @@
-# app/models/admin.rb
 class Admin < ApplicationRecord
-  # Include default devise modules
+  # devise のみ使用する
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 end
