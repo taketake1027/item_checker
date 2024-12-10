@@ -24,7 +24,7 @@ class Admin::GroupsController < ApplicationController
   end
 
   def show
-    @group_users = @group.group_users.includes(:user)
+    @group_users = @group.group_users.includes(:user).page(params[:page]).per(3)
   end
 
   def update

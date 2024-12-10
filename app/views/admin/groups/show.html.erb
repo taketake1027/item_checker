@@ -17,13 +17,13 @@
       </div>
 
       <!-- グループに追加された人数 -->
-      <h3>グループに追加された人数: <%= @group_users.count %>人</h3>
+      <h3>グループに追加された人数: <%= @group.users.count %>人</h3>
 
-      <!-- グループに追加された人の名前 -->
+      <!-- グループメンバー（横並び表示） -->
       <h4>グループメンバー</h4>
-      <ul>
+      <ul style="display: flex; flex-wrap: wrap; gap: 15px;">
         <% @group_users.each do |group_user| %>
-          <li>
+          <li style="list-style-type: none; background: #f8f9fa; padding: 10px 20px; border-radius: 5px;">
             <% if group_user.user.present? %>
               <%= group_user.user.name %>（<%= group_user.status %>） 
               <!-- ユーザー削除ボタン -->
@@ -34,6 +34,11 @@
           </li>
         <% end %>
       </ul>
+
+      <!-- ページネーション -->
+      <div class="pagination justify-content-center">
+        <%= paginate @group_users %>
+      </div>
 
       <!-- ユーザー追加フォーム（自動招待） -->
       <h3>ユーザー追加</h3>
