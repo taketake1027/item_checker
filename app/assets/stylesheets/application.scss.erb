@@ -10,8 +10,19 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
+ *= require_tree 
  *= require_self
  */
 /*= require bootstrap */
 @import 'bootstrap';
+
+/* 全体の背景画像 */
+body {
+  background-image: url('<%= asset_path("drawing-pad-1209779_1920.jpg") %>');
+  background-size: cover; /* 画面全体に画像をフィットさせる */
+  background-position: center; /* 画像を中央に配置 */
+  background-repeat: no-repeat; /* 画像を繰り返さない */
+  min-height: 100vh; /* ビューポートの高さに合わせる */
+  margin: 0;
+  color: #333333; /* 文字色を設定 */
+}
