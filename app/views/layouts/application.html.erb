@@ -1,67 +1,52 @@
-<!-- app/views/layouts/application.html.erb -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>イベント管理アプリ</title>
-  <%= csrf_meta_tags %>  <!-- CSRFトークンを生成 -->
+  <%= csrf_meta_tags %>
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= stylesheet_pack_tag 'application' %>
-  <!-- JavaScriptの読み込みを<head>内に移動 -->
   <%= javascript_pack_tag 'application' %>
   
   <style>
-    /* 背景色を白に設定 */
+    /* 共通スタイル */
     body {
-      background-color: #FFFFFF; /* 背景色を白 (#FFFFFF) に変更 */
-      color: #333333; /* 文字色を濃いグレー (#333333) に変更 */
+      background-color: #FFFFFF;
+      color: #333333;
       margin: 0;
-      min-height: 100vh; /* 最小高さを100vh（画面全体）に設定 */
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
 
-    /* ヘッダーとフッターの色 */
-    footer, header {
-      background-color: #004986; /* ヘッダーとフッターの背景色を濃い青 (#004986) に変更 */
-      color: white;
-      padding: 20px 0;
-      text-align: center;
-    }
-
-    /* メインコンテンツエリア */
     main {
-      flex-grow: 1; /* メインコンテンツを最大限に伸ばす */
-      padding-bottom: 60px; /* フッター分の余白を確保 */
+      flex-grow: 1;
+      padding-bottom: 60px;
     }
 
-    /* フッターを常に下に表示 */
     footer {
-      margin-top: auto; /* フッターを画面の最下部に配置 */
+      margin-top: auto;
+      background-color: #004986;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
     }
   </style>
 </head>
 <body>
-  <!-- ヘッダー部分 -->
-  <header>
-    <div class="container">
-      <h1>イベント管理アプリ</h1>
-    </div>
-  </header>
-
-  <%= render 'layouts/header' %> <!-- ヘッダー部分の呼び出し -->
+  <!-- ヘッダー -->
+  <%= render 'layouts/header' %>
 
   <main>
-    <%= yield %> <!-- メインコンテンツ -->
+    <%= yield %>
   </main>
 
-  <!-- フッター部分 -->
+  <!-- フッター -->
   <footer>
     <div class="container">
       <p>© 2024 イベント管理アプリ</p>
     </div>
   </footer>
-
 </body>
 </html>
