@@ -1,5 +1,5 @@
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-  <div class="card shadow p-4" style="max-width: 400px; width: 100%;">
+<div class="container d-flex justify-content-center align-items-center">
+  <div class="card shadow p-4" style="max-width: 600px; width: 100%;"> <!-- 最大横幅600px、幅は100% -->
     <h2 class="text-center mb-4">ログイン</h2>
 
     <div class="d-flex justify-content-center mb-3">
@@ -49,6 +49,11 @@
       <div class="d-grid">
         <%= f.submit "ログイン", class: "btn btn-primary" %>
       </div>
+
+      <!-- 新規登録ページへのボタン -->
+      <div class="d-flex justify-content-center mt-3">
+        <%= link_to '新規登録はこちら', new_user_registration_path, class: 'btn btn-primary w-100' %> <!-- ログインボタンと同じ色に変更 -->
+      </div>
     <% end %>
   </div>
 </div>
@@ -77,4 +82,21 @@
     padding: 10px;
     font-size: 1rem;
   }
+
+  /* ゲストログインボタンのスタイル調整 */
+  .btn-secondary {
+    width: 100%; /* ボタンの横幅を100%にして、中央に揃える */
+  }
+
+  /* 新規登録ボタンのスタイル調整（ログインボタンと同じ色） */
+  .btn-primary {
+    width: 100%; /* 横幅100% */
+    padding: 10px; /* ボタン内余白 */
+  }
+
+  /* エラーメッセージのスタイル調整 */
+  .alert {
+    margin-top: 10px;
+  }
 </style>
+

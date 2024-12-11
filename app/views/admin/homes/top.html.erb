@@ -1,8 +1,16 @@
-<h1>管理者トップページ</h1>
-<p>ここで管理者ダッシュボード機能を提供します。</p>
-<nav>
-  <ul>
-    <li><%= link_to 'グループ一覧', admin_groups_path %></li>
-    <li><%#= link_to 'イベント一覧', admin_events_path %></li>
-  </ul>
-</nav>
+<!-- app/views/admin/dashboard/index.html.erb -->
+<div class="container my-4">
+  <h1 class="text-center mb-4">管理者トップページ</h1>
+  <p class="text-center mb-4">ここで管理者ダッシュボード機能を提供します。</p>
+
+  <nav>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <%= link_to 'グループ一覧', admin_groups_path, class: "btn btn-link w-100 text-start" %>
+      </li>
+      <li class="list-group-item">
+        <%#= link_to 'イベント一覧', admin_events_path, class: "btn btn-link w-100 text-start" %>
+      </li>
+    </ul>
+  </nav>
+</div>

@@ -4,56 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>イベント管理アプリ | 管理者ページ</title>
-  <%= csrf_meta_tags %>  <!-- CSRFトークンを生成 -->
+  <%= csrf_meta_tags %>  
   <%= stylesheet_link_tag 'application', media: 'all' %>
-  <%= stylesheet_pack_tag 'application' %>
-  <!-- JavaScriptの読み込みを<head>内に移動 -->
-  <%= javascript_pack_tag 'application' %>
+  <%= stylesheet_pack_tag 'admin' %> <!-- 管理者専用スタイルを読み込み -->
+
+  <!-- JavaScriptを<head>内に移動 -->
+  <%= javascript_pack_tag 'application' %> <!-- JavaScriptをヘッダーに読み込み -->
 
   <style>
-    /* 背景色を白 (#FFFFFF) に設定 */
+    /* ページ全体のレイアウト設定 */
     body {
-      background-color: #FFFFFF; /* 背景色を白 (#FFFFFF) に変更 */
-      color: #333333; /* 文字色を濃いグレー (#333333) に変更 */
       margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh; /* 最低でも画面いっぱいに広がる */
     }
 
-    /* ヘッダーとフッターの背景色を濃い青 (#004986) に変更 */
-    footer, header {
-      background-color: #004986; /* 背景色を濃い青 (#004986) に変更 */
+    /* メインコンテンツ */
+    main {
+      flex-grow: 1; /* メインコンテンツ部分が画面の残りのスペースを占める */
+    }
+
+    /* フッター */
+    footer {
+      margin-top: auto; /* フッターを最下部に固定 */
+      background-color: #004986; /* 背景色 */
       color: white;
       padding: 20px 0;
       text-align: center;
     }
-
-    /* 中央寄せ */
-    .container {
-      width: 100%;
-      max-width: 1200px; /* 最大幅 */
-      margin: 0 auto;
-      padding: 0 15px;
-    }
-    
-    /* フッターを画面下部に固定 */
-    body, html {
-      height: 100%;
-      margin: 0;
-    }
-
-    main {
-      padding-bottom: 80px; /* フッター分の余白 */
-    }
   </style>
 </head>
 <body>
-  <%= render 'layouts/header_admin' %> <!-- ヘッダー部分の呼び出し -->
+  <%= render 'layouts/header_admin' %> <!-- ヘッダー部分 -->
 
   <main>
-    <%= yield %>
+    <%= yield %> <!-- コンテンツ部分 -->
   </main>
 
-  <footer>
-    <p>© 2024 イベント管理アプリ</p>
+  <!-- フッター部分 -->
+  <footer class="text-white py-4" style="background-color: #004986;">
+    <div class="container text-center">
+      <p>© 2024 イベント管理アプリ</p>
+    </div>
   </footer>
 
 </body>
