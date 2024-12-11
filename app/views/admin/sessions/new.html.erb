@@ -1,27 +1,56 @@
 <!-- app/views/admin/sessions/new.html.erb -->
-<div class="container">
-  <h2 class="my-4 text-center">管理者ログイン</h2>
+<div class="container mt-5">
+  
 
-  <%= form_for(:admin, url: admin_session_path) do |f| %>
-    <div class="row justify-content-center">
-      <div class="col-md-6 col-lg-4">
-        <!-- メールアドレス -->
-        <div class="form-group mb-3">
-          <%= f.label :email, 'メールアドレス', class: "form-label" %>
-          <%= f.text_field :email, autofocus: true, class: "form-control" %>
-        </div>
-
-        <!-- パスワード -->
-        <div class="form-group mb-3">
-          <%= f.label :password, 'パスワード', class: "form-label" %>
-          <%= f.password_field :password, class: "form-control" %>
-        </div>
-
-        <!-- ログインボタン -->
-        <div class="form-group text-center">
-          <%= f.submit "ログイン", class: "btn btn-primary btn-lg w-100" %>
-        </div>
+  <div class="card shadow p-4" style="max-width: 500px; margin: 0 auto;">
+    <%= form_for(:admin, url: admin_session_path) do |f| %>
+    <h2 class="my-4 text-center">管理者ログイン</h2>
+      <div class="form-group mb-3">
+        <%= f.label :email, 'メールアドレス', class: "form-label" %>
+        <%= f.text_field :email, autofocus: true, class: "form-control" %>
       </div>
-    </div>
-  <% end %>
+
+      <div class="form-group mb-3">
+        <%= f.label :password, 'パスワード', class: "form-label" %>
+        <%= f.password_field :password, class: "form-control" %>
+      </div>
+
+      <div class="form-group text-center">
+        <%= f.submit "ログイン", class: "btn btn-primary btn-lg w-100" %>
+      </div>
+    <% end %>
+  </div>
 </div>
+
+<style>
+  /* 必要に応じてフォームの幅やデザインを調整 */
+  .card {
+    max-width: 500px;  /* 最大幅500px */
+    margin: 0 auto;  /* 中央揃え */
+  }
+
+  /* スタイル調整：カードのシャドウやパディングを設定 */
+  .card.shadow {
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;  /* 内側の余白を調整 */
+  }
+
+  /* 入力フィールドのスタイル調整 */
+  .form-control {
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  /* ログインボタンのスタイル調整 */
+  .btn-primary {
+    font-size: 1.1rem;
+    padding: 10px;
+  }
+
+  /* 必要に応じて、画面サイズに応じた調整 */
+  @media (max-width: 768px) {
+    .container {
+      padding: 0 15px; /* モバイル端末での左右余白 */
+    }
+  }
+</style>
