@@ -23,11 +23,11 @@
       <h4>グループメンバー</h4>
       <ul style="display: flex; flex-wrap: wrap; gap: 15px;">
         <% @group_users.each do |group_user| %>
-          <li style="list-style-type: none; background: #f8f9fa; padding: 10px 20px; border-radius: 5px;">
+          <li style="list-style-type: none; background: #f8f9fa; padding: 10px 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
             <% if group_user.user.present? %>
               <%= group_user.user.name %>（<%= group_user.status %>） 
               <!-- ユーザー削除ボタン -->
-              <%= link_to '削除', admin_group_remove_user_path(@group, group_user), method: :delete, data: { confirm: '本当にこのユーザーを削除しますか？' }, class: 'btn btn-danger btn-sm' %>
+              <%= link_to '削除', admin_group_remove_user_path(@group, group_user), method: :delete, data: { confirm: '本当にこのユーザーを削除しますか？' }, class: 'btn btn-danger btn-sm ml-2' %>
             <% else %>
               <%= "ユーザー情報がありません" %>
             <% end %>
@@ -42,19 +42,21 @@
 
       <!-- ユーザー追加フォーム（自動招待） -->
       <h3>ユーザー追加</h3>
-      <%= form_with url: add_user_to_group_admin_group_path(@group), method: :post, local: true do |f| %>
-        <div class="form-group mb-3">
-          <%= f.label :email, '追加するユーザーのメールアドレス', class: 'form-label', for: "user_email" %>
-          <%= f.email_field :email, class: 'form-control', id: 'user_email', required: true %>
-        </div>
-        <%= f.submit 'ユーザー追加', class: 'btn btn-primary' %>
-      <% end %>
+      <div class="form-container" style="background-color: white; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+        <%= form_with url: add_user_to_group_admin_group_path(@group), method: :post, local: true do |f| %>
+          <div class="form-group mb-3">
+            <%= f.label :email, '追加するユーザーのメールアドレス', class: 'form-label' %>
+            <%= f.email_field :email, class: 'form-control', id: 'user_email', required: true %>
+          </div>
+          <%= f.submit 'ユーザー追加', class: 'btn btn-primary' %>
+        <% end %>
+      </div>
 
       <!-- 戻るボタン -->
-      <div class="text-center">
+      <div class="text-center mt-3">
         <%= link_to '戻る', admin_groups_path, class: 'btn btn-secondary' %>
       </div>
-      
+
     </div>
   </div>
 </div>

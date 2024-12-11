@@ -1,27 +1,71 @@
 <div class="container my-4">
   <h1 class="text-center mb-4">グループ情報編集</h1>
 
-  <%= form_with model: @group, url: admin_group_path(@group), method: :patch, local: true do |f| %>
-    <!-- グループ名 -->
-    <div class="form-group mb-3">
-      <%= f.label :name, 'グループ名', class: 'form-label' %>
-      <%= f.text_field :name, class: 'form-control', required: true %>
-    </div>
+  <!-- 白い枠を追加 -->
+  <div class="form-container border p-4 rounded shadow">
+    <%= form_with model: @group, url: admin_group_path(@group), method: :patch, local: true do |f| %>
+      <!-- グループ名 -->
+      <div class="form-group mb-3">
+        <%= f.label :name, 'グループ名', class: 'form-label' %>
+        <%= f.text_field :name, class: 'form-control', required: true %>
+      </div>
 
-    <!-- グループ紹介 -->
-    <div class="form-group mb-3">
-      <%= f.label :introduction, 'グループ紹介', class: 'form-label' %>
-      <%= f.text_area :introduction, class: 'form-control', rows: 4 %>
-    </div>
+      <!-- グループ紹介 -->
+      <div class="form-group mb-3">
+        <%= f.label :introduction, 'グループ紹介', class: 'form-label' %>
+        <%= f.text_area :introduction, class: 'form-control', rows: 4 %>
+      </div>
 
-    <!-- 更新ボタン -->
-    <div class="text-center mb-3">
-      <%= f.submit '更新', class: 'btn btn-primary' %>
-    </div>
-  <% end %>
+      <!-- 更新ボタン -->
+      <div class="text-center mb-3">
+        <%= f.submit '更新', class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
 
   <!-- 戻るボタン -->
   <div class="text-center">
     <%= link_to '戻る', admin_group_path(@group), class: 'btn btn-secondary' %>
   </div>
 </div>
+
+<style>
+  /* コンテナの背景画像 */
+  .container {
+    background-image: url('your-background-image.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+  }
+
+  /* フォームを囲む白い枠のスタイル */
+  .form-container {
+    background-color: white; /* 白い背景 */
+    background-image: none;  /* 背景画像は適用しない */
+    border: 3px solid #007bff; /* 青色の太めの枠線 */
+    border-radius: 10px;      /* 角を丸くする */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* 強めのシャドウ効果 */
+  }
+
+  /* フォームの周りに余白を追加 */
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  /* ボタンに余白とフォントサイズを調整 */
+  .btn-primary {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+  }
+
+  /* フォーム内のラベル */
+  .form-label {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+
+  /* ボーダーの色やサイズの強調 */
+  .form-container:hover {
+    border-color: #0056b3;  /* ホバー時に枠線の色を変える */
+  }
+</style>
