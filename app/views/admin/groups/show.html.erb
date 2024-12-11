@@ -21,11 +21,11 @@
 
       <!-- グループメンバー（横並び表示） -->
       <h4>グループメンバー</h4>
-      <ul style="display: flex; flex-wrap: wrap; gap: 15px;">
+      <ul class="d-flex flex-wrap justify-content-start gap-3" style="list-style-type: none; padding: 0;">
         <% @group_users.each do |group_user| %>
-          <li style="list-style-type: none; background: #f8f9fa; padding: 10px 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+          <li class="d-flex flex-column" style="background: #f8f9fa; padding: 10px 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); flex: 0 0 30%;">
             <% if group_user.user.present? %>
-              <%= group_user.user.name %>（<%= group_user.status %>） 
+              <%= group_user.user.name %>（<%= group_user.status %>）
               <!-- ユーザー削除ボタン -->
               <%= link_to '削除', admin_group_remove_user_path(@group, group_user), method: :delete, data: { confirm: '本当にこのユーザーを削除しますか？' }, class: 'btn btn-danger btn-sm ml-2' %>
             <% else %>
@@ -45,7 +45,8 @@
       <div class="form-container" style="background-color: white; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
         <%= form_with url: add_user_to_group_admin_group_path(@group), method: :post, local: true do |f| %>
           <div class="form-group mb-3">
-            <%= f.label :email, '追加するユーザーのメールアドレス', class: 'form-label' %>
+            <!-- 修正: labelのfor属性をemail_fieldのid属性と一致させる -->
+            <%= f.label :email, '追加するユーザーのメールアドレス', class: 'form-label', for: 'user_email' %>
             <%= f.email_field :email, class: 'form-control', id: 'user_email', required: true %>
           </div>
           <%= f.submit 'ユーザー追加', class: 'btn btn-primary' %>
