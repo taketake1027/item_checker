@@ -1,16 +1,52 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>ItemChecker</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>イベント管理アプリ</title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= stylesheet_pack_tag 'application' %>
+  <%= javascript_pack_tag 'application' %>
+  
+  <style>
+    /* 共通スタイル */
+    body {
+      background-color: #FFFFFF;
+      color: #333333;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    main {
+      flex-grow: 1;
+      padding-bottom: 60px;
+    }
 
-  <body>
+    footer {
+      margin-top: auto;
+      background-color: #004986;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- ヘッダー -->
+  <%= render 'layouts/header' %>
+
+  <main>
     <%= yield %>
-  </body>
+  </main>
+
+  <!-- フッター -->
+  <footer>
+    <div class="container">
+      <p>© 2024 イベント管理アプリ</p>
+    </div>
+  </footer>
+</body>
 </html>

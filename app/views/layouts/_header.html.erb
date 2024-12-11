@@ -1,0 +1,73 @@
+<header class="custom-header">
+  <nav class="navbar navbar-expand-lg navbar-light custom-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="<%= root_path %>">アイテムチェッカー</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <% if user_signed_in? %>
+            <% unless current_user.email == 'guest@example.com' %>
+              <li class="nav-item">
+                <span class="nav-link">ようこそ、<%= current_user.name %>さん</span>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="<%= mypage_path(current_user) %>">マイページ</a>
+              </li>
+            <% end %>
+            <li class="nav-item">
+              <a class="nav-link" href="<%= about_path %>">アバウト</a>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-link" %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to 'ログイン', new_user_session_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to '新規登録', new_user_registration_path, class: "nav-link" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<style>
+  .custom-header {
+    background-color: #004986;
+    border-bottom: 2px solid #004986;
+  }
+
+  .custom-navbar {
+    padding: 5px 0;
+  }
+
+  .custom-navbar .navbar-brand {
+    color: white !important;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .custom-navbar .nav-link {
+    color: white !important;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 5px;
+  }
+
+  .custom-navbar .nav-link:hover {
+    color: #ffd700 !important;
+  }
+
+  @media (max-width: 767px) {
+    .custom-navbar .navbar-nav {
+      text-align: center;
+    }
+  }
+</style>

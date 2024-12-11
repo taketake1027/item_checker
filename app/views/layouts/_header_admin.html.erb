@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-lg navbar-light custom-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="<%= root_path %>">アイテムチェッカー管理者ページ</a>
+
+    <!-- ハンバーガーメニューアイコン -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- ナビゲーションメニュー -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <% if admin_signed_in? %>
+          <!-- ログアウトリンク -->
+          <li class="nav-item">
+            <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "nav-link" %>
+          </li>
+        <% else %>
+          <!-- 未ログイン状態の場合 -->
+          <li class="nav-item">
+            <%= link_to 'ログイン', new_admin_session_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<style>
+  /* カスタムスタイル */
+  .custom-navbar {
+    background-color: #004986 !important; /* 背景色を濃い青に */
+    border-bottom: 2px solid #004986; /* 下に濃い青色の枠 */
+    padding: 10px 0; /* 上下のパディング */
+  }
+
+  /* ナビゲーションリンクのスタイル */
+  .custom-navbar .nav-link {
+    color: white !important; /* リンク文字色を白 */
+    font-size: 1.1rem; /* フォントサイズ */
+    font-weight: bold; /* フォントを太く */
+  }
+
+  .custom-navbar .nav-link:hover {
+    color: #ffd700 !important; /* ホバー時の文字色をゴールドに */
+  }
+
+  /* ブランド名のスタイル */
+  .navbar-brand {
+    color: white !important; /* ブランド名の文字色を白 */
+    font-weight: bold; /* 太字 */
+  }
+
+  /* 小さい画面で中央寄せ */
+  @media (max-width: 767px) {
+    .custom-navbar .navbar-nav {
+      text-align: center; /* テキスト中央寄せ */
+    }
+  }
+</style>

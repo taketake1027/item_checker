@@ -1,0 +1,44 @@
+<h1 class="text-center mb-4">プロフィール編集</h1>
+
+<%= form_for @user do |f| %>
+  <% if @user.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <!-- フォーム全体に白背景と枠を追加 -->
+      <div class="form-container p-4 rounded shadow-sm bg-white">
+        <div class="form-group">
+          <%= f.label :name, '名前', class: 'form-label' %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :email, 'メールアドレス', class: 'form-label' %>
+          <%= f.email_field :email, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password, 'パスワード', class: 'form-label' %>
+          <%= f.password_field :password, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password_confirmation, 'パスワード確認', class: 'form-label' %>
+          <%= f.password_field :password_confirmation, class: 'form-control' %>
+        </div>
+
+        <div class="form-group text-center">
+          <%= f.submit '更新', class: 'btn btn-primary w-100' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

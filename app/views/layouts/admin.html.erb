@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>イベント管理アプリ | 管理者ページ</title>
+  <%= csrf_meta_tags %>  
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= stylesheet_pack_tag 'admin' %> <!-- 管理者専用スタイルを読み込み -->
+
+  <!-- JavaScriptを<head>内に移動 -->
+  <%= javascript_pack_tag 'application' %> <!-- JavaScriptをヘッダーに読み込み -->
+
+  <style>
+    /* ページ全体のレイアウト設定 */
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh; /* 最低でも画面いっぱいに広がる */
+    }
+
+    /* メインコンテンツ */
+    main {
+      flex-grow: 1; /* メインコンテンツ部分が画面の残りのスペースを占める */
+    }
+
+    /* フッター */
+    footer {
+      margin-top: auto; /* フッターを最下部に固定 */
+      background-color: #004986; /* 背景色 */
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <%= render 'layouts/header_admin' %> <!-- ヘッダー部分 -->
+
+  <main>
+    <%= yield %> <!-- コンテンツ部分 -->
+  </main>
+
+  <!-- フッター部分 -->
+  <footer class="text-white py-4" style="background-color: #004986;">
+    <div class="container text-center">
+      <p>© 2024 イベント管理アプリ</p>
+    </div>
+  </footer>
+
+</body>
+</html>
