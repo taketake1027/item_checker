@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   # 管理者用のDevise設定
   devise_for :admins, path: 'admin', controllers: {
     sessions: 'admin/sessions',
-    confirmations: 'admin/confirmations'
+    confirmations: 'admin/confirmations'  # 修正後: Admin::ConfirmationsControllerを使用
   }
 
   # ユーザー関連のルート
