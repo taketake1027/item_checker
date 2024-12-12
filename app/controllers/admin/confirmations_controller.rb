@@ -1,4 +1,5 @@
 # app/controllers/admin/confirmations_controller.rb
 class Admin::ConfirmationsController < Devise::ConfirmationsController
-  # コントローラの実装
-end
+    # Custom logic for admins confirmation can go here
+  end
+
