@@ -1,6 +1,6 @@
 <h1><%= @event.name %></h1>
 <p>場所: <%= @event.location %></p>
-<p>開催日: <%= @event.start_date %></p>
+<p>開催日: <%= @event.start_date.strftime('%Y-%m-%d') if @event.start_date %></p> <!-- 時間部分を省略して日付のみ表示 -->
 
 <% if current_user.events.include?(@event) %>
   <p class="text-success">このイベントに招待されています。</p>

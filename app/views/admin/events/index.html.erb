@@ -16,7 +16,7 @@
   <thead>
     <tr>
       <th>イベント名</th>
-      <th>開催日時</th>
+      <th>開催日</th> <!-- "開催日時"から"開催日"に変更 -->
       <th>アイテム数</th> <!-- この行は一時的に削除またはコメントアウト -->
       <th>コメント数</th>
       <th>操作</th>
@@ -26,7 +26,7 @@
     <% @events.each do |event| %>
       <tr>
         <td><%= event.name %></td>
-        <td><%= event.start_date.present? ? event.start_date.strftime('%Y-%m-%d %H:%M') : '未設定' %></td>
+        <td><%= event.start_date.present? ? event.start_date.strftime('%Y-%m-%d') : '未設定' %></td> <!-- 時間部分を省略し、日付のみ表示 -->
         <td><!-- アイテム数の表示 --></td>
         <td><!-- コメント数の表示 --></td>
         <td>
