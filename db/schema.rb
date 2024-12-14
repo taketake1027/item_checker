@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2024_12_09_081601) do
     t.integer "group_id", null: false
     t.integer "user_id", null: false
     t.date "joined_date", null: false
-    t.string "position"
+    t.string "position", null: false
     t.string "status", default: "active", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
