@@ -3,7 +3,7 @@ class AddFieldsToGroupUsers < ActiveRecord::Migration[6.0]
     create_table :group_users do |t|
       t.integer :group_id, null: false, index: true  # グループID
       t.integer :user_id, null: false, index: true  # ユーザーID
-      t.date :joined_date, null: false, default: -> { 'CURRENT_DATE' }  # 参加日
+      t.date :joined_date, null: false # 参加日
       t.string :position, null: false
       t.string :status, null: false  # ステータス
 
