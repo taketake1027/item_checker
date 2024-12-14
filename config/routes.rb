@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   # ユーザー関連のルート
   resources :users, only: [:show, :edit, :update, :destroy]
-
+  resources :events, only: [:index, :show]
   # トップページ
   root 'homes#top'
 
