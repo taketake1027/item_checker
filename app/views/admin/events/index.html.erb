@@ -1,0 +1,44 @@
+<!-- app/views/admin/events/index.html.erb -->
+
+<h1>イベント一覧</h1>
+
+<!-- 新規イベント作成ボタン -->
+<%= link_to '新規イベント作成', new_admin_event_path, class: 'btn btn-primary mb-3' %>
+
+<!-- イベント検索フォーム -->
+<%= form_with url: admin_events_path, method: :get, class: 'mb-3' do %>
+  <div class="input-group">
+    <%= text_field_tag :search, params[:search], placeholder: "イベント名で検索", class: 'form-control' %>
+    <%= submit_tag '検索', class: 'btn btn-secondary' %>
+  </div>
+<% end %>
+
+<!-- イベント一覧テーブル -->
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>イベント名</th>
+      <th>開催日時</th>
+      <th>アイテム数</th>
+      <th>コメント数</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.name %></td>
+        <td><%= event.start_time.strftime('%Y-%m-%d %H:%M') %></td>
+        <td><%= event.items.count %></td>
+        <td><%= event.comments.count %></td>
+        <td>
+          <%= link_to '編集', edit_admin_event_path(event), class: 'btn btn-warning btn-sm' %>
+          <%= link_to '削除', admin_event_path(event), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<!-- ページネーション（もしページが多い場合） -->
+<%= paginate @events %>
