@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     end
     
     if @user.update(p)
-      bypass_sign_in(@user)
+      bypass_sign_in @user, scope: :user
       redirect_to mypage_path, notice: 'プロフィールが更新されました。'
     else
       render :edit
