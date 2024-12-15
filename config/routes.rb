@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'homes#top'
     get 'homes/top', to: 'homes#top'
-    resources :events, only: [:index, :new, :create, :edit, :update, :show, :destroy]
+    resources :items
+    resources :events
     resources :groups do
       post 'add_user_to_group', on: :member
       resources :group_users, only: [:destroy], as: 'remove_user'
@@ -44,10 +45,10 @@ Rails.application.routes.draw do
   end
 
   # アイテム関連
-  resources :items, only: [:index, :show]
+  resources :items, only: [:index, :show, :edit, :update]
 
   # 通知関連
-  resources :notices, only: [:index, :show]
+  resources :notices, only: [:index, :show, :edit, :update]
 
   # グループ関連
   resources :groups, only: [:index, :show] do

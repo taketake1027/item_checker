@@ -1,0 +1,51 @@
+<h1>新規アイテム追加</h1>
+
+<%= form_with(model: @item, url: admin_items_path, local: true, html: { multipart: true }) do |form| %>
+  <% if @item.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% @item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name, 'アイテム名' %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :introduction, 'アイテム説明' %>
+    <%= form.text_area :introduction, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :status, 'ステータス' %>
+    <%= form.select :status, options_for_select(['在庫アリ', '在庫無し'], @item.status), class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :amount, '数量' %>
+    <%= form.number_field :amount, class: 'form-control' %>
+  </div>
+
+  <!-- グループ選択フィールド -->
+  <div class="form-group">
+    <%= form.label :group_id, 'グループ' %>
+    <%= form.collection_select :group_id, Group.all, :id, :name, prompt: 'グループを選択', class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :image, 'アイテム画像' %>
+    <%= form.file_field :image, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit 'アイテムを作成', class: 'btn btn-primary' %>
+  </div>
+
+<% end %>
+
+<%= link_to 'アイテム一覧に戻る', admin_items_path, class: 'btn btn-secondary' %>
