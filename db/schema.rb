@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_12_09_081601) do
+ActiveRecord::Schema.define(version: 2024_12_14_175407) do
 
   create_table "admins", force: :cascade do |t|
     t.string "role", null: false
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 2024_12_09_081601) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "event_members", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_event_members_on_event_id"
+    t.index ["user_id"], name: "index_event_members_on_user_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.string "name", null: false
     t.text "introduction", null: false
@@ -35,6 +44,7 @@ ActiveRecord::Schema.define(version: 2024_12_09_081601) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "group_id"
+    t.string "add_members"
     t.index ["group_id"], name: "index_events_on_group_id"
     t.index ["name"], name: "index_events_on_name"
     t.index ["user_id"], name: "index_events_on_user_id"
@@ -44,7 +54,7 @@ ActiveRecord::Schema.define(version: 2024_12_09_081601) do
     t.integer "group_id", null: false
     t.integer "user_id", null: false
     t.date "joined_date", null: false
-    t.string "position"
+    t.string "position", null: false
     t.string "status", default: "active", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -76,4 +86,6 @@ ActiveRecord::Schema.define(version: 2024_12_09_081601) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "event_members", "events"
+  add_foreign_key "event_members", "users"
 end

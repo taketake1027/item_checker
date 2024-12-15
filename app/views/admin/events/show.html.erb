@@ -1,0 +1,11 @@
+<div class="container">
+  <h1><%= @event.name %></h1>
+
+  <p><strong>開催日:</strong> <%= @event.start_date.strftime('%Y-%m-%d') if @event.start_date %></p> <!-- 時間部分を省略 -->
+  <p><strong>終了日:</strong> <%= @event.end_date.strftime('%Y-%m-%d') if @event.end_date %></p> <!-- 時間部分を省略 -->
+  <p><strong>場所:</strong> <%= @event.location %></p>
+  <p><strong>紹介:</strong> <%= @event.introduction %></p>
+
+  <br>
+  <%= link_to '戻る', admin_events_path, class: 'btn btn-secondary' %>
+</div>

@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_many :group_users, dependent: :destroy # ここで関連するグループ参加情報を削除
   has_many :groups, through: :group_users
 
+  # グループを介して関連するイベントを取得
+  has_many :events, through: :groups
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

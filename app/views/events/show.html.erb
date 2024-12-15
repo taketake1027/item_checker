@@ -1,25 +1,13 @@
-<!-- app/views/events/show.html.erb -->
-<div class="container mt-5">
-  <div class="card">
-    <div class="card-header">
-      <h1 class="card-title"><%= @event.name %></h1>
-    </div>
-    <div class="card-body">
-      <p class="card-text"><%= @event.description %></p>
-      <p><strong>開催日:</strong> <%= @event.event_date %></p>
-      <p><strong>場所:</strong> <%= @event.location %></p>
+<h1><%= @event.name %></h1>
+<p>場所: <%= @event.location %></p>
+<p>開催日: <%= @event.start_date.strftime('%Y-%m-%d') if @event.start_date %></p> <!-- 時間部分を省略して日付のみ表示 -->
 
-      <div class="mt-3">
-        <% if user_signed_in? %>
-          <%= link_to '参加する', join_event_path(@event), method: :post, class: 'btn btn-primary' %>
-        <% else %>
-          <p>ログインするとイベントに参加できます。</p>
-        <% end %>
-      </div>
+<% if current_user.events.include?(@event) %>
+  <p class="text-success">このイベントに招待されています。</p>
+<% else %>
+  <p class="text-danger">このイベントには招待されていません。</p>
+<% end %>
 
-      <div class="mt-3">
-        <%= link_to '戻る', events_path, class: 'btn btn-secondary' %>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- イベントの説明文を表示 -->
+<h2>イベント説明</h2>
+<p><%= @event.introduction %></p>

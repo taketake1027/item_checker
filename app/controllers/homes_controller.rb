@@ -3,13 +3,16 @@ class HomesController < ApplicationController
   before_action :restrict_guest_access, except: [:top, :about]
 
   def top
-    # トップページの処理
+    @events = Event.all.order(start_date: :asc) # イベントを取得して開始日順に並べる
   end
 
   def about
     # Aboutページの処理
   end
 
+  def index
+    
+  end
   private
 
   def restrict_guest_access

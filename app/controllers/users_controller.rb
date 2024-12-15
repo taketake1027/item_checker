@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:guest_login, :destroy] # 認証が必要なアクションを指定
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  def show
+    
+  end
   # ユーザー情報の編集フォームを表示
   def edit
   end
@@ -9,12 +11,15 @@ class UsersController < ApplicationController
   # ユーザー情報を更新
   def update
     # パスワードを空欄にした場合、パスワードの更新をスキップする
+    p=user_params
     if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
-      params[:user].delete(:password)
-      params[:user].delete(:password_confirmation)
+      
+      p.delete(:password)
+      p.delete(:password_confirmation)
     end
-
-    if @user.update(user_params)
+    
+    if @user.update(p)
+      bypass_sign_in @user, scope: :user
       redirect_to mypage_path, notice: 'プロフィールが更新されました。'
     else
       render :edit
