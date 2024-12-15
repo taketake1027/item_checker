@@ -33,7 +33,6 @@
 
   <!-- メンバー追加オプション -->
   <div class="form-group">
-    <%= form.label :add_members, 'メンバー追加方法' %><br>
     <%= form.radio_button :add_members, 'group', checked: @add_members == 'group' %>
     <%= form.label :add_members_group, 'グループごと追加' %><br>
     <%= form.radio_button :add_members, 'individual', checked: @add_members == 'individual' %>
