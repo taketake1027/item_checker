@@ -3,7 +3,8 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    @posts = @event.posts  # イベントに関連する投稿を取得
+
+    @posts = @event.posts.page(params[:page]).per(1)  # 1ページに3件表示
   end
   
   def join

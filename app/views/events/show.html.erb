@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="row">
     <!-- 左側: イベント詳細 -->
-    <div class="col-md-6">
+    <div class="col-md-6 col-12">
       <h1><%= @event.name %></h1>
       <p><strong>場所:</strong> <%= @event.location %></p>
       <p><strong>開催日:</strong> <%= @event.start_date.strftime('%Y-%m-%d') if @event.start_date %></p>
@@ -17,14 +17,31 @@
     </div>
 
     <!-- 右側: 投稿フォーム -->
-    <div class="col-md-6">
+    <div class="col-md-6 col-12">
       <h3>イベントに関する投稿</h3>
-      <%= form_with(model: [@event, @event.posts.build], local: true) do |f| %>
-  <div class="form-group">
-    <%= f.label :content, "投稿内容" %>
-    <%= f.text_area :content, class: "form-control", rows: 4 %>
-  </div>
-  <%= f.submit "投稿する", class: "btn btn-primary btn-block" %>
+      <%= form_with(model: [@event, @event.posts.build], local: true, html: { multipart: true }) do |f| %>
+        <div class="form-group">
+          <%= f.label :content, "投稿内容", class: "form-label" %>
+          <%= f.text_area :content, class: "form-control form-control-sm", rows: 3 %>
+        </div>
+        <div class="form-group">
+          <%= f.label :file, "ファイルを添付", class: "form-label" %>
+          <%= f.file_field :file, class: "form-control form-control-sm" %>
+        </div>
+        <%= f.submit "投稿する", class: "btn btn-primary btn-sm btn-block" %>
+      <% end %>
+
+      <% @posts.each do |post| %>
+  <h4><%= post.content %></h4>
+  <!-- コメント入力欄 -->
+  <h5 class="mt-4">コメントを投稿</h5>
+  <%= form_with(model: [@event, post, post.comments.build], local: true) do |f| %>
+    <div class="form-group">
+      <%= f.label :body, "コメント内容", class: "form-label" %>
+      <%= f.text_area :body, class: "form-control", rows: 3 %>
+    </div>
+    <%= f.submit "コメントする", class: "btn btn-primary btn-sm btn-block" %>
+  <% end %>
 <% end %>
 
     </div>
@@ -33,17 +50,56 @@
   <!-- 投稿一覧 -->
   <div class="mt-4">
     <h3>投稿一覧</h3>
-    <ul class="list-group">
-      <% @event.posts.each do |post| %>
+    <ul class="list-group" style="max-width: 100%; overflow-x: hidden;">
+      <% @posts.each do |post| %>
         <li class="list-group-item">
           <p><%= post.content %></p>
+          <% if post.file.attached? %>
+            <% if post.file.content_type.starts_with?('image/') %>
+              <%= image_tag(rails_blob_path(post.file, disposition: "attachment"), alt: "添付画像", class: "img-fluid post-image") %>
+            <% elsif post.file.content_type == 'application/pdf' %>
+              <%= link_to "PDFをダウンロード", rails_blob_path(post.file, disposition: "attachment"), class: "btn btn-link" %>
+            <% else %>
+              <%= link_to "ファイルをダウンロード", rails_blob_path(post.file, disposition: "attachment"), class: "btn btn-link" %>
+            <% end %>
+          <% else %>
+            <p>添付ファイルはありません。</p>
+          <% end %>
+
           <% if post.user %>
             <p class="text-muted">- <%= post.user.name %></p>
           <% else %>
             <p class="text-muted">- ユーザー情報なし</p>
           <% end %>
+
+          <% if post.user == current_user %>
+            <%= link_to '削除', event_post_path(@event, post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
+          <% end %>
         </li>
       <% end %>
     </ul>
+
+    <%= paginate @posts %>
   </div>
+
+  <!-- コメント一覧 -->
+  <div class="mt-4">
+  <h3>コメント一覧</h3>
+  <ul class="list-group">
+    <% @posts.each do |post| %>
+      <% post.comments.each do |comment| %>
+        <li class="list-group-item">
+          <p><%= comment.body %></p>
+          <% if comment.user %>
+            <p><small><%= comment.user.name %> さん</small></p>
+          <% else %>
+            <p><small>ユーザー情報なし</small></p>
+          <% end %>
+          <% if comment.user == current_user %>
+            <%= link_to '削除', post_comment_path(post, comment), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
+          <% end %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
 </div>
