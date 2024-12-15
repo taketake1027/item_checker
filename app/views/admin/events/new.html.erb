@@ -33,12 +33,14 @@
 
   <!-- メンバー追加オプション -->
   <div class="form-group">
-    <%= form.label :add_members, 'メンバー追加方法' %><br>
-    <%= form.radio_button :add_members, 'group', checked: @add_members == 'group' %>
-    <%= form.label :add_members_group, 'グループごと追加' %><br>
-    <%= form.radio_button :add_members, 'individual', checked: @add_members == 'individual' %>
-    <%= form.label :add_members_individual, '個別に追加' %>
-  </div>
+  <%= form.radio_button :add_members, 'group', checked: @add_members == 'group', id: 'event_add_members_group' %>
+  <%= form.label :add_members_group, 'グループごと追加', for: 'event_add_members_group' %><br>
+
+  <%= form.radio_button :add_members, 'individual', checked: @add_members == 'individual', id: 'event_add_members_individual' %>
+  <%= form.label :add_members_individual, '個別に追加', for: 'event_add_members_individual' %>
+</div>
+
+
 
   <% if @add_members == 'individual' %>
     <div class="form-group">

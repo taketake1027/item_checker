@@ -37,9 +37,10 @@ Rails.application.routes.draw do
   post 'guest_login', to: 'users#guest_login', as: :guest_login
 
   # イベント関連
-  resources :events, only: [:show] do
-    resources :posts, only: [:create, :destroy]
-    resources :comments, only: [:create, :destroy]
+  resources :events do
+    resources :posts do
+      resources :comments, only: [:create, :destroy]
+    end
   end
 
   # アイテム関連
