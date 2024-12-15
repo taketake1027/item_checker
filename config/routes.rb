@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
   # イベント関連
   resources :events, only: [:show] do
-    resources :posts, only: [:create, :destroy]
+    resources :posts, only: [:create, :index, :destroy]
     resources :comments, only: [:create, :destroy]
   end
 
