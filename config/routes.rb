@@ -23,8 +23,16 @@ Rails.application.routes.draw do
 
   # ユーザー関連のルート
   resources :users, only: [:show, :edit, :update, :destroy]
-  resources :events, only: [:index, :show]
-  resources :items, only: [:index]
+  
+  # イベント関連（アイテム一覧をネスト）
+  resources :events, only: [:index, :show] do
+    resources :items, only: [:index, :show]  # イベントに紐づくアイテム一覧と詳細
+  end
+  
+  # アイテム関連
+  # 上記のようにネストされているため、ここでは不要
+  # resources :items, only: [:index, :show, :edit, :update]
+
   # トップページ
   root 'homes#top'
 
@@ -38,16 +46,6 @@ Rails.application.routes.draw do
 
   # ゲストログイン
   post 'guest_login', to: 'users#guest_login', as: :guest_login
-
-  # イベント関連
-  resources :events do
-    resources :posts do
-      resources :comments, only: [:create, :destroy]
-    end
-  end
-
-  # アイテム関連
-  resources :items, only: [:index, :show, :edit, :update]
 
   # 通知関連
   resources :notices, only: [:index, :show, :edit, :update]
