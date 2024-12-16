@@ -5,6 +5,12 @@ class Admin::GroupsController < ApplicationController
 
   def index
     @groups = Group.all
+
+    if params[:search].present?
+      @groups = Group.where('name LIKE ?', "%#{params[:search]}%").page(params[:page]).per(10)
+    else
+      @groups = Group.all.page(params[:page]).per(10)
+    end
   end
 
   def new
