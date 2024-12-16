@@ -56,7 +56,7 @@ class Admin::ItemsController < ApplicationController
   private
 
   def set_item
-    @item = Item.find_by(id: params[:id])
+    @item = Item.find(params[:id])
     unless @item
       redirect_to admin_items_path, alert: 'アイテムが見つかりませんでした。'
     end

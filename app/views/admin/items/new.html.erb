@@ -23,7 +23,7 @@
 
   <div class="form-group">
     <%= form.label :status, 'ステータス' %>
-    <%= form.select :status, options_for_select(['在庫アリ', '在庫無し'], @item.status), class: 'form-control' %>
+    <%= form.select :status, options_for_select(['完了', '未完了'], @item.status), class: 'form-control' %>
   </div>
 
   <div class="form-group">
