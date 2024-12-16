@@ -64,6 +64,6 @@ class Admin::ItemsController < ApplicationController
   
   # アイテムのパラメータをストロングパラメータで設定
   def item_params
-    params.require(:item).permit(:name, :introduction, :status, :amount, :image)
+    params.require(:item).permit(:name, :introduction, :status, :amount, :event_id, :image)
   end
 end

@@ -1,0 +1,24 @@
+<!-- app/views/items/index.html.erb -->
+<h1>アイテム一覧</h1>
+
+<!-- アイテムが存在する場合に表示 -->
+<% if @items.any? %>
+  <div class="row">
+    <% @items.each do |item| %>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= item.name %></h5>
+            <p class="card-text"><%= item.description %></p>
+            <p><%= "在庫数: #{item.stock}" %></p>
+            <%= link_to '詳細を見る', item_path(item), class: 'btn btn-info' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>アイテムはありません。</p>
+<% end %>
+
+<%= link_to '新規アイテム作成', new_item_path, class: 'btn btn-primary' %>

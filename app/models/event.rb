@@ -4,4 +4,5 @@ class Event < ApplicationRecord
   belongs_to :group
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :items
 end

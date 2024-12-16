@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'items/index'
   # 管理者用トップページ
   namespace :admin do
     root to: 'homes#top'
@@ -23,6 +24,7 @@ Rails.application.routes.draw do
   # ユーザー関連のルート
   resources :users, only: [:show, :edit, :update, :destroy]
   resources :events, only: [:index, :show]
+  resources :items, only: [:index]
   # トップページ
   root 'homes#top'
 

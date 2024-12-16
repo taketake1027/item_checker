@@ -20,8 +20,8 @@
       <thead>
         <tr>
           <th>アイテム名</th>
-          <th>アイテム説明</th>
-          <th>ステータス</th>
+          <th>イベント名</th>
+          <th>準備状態</th>
           <th>数量</th>
           <th>操作</th>
         </tr>
@@ -31,7 +31,7 @@
           <% @items.each do |item| %>
             <tr>
               <td><%= item.name %></td>
-              <td><%= item.introduction %></td>
+              <td><%= item.event ? item.event.name : '未設定' %></td>
               <td><%= item.status %></td>
               <td><%= item.amount %></td>
               <td>
