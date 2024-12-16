@@ -31,12 +31,6 @@
     <%= form.number_field :amount, class: 'form-control' %>
   </div>
 
-  <!-- グループ選択フィールド -->
-  <div class="form-group">
-    <%= form.label :group_id, 'グループ' %>
-    <%= form.collection_select :group_id, Group.all, :id, :name, prompt: 'グループを選択', class: 'form-control' %>
-  </div>
-
   <div class="form-group">
     <%= form.label :image, 'アイテム画像' %>
     <%= form.file_field :image, class: 'form-control' %>
