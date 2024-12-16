@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light custom-navbar">
   <div class="container">
-    <a class="navbar-brand" href="<%= root_path %>">Item_Checker Admin</a>
+    <a class="navbar-brand" href="<%= admin_root_path %>">Item_Checker Admin</a>
 
     <!-- ハンバーガーメニューアイコン -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,6 +22,10 @@
           <!-- イベント一覧ページリンク -->
           <li class="nav-item">
             <%= link_to 'Event', admin_events_path, class: "nav-link" %>
+          </li>
+          <!-- アイテム一覧ページリンク -->
+          <li class="nav-item">
+            <%= link_to 'Item', admin_items_path, class: "nav-link" %>
           </li>
           <!-- ログアウトリンク -->
           <li class="nav-item">
