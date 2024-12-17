@@ -15,9 +15,9 @@
   </div>
 
   <!-- イベント一覧テーブル -->
-  <div class="table-responsive w-75">
+  <div class="table-responsive w-75 mb-4" style="background-color: white; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
     <table class="table table-bordered text-center">
-      <thead>
+      <thead class="bg-dark text-white">  <!-- ダーク背景と白文字を追加 -->
         <tr>
           <th>イベント名</th>
           <th>開催日</th>
@@ -47,3 +47,59 @@
     <%= paginate @events %>
   </div>
 </div>
+
+<style>
+  /* テーブルを囲むスタイル */
+  .table-responsive {
+    background-color: #fff; /* 白背景 */
+    border: 2px solid #007bff; /* 青い枠線 */
+    padding: 20px; /* パディング */
+    border-radius: 10px; /* 角を丸く */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 軽い影 */
+  }
+
+  /* 検索フォームのスタイル */
+  .form-group {
+    background-color: #fff; /* 白背景 */
+    border: 2px solid #007bff; /* 青い枠線 */
+    padding: 20px; /* パディング */
+    border-radius: 10px; /* 角を丸く */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 軽い影 */
+  }
+
+  /* イベント管理ページのボタンスタイル */
+  .btn {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+  }
+
+  .btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+  }
+
+  .btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+  }
+
+  /* ページネーション */
+  .pagination {
+    justify-content: center;
+  }
+</style>

@@ -49,8 +49,8 @@
 <style>
   /* カスタムスタイル */
   .custom-navbar {
-    background-color: #004986 !important; /* 背景色を濃い青に */
-    border-bottom: 2px solid #004986; /* 下に濃い青色の枠 */
+    background-color: rgba(0, 0, 0, 0.7) !important; /* 背景色を半透明の黒に */
+    border-bottom: 2px solid rgba(0, 0, 0, 0.7); /* 下に半透明の枠線 */
     padding: 10px 0; /* 上下のパディング */
   }
 
@@ -69,6 +69,11 @@
   .navbar-brand {
     color: white !important; /* ブランド名の文字色を白 */
     font-weight: bold; /* 太字 */
+  }
+
+  /* ナビゲーションメニューの右寄せ */
+  .navbar-nav {
+    margin-left: auto; /* 左側のマージンを自動にして右寄せ */
   }
 
   /* 小さい画面で中央寄せ */

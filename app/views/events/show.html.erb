@@ -22,22 +22,24 @@
 
     <!-- 右側: 投稿フォーム -->
     <div class="col-md-6 col-12">
-      <h3>イベントに関する投稿</h3>
-      <%= form_with(model: [@event, @event.posts.build], local: true, html: { multipart: true }) do |f| %>
-        <div class="form-group">
-          <%= f.label :title, "投稿タイトル", class: "form-label" %>
-          <%= f.text_field :title, class: "form-control form-control-sm" %>
-        </div>
-        <div class="form-group">
-          <%= f.label :content, "投稿内容", class: "form-label" %>
-          <%= f.text_area :content, class: "form-control form-control-sm", rows: 3 %>
-        </div>
-        <div class="form-group">
-          <%= f.label :image, "画像を添付", class: "form-label" %>
-          <%= f.file_field :image, accept: "image/*", class: "form-control form-control-sm" %>
-        </div>
-        <%= f.submit "投稿する", class: "btn btn-primary btn-sm btn-block" %>
-      <% end %>
+      <div class="card p-4 shadow-sm" style="background-color: white; border-radius: 8px;">
+        <h3>イベントに関する投稿</h3>
+        <%= form_with(model: [@event, @event.posts.build], local: true, html: { multipart: true }) do |f| %>
+          <div class="form-group mb-3">
+            <%= f.label :title, "投稿タイトル", class: "form-label" %>
+            <%= f.text_field :title, class: "form-control form-control-sm" %>
+          </div>
+          <div class="form-group mb-3">
+            <%= f.label :content, "投稿内容", class: "form-label" %>
+            <%= f.text_area :content, class: "form-control form-control-sm", rows: 3 %>
+          </div>
+          <div class="form-group mb-3">
+            <%= f.label :image, "画像を添付", class: "form-label" %>
+            <%= f.file_field :image, accept: "image/*", class: "form-control form-control-sm" %>
+          </div>
+          <%= f.submit "投稿する", class: "btn btn-primary btn-sm btn-block" %>
+        <% end %>
+      </div>
     </div>
   </div>
 
@@ -45,20 +47,54 @@
   <div class="col-md-6 col-12 mt-4">
     <h3>投稿一覧</h3>
     <% @posts.each do |post| %>
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title"><%= post.user.name %></h5>
-      <p class="card-text"><%= post.content %></p>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title"><%= post.user.name %></h5>
+          <p class="card-text"><%= post.content %></p>
 
-      <% if post.image.attached? %>
-        <p><%= image_tag(post.image, class: 'img-fluid') %></p>
-      <% end %>
+          <% if post.image.attached? %>
+            <p><%= image_tag(post.image, class: 'img-fluid') %></p>
+          <% end %>
 
-      <p class="text-muted"><%= post.created_at.strftime('%Y-%m-%d %H:%M') %></p>
-    </div>
+          <p class="text-muted"><%= post.created_at.strftime('%Y-%m-%d %H:%M') %></p>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @posts.empty? %>
+      <p>まだ投稿はありません。</p>
+    <% end %>
   </div>
-<% end %>
+</div>
 
-<% if @posts.empty? %>
-  <p>まだ投稿はありません。</p>
-<% end %>
+<style>
+  /* 投稿フォームを囲むカードのデザイン */
+  .card {
+    background-color: white; /* 背景色を白に設定 */
+    border-radius: 8px; /* 角を丸くする */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 軽い影をつけて立体感を出す */
+  }
+
+  /* 入力フィールドのスタイル */
+  .form-control {
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  /* ボタンのスタイル */
+  .btn-primary {
+    width: 100%;
+    padding: 10px;
+  }
+
+  /* 投稿内容のスタイル */
+  .card-body {
+    padding: 20px;
+  }
+
+  /* 投稿一覧カードのスタイル */
+  .card.mb-3 {
+    border: 1px solid #ddd;
+  }
+</style>
