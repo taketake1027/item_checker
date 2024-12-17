@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+  layout 'admin'
   before_action :authenticate_admin!  # 管理者の認証を行う
 
   # ユーザー一覧ページを表示
