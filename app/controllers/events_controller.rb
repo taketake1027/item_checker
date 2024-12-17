@@ -3,7 +3,8 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-
+    @posts = @event.posts.order(created_at: :desc)
+    
     @posts = @event.posts.page(params[:page]).per(1)  # 1ページに3件表示
   end
   

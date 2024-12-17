@@ -1,4 +1,5 @@
 class Admin::EventsController < ApplicationController
+  layout 'admin'
   before_action :authenticate_admin!
   before_action :set_event, only: [:edit, :update]  # :edit と :update に set_event を追加
 

@@ -1,0 +1,43 @@
+<!-- app/views/admin/items/show.html.erb -->
+
+<div class="container mt-4">
+  <h1><%= @item.name %></h1>
+
+  <div class="row">
+    <div class="col-md-8">
+      <p><strong>紹介:</strong> <%= @item.introduction %></p>
+      <p><strong>準備状態:</strong> <%= @item.status %></p>
+      <p><strong>数量:</strong> <%= @item.amount %></p>
+    </div>
+
+    <div class="col-md-4">
+      <% if @item.image.attached? %>
+        <%= image_tag @item.image, class: 'img-fluid', alt: @item.name %>
+      <% else %>
+        <p>画像はありません。</p>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- 関連イベントの表示 -->
+  <div class="mt-4">
+    <p><strong>関連イベント:</strong> 
+      <% if @item.event.present? %>
+        <%= @item.event.name %>（開催日: <%= @item.event.start_date.strftime('%Y-%m-%d') if @item.event.start_date %>）
+      <% else %>
+        <span>イベントはありません。</span>
+      <% end %>
+    </p>
+  </div>
+  <hr>
+
+  <!-- 関連アイテムの表示 -->
+  <% if @item.group.present? %>
+    <h3>関連アイテム:</h3>
+    <ul>
+      <% @item.group.items.each do |related_item| %>
+        <li><%= link_to related_item.name, admin_item_path(related_item) %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

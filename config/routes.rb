@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  get 'items/index'
   # 管理者用トップページ
   namespace :admin do
     root to: 'homes#top'
     get 'homes/top', to: 'homes#top'
-    resources :events, only: [:index, :new, :create, :edit, :update, :show, :destroy]
+    resources :items
+    resources :events
     resources :groups do
       post 'add_user_to_group', on: :member
       resources :group_users, only: [:destroy], as: 'remove_user'
@@ -21,7 +23,18 @@ Rails.application.routes.draw do
 
   # ユーザー関連のルート
   resources :users, only: [:show, :edit, :update, :destroy]
-  resources :events, only: [:index, :show]
+  
+  # イベント関連（アイテム一覧をネスト）
+  resources :events do
+    resources :items, only: [:index, :show]  # イベントに紐づくアイテム一覧と詳細
+    resources :posts, only: [:create]  # ここで投稿用のルートを定義
+    resources :comments, only: [:create]
+  end
+  
+  # アイテム関連
+  # 上記のようにネストされているため、ここでは不要
+  # resources :items, only: [:index, :show, :edit, :update]
+
   # トップページ
   root 'homes#top'
 
@@ -36,18 +49,8 @@ Rails.application.routes.draw do
   # ゲストログイン
   post 'guest_login', to: 'users#guest_login', as: :guest_login
 
-  # イベント関連
-  resources :events do
-    resources :posts do
-      resources :comments, only: [:create, :destroy]
-    end
-  end
-
-  # アイテム関連
-  resources :items, only: [:index, :show]
-
   # 通知関連
-  resources :notices, only: [:index, :show]
+  resources :notices, only: [:index, :show, :edit, :update]
 
   # グループ関連
   resources :groups, only: [:index, :show] do

@@ -1,0 +1,49 @@
+<div class="container my-4">
+  <h1 class="text-center mb-4">アイテム一覧</h1>
+  <!-- アイテム検索フォーム -->
+  <div class="mb-3 text-center">
+    <%= form_with url: event_items_path(@event), method: :get, class: 'd-flex justify-content-center' do %>
+      <%= text_field_tag :search, params[:search], placeholder: "アイテム名で検索", class: 'form-control w-50 me-2' %>
+      <%= submit_tag '検索', class: 'btn btn-secondary' %>
+    <% end %>
+  </div>
+
+  <!-- アイテム一覧テーブル -->
+  <div class="table-responsive">
+    <table class="table table-striped table-hover text-center">
+      <thead>
+        <tr>
+          <th>アイテム名</th>
+          <th>イベント名</th>
+          <th>準備状態</th>
+          <th>数量</th>
+          <th>詳細</th>  <!-- 新しい列を追加 -->
+        </tr>
+      </thead>
+      <tbody>
+        <% if @items.any? %>
+          <% @items.each do |item| %>
+            <tr>
+              <td><%= item.name %></td>
+              <td><%= item.event ? item.event.name : '未設定' %></td>
+              <td><%= item.status %></td>
+              <td><%= item.amount %></td>
+              <td>
+                <%= link_to '詳細', event_item_path(@event, item), class: 'btn btn-info' %>  <!-- 詳細ページへ遷移するリンク -->
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="5">検索結果が見つかりませんでした。</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ページネーション -->
+  <div class="text-center">
+    <%= paginate @items %>
+  </div>
+</div>
