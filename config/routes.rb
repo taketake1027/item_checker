@@ -25,9 +25,10 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit, :update, :destroy]
   
   # イベント関連（アイテム一覧をネスト）
-  resources :events, only: [:index, :show] do
+  resources :events do
     resources :items, only: [:index, :show]  # イベントに紐づくアイテム一覧と詳細
     resources :posts, only: [:create]  # ここで投稿用のルートを定義
+    resources :comments, only: [:create]
   end
   
   # アイテム関連
