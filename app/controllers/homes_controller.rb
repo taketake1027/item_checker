@@ -3,15 +3,16 @@ class HomesController < ApplicationController
   before_action :restrict_guest_access, except: [:top, :about]
 
   def top
-    @events = Event.all.order(start_date: :asc) # イベントを取得して開始日順に並べる
+    @events = Event.order(start_date: :asc).page(params[:page]).per(6) # ページネーションを適用
   end
+  
 
   def about
     # Aboutページの処理
   end
 
   def index
-    
+    @events = Event.page(params[:page]).per(6)
   end
   private
 
