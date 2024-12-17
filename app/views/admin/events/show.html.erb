@@ -1,11 +1,17 @@
-<div class="container">
-  <h1><%= @event.name %></h1>
+<div class="container d-flex justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <h1 class="text-center mb-4"><%= @event.name %></h1>
 
-  <p><strong>開催日:</strong> <%= @event.start_date.strftime('%Y-%m-%d') if @event.start_date %></p> <!-- 時間部分を省略 -->
-  <p><strong>終了日:</strong> <%= @event.end_date.strftime('%Y-%m-%d') if @event.end_date %></p> <!-- 時間部分を省略 -->
-  <p><strong>場所:</strong> <%= @event.location %></p>
-  <p><strong>紹介:</strong> <%= @event.introduction %></p>
+    <div class="card" style="border: 2px solid #007bff; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+      <div class="card-body">
+        <p><strong>開催日:</strong> <%= @event.start_date.strftime('%Y-%m-%d') if @event.start_date %></p>
+        <p><strong>終了日:</strong> <%= @event.end_date.strftime('%Y-%m-%d') if @event.end_date %></p>
+        <p><strong>場所:</strong> <%= @event.location %></p>
+        <p><strong>紹介:</strong> <%= @event.introduction %></p>
 
-  <br>
-  <%= link_to '戻る', admin_events_path, class: 'btn btn-secondary' %>
+        <br>
+        <%= link_to '戻る', admin_events_path, class: 'btn btn-secondary' %>
+      </div>
+    </div>
+  </div>
 </div>
