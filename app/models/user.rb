@@ -4,8 +4,7 @@ class User < ApplicationRecord
 
   # グループを介して関連するイベントを取得
   has_many :events, through: :groups
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -21,6 +20,10 @@ class User < ApplicationRecord
   # ユーザー削除時に関連するグループ参加情報も削除
   before_destroy :remove_from_groups
 
+  enum role: { 社員: 0, パート: 1, 役職持ち: 2 }
+  
+   # Devise の設定（ユーザー認証）
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
   private
 
   # ユーザーが削除される前に、関連するグループからそのユーザーを削除
