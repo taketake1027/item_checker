@@ -15,9 +15,14 @@ class PostsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
+    # イベントをparams[:event_id]で取得
+    @event = Event.find(params[:event_id])
+  
+    # 投稿をparams[:id]で取得
+    @post = @event.posts.find(params[:id])
+  
+    # イベントに関連する投稿を取得
     @posts = @event.posts.includes(:user).order(created_at: :desc)
-    logger.debug "Posts fetched: #{@posts.inspect}"  # ログ出力
   end
   
   def destroy

@@ -65,13 +65,7 @@
                 <%= link_to post.user.name, event_post_path(@event, post), class: "link-style" %>
               </h5>
               <p class="card-text"><%= truncate(post.content, length: 20) %></p>
-
-              <% if post.image.attached? %>
-                <p><%= image_tag(post.image, class: 'img-fluid') %></p>
-              <% end %>
-
               <p class="text-muted"><%= post.created_at.strftime('%Y-%m-%d %H:%M') %></p>
-
               <% if post.user == current_user %>
           <!-- 投稿者だけが削除できるリンク -->
                 <%= link_to '削除', event_post_path(@event, post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
