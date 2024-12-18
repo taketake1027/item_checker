@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  get 'items/index'
-
   # 管理者用トップページ
   namespace :admin do
     root to: 'homes#top'
     get 'homes/top', to: 'homes#top'
+    
+    # 管理者用リソース
     resources :items
     resources :events
     resources :groups do
@@ -30,17 +30,19 @@ Rails.application.routes.draw do
   }
 
   # ユーザー関連のルート
-      resources :users, only: [:show, :create, :update, :destroy]
+  resources :users, only: [:show, :create, :update, :destroy]
+
   # イベント関連（アイテム一覧をネスト）
   resources :events do
     resources :items, only: [:index, :show]
-    resources :posts, only: [:show, :create, :destroy]
+    resources :posts, only: [:show, :create, :destroy] do
+      post 'create_comment', on: :member
+    end
     resources :comments, only: [:create]
   end
 
   # ログイン前は homes#landing、ログイン後は homes#top にリダイレクト
-  root to: 'homes#landing'  # ログイン前のトップページをデフォルトに設定
-  # ログイン後にリダイレクトされるトップページ
+  root to: 'homes#landing'  # ログイン前のトップページ
   get 'homes/top', to: 'homes#top', as: 'homes_top'
 
   # アバウトページ

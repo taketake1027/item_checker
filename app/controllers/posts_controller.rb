@@ -17,12 +17,28 @@ class PostsController < ApplicationController
   def show
     # イベントをparams[:event_id]で取得
     @event = Event.find(params[:event_id])
-  
     # 投稿をparams[:id]で取得
     @post = @event.posts.find(params[:id])
-  
     # イベントに関連する投稿を取得
     @posts = @event.posts.includes(:user).order(created_at: :desc)
+
+    @comments = @post.comments.includes(:user)
+    @comment = Comment.new
+  end
+  
+  def create_comment
+    @post = Post.find(params[:id])
+    @event = Event.find(params[:event_id])
+    @comment = @post.comments.build(comment_params)
+    @comment.user = current_user
+    @comment.event_id = @event.id
+  
+    if @comment.save
+      redirect_to event_post_path(@event, @post)
+    else
+      @comments = @post.comments.includes(:user)
+      render :show
+    end
   end
   
   def destroy
@@ -39,6 +55,7 @@ class PostsController < ApplicationController
 
   def set_event
     @event = Event.find(params[:event_id])
+    redirect_to root_path, alert: "Event not found" if @event.nil?
   end
 
   def set_post
@@ -48,5 +65,9 @@ class PostsController < ApplicationController
   # Strong Parameters: 投稿内容とファイルのパラメータを許可
   def post_params
     params.require(:post).permit(:title, :content, :image)  # :file を追加
+  end
+
+  def comment_params
+    params.require(:comment).permit(:content)
   end
 end

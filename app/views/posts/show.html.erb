@@ -1,8 +1,7 @@
-<!-- app/views/posts/show.html.erb -->
 <div class="container mt-4">
   <div class="row">
     <!-- 左側: 投稿詳細 -->
-    <div class="col-md-8 offset-md-2 col-12">
+    <div class="col-md-6 col-12">
       <div class="card p-4 shadow-sm">
         <h1><%= @post.title %></h1> <!-- 投稿タイトル -->
         
@@ -18,5 +17,36 @@
         <%= link_to 'イベントに戻る', event_path(@event), class: 'btn btn-outline-secondary' %> <!-- イベントページへのリンク -->
       </div>
     </div>
+
+    <!-- 右側: コメントフォーム -->
+    <div class="col-md-6 col-12">
+      <div class="card mt-4 p-4 shadow-sm">
+        <h3>コメント</h3>
+        <%= form_with(model: [@post, @comment], url: create_comment_event_post_path(@event,@post), method: :post, local: true) do |f| %>
+          <%= hidden_field_tag :event_id, @event.id %> <!-- イベントIDを隠しフィールドで送信 -->
+          <div class="form-group">
+            <%= f.text_area :content, placeholder: "コメントを入力", class: "form-control", rows: 4 %>
+          </div>
+          <%= f.submit 'コメントする', class: 'btn btn-primary mt-2' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <!-- コメント一覧 -->
+  <div class="mt-4">
+    <h4>コメント一覧</h4>
+    <% if @comments.any? %> <!-- コメントがある場合 -->
+      <% @comments.each do |comment| %>
+        <div class="card mb-3 p-3">
+          <p><strong><%= comment.user.name %></strong> <%= comment.created_at.strftime('%Y-%m-%d %H:%M') %></p>
+          <p><%= comment.content %></p>
+        </div>
+      <% end %>
+    <% else %> <!-- コメントがない場合 -->
+      <div class="card p-3">
+        <p>コメントはありません</p>
+      </div>
+    <% end %>
   </div>
 </div>
