@@ -47,6 +47,7 @@
   <div class="col-md-6 col-12 mt-4">
     <h3>投稿一覧</h3>
     <% @posts.each do |post| %>
+      <% next if post.new_record? %>
       <div class="card mb-3">
         <div class="card-body">
           <h5 class="card-title"><%= post.user.name %></h5>
