@@ -21,13 +21,14 @@ class PostsController < ApplicationController
   end
   
   def destroy
-    if @post.destroy
-      flash[:notice] = "投稿が削除されました。"
+    if @post.user == current_user  # 投稿したユーザーだけが削除できる
+      @post.destroy
+      redirect_to event_path(@event), notice: '投稿が削除されました。'
     else
-      flash[:alert] = "投稿の削除に失敗しました。"
+      redirect_to event_path(@event), alert: '削除権限がありません。'
     end
-    redirect_to event_path(@event)
   end
+
 
   private
 

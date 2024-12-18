@@ -30,12 +30,11 @@ Rails.application.routes.draw do
   }
 
   # ユーザー関連のルート
-  resources :users, only: [:show, :edit, :update, :destroy]
-
+      resources :users, only: [:show, :create, :update, :destroy]
   # イベント関連（アイテム一覧をネスト）
   resources :events do
     resources :items, only: [:index, :show]
-    resources :posts, only: [:create]
+    resources :posts, only: [:show, :create, :destroy]
     resources :comments, only: [:create]
   end
 
