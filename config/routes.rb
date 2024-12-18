@@ -37,8 +37,8 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :show]
     resources :posts, only: [:show, :create, :destroy] do
       post 'create_comment', on: :member
+    resources :comments, only: [:create, :destroy]
     end
-    resources :comments, only: [:create]
   end
 
   # ログイン前は homes#landing、ログイン後は homes#top にリダイレクト

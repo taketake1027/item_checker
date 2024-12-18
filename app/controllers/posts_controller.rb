@@ -24,6 +24,10 @@ class PostsController < ApplicationController
 
     @comments = @post.comments.includes(:user)
     @comment = Comment.new
+
+    # コントローラーでページネーションを設定
+    @comments = @post.comments.page(params[:page]).per(4)
+
   end
   
   def create_comment

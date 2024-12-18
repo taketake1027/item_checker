@@ -37,12 +37,21 @@
   <div class="mt-4">
     <h4>コメント一覧</h4>
     <% if @comments.any? %> <!-- コメントがある場合 -->
-      <% @comments.each do |comment| %>
+      <% @comments.limit(4).each do |comment| %> <!-- 最大4件まで表示 -->
         <div class="card mb-3 p-3">
           <p><strong><%= comment.user.name %></strong> <%= comment.created_at.strftime('%Y-%m-%d %H:%M') %></p>
           <p><%= comment.content %></p>
+
+          <% if comment.user == current_user %> <!-- 自分のコメントの場合 -->
+            <%= link_to '削除', event_post_comment_path(@event, @post, comment), method: :delete, class: 'btn btn-danger btn-sm' %>
+          <% end %>
         </div>
       <% end %>
+
+      <!-- ページネーション -->
+      <div class="mt-3">
+        <%= paginate @comments %> <!-- ページネーション -->
+      </div>
     <% else %> <!-- コメントがない場合 -->
       <div class="card p-3">
         <p>コメントはありません</p>
