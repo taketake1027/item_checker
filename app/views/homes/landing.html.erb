@@ -1,7 +1,13 @@
-<div class="landing-page d-flex justify-content-center align-items-center flex-column" style="height: 80vh;">
-  <h1 class="text-center">ようこそ！</h1>
-  <p class="text-center">ログイン前のトップページです。</p>
-  <div class="d-flex justify-content-center mb-3">
-    <%= button_to 'ゲストログイン', guest_login_path, method: :post, class: 'btn btn-lg btn-primary' %>
+<div class="landing-page d-flex justify-content-center align-items-center" style="height: 80vh; position: relative; background-color: green;">
+  <!-- 右上のテキスト -->
+  <div style="position: absolute; top: 20px; right: 20px; text-align: right;">
+    <h1 style="font-size: 2.5rem; font-weight: bold; color: #ffffff; text-shadow: 1px 1px 3px #000;">ようこそ！</h1>
+    <p style="font-size: 1.5rem; font-weight: bold; color: #f8f9fa; text-shadow: 1px 1px 3px #000;">アイテムチェッカーへ。</p>
+    <p style="font-size: 1.2rem; font-weight: bold; color: #ffeb3b; text-shadow: 1px 1px 3px #000;">ログインせずに続けるには、ゲストログインを使用してください。</p>
+  </div>
+
+  <!-- 中央のコンテンツ -->
+  <div class="text-center">
+    <%= button_to 'ゲストログイン', guest_login_path, method: :post, class: 'btn btn-lg', style: 'font-size: 1.5rem; font-weight: bold; padding: 15px 30px; background-color: #1e88e5; color: #ffffff; border: none;' %>
   </div>
 </div>
