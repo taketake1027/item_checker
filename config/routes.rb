@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       post 'add_user_to_group', on: :member
       resources :group_users, only: [:destroy], as: 'remove_user'
     end
+
     # ユーザー管理ページ
     resources :users, only: [:index, :show, :edit, :update, :destroy] do
       member do
@@ -25,7 +26,7 @@ Rails.application.routes.draw do
   # 管理者用のDevise設定
   devise_for :admins, path: 'admin', controllers: {
     sessions: 'admin/sessions',
-    confirmations: 'admin/confirmations'  # 修正後: Admin::ConfirmationsControllerを使用
+    confirmations: 'admin/confirmations'
   }
 
   # ユーザー関連のルート
@@ -33,13 +34,15 @@ Rails.application.routes.draw do
 
   # イベント関連（アイテム一覧をネスト）
   resources :events do
-    resources :items, only: [:index, :show]  # イベントに紐づくアイテム一覧と詳細
-    resources :posts, only: [:create]  # ここで投稿用のルートを定義
+    resources :items, only: [:index, :show]
+    resources :posts, only: [:create]
     resources :comments, only: [:create]
   end
 
-  # トップページ
-  root 'homes#top'
+  # ログイン前は homes#landing、ログイン後は homes#top にリダイレクト
+  root to: 'homes#landing'  # ログイン前のトップページをデフォルトに設定
+  # ログイン後にリダイレクトされるトップページ
+  get 'homes/top', to: 'homes#top', as: 'homes_top'
 
   # アバウトページ
   get '/about', to: 'homes#about'

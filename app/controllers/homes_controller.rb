@@ -6,6 +6,11 @@ class HomesController < ApplicationController
     @events = Event.order(start_date: :asc).page(params[:page]).per(6) # ページネーションを適用
   end
   
+  def landing
+    if user_signed_in?
+      redirect_to homes_top_path
+    end
+  end
 
   def about
     # Aboutページの処理
@@ -16,6 +21,10 @@ class HomesController < ApplicationController
   end
   private
 
+  def guest_user?
+    current_user && current_user.guest?  # current_user がゲストユーザーかどうかを判定
+  end
+  
   def restrict_guest_access
     if guest_user?
       redirect_to root_path, alert: 'ゲストユーザーはこのページにアクセスできません。'

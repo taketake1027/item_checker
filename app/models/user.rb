@@ -22,6 +22,9 @@ class User < ApplicationRecord
 
   enum role: { 社員: 0, パート: 1, 役職持ち: 2 }
   
+  def guest?
+    self.role == 'guest'  # roleがguestの場合をゲストと判断
+  end
    # Devise の設定（ユーザー認証）
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
   private
