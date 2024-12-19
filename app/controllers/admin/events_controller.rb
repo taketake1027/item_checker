@@ -14,9 +14,9 @@ class Admin::EventsController < ApplicationController
   def new
     @event = Event.new
     @groups = Group.all
-    @add_members = 'group'  # 新規作成時のデフォルト値
   end
-
+  
+  
   def create
     @event = Event.new(event_params)
 

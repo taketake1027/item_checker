@@ -4,10 +4,20 @@
 
     <div class="card" style="border: 2px solid #007bff; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
       <div class="card-body">
-        <p><strong>開催日:</strong> <%= @event.start_date.strftime('%Y-%m-%d') if @event.start_date %></p>
-        <p><strong>終了日:</strong> <%= @event.end_date.strftime('%Y-%m-%d') if @event.end_date %></p>
+        <!-- イベント紹介 -->
+        <p><strong>イベント紹介:</strong> <%= @event.introduction %></p>
+
+        <!-- 開始日時 -->
+        <p><strong>開始日時:</strong> <%= @event.start_date.strftime('%Y-%m-%d %H:%M') if @event.start_date %></p>
+
+        <!-- 終了日時 -->
+        <p><strong>終了日時:</strong> <%= @event.end_date.strftime('%Y-%m-%d %H:%M') if @event.end_date %></p>
+
+        <!-- 場所 -->
         <p><strong>場所:</strong> <%= @event.location %></p>
-        <p><strong>紹介:</strong> <%= @event.introduction %></p>
+
+        <!-- グループ -->
+        <p><strong>グループ:</strong> <%= @event.group.name if @event.group %></p>
 
         <br>
         <%= link_to '戻る', admin_events_path, class: 'btn btn-secondary' %>
