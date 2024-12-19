@@ -1,6 +1,7 @@
 class Admin::UsersController < ApplicationController
   layout 'admin'
   before_action :authenticate_admin!  # 管理者の認証を行う
+  before_action :set_user, only: [:update_role, :destroy]
 
   # ユーザー一覧ページを表示
   def index
@@ -42,6 +43,17 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_users_path, notice: 'ユーザーが削除されました。'
   end
 
+  # 役職の更新
+  def update_role
+    if @user.update(role: params[:user][:role])
+      # 成功時に役職が更新された旨のレスポンスを返す
+      render json: { status: 'success', message: '役職が更新されました。' }
+    else
+      # 失敗時にエラーメッセージを返す
+      render json: { status: 'error', message: '役職の更新に失敗しました。' }
+    end
+  end
+
   private
 
   def user_params
@@ -51,5 +63,12 @@ class Admin::UsersController < ApplicationController
   # 管理者のみアクセスできるように制限
   def authenticate_admin!
     redirect_to root_path, alert: '管理者専用ページです。' unless current_admin
+  end
+
+  def set_user
+    @user = User.find_by(id: params[:id]) # find_byを使ってユーザーが存在しない場合はnilを返す
+    unless @user
+      redirect_to admin_users_path, alert: '指定されたユーザーは存在しません。'
+    end
   end
 end
