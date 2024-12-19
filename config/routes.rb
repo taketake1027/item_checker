@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     
     # 管理者用リソース
     resources :items
-    resources :events
+    resources :events do
+      resources :comments, only: [:index, :destroy], controller: 'event_comments'
+  end
     resources :groups do
       post 'add_user_to_group', on: :member
       resources :group_users, only: [:destroy], as: 'remove_user'

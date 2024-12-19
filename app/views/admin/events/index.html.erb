@@ -30,7 +30,10 @@
           <tr>
             <td><%= event.name %></td>
             <td><%= event.start_date.present? ? event.start_date.strftime('%Y-%m-%d') : '未設定' %></td>
-            <td><%= event.comments.count %></td> <!-- コメント数の表示 -->
+            <td>
+            <%= link_to event.comments.count, admin_event_comments_path(event), class: 'text-primary', style: 'cursor: pointer;' %> <!-- コメント数のリンク -->
+            </td>
+
             <td>
               <%= link_to '詳細', admin_event_path(event), class: 'btn btn-info btn-sm' %>
               <%= link_to '編集', edit_admin_event_path(event), class: 'btn btn-warning btn-sm' %>
