@@ -38,9 +38,10 @@
 <body>
   <!-- ヘッダー -->
   <%= render 'layouts/header' %>
-
+  
   <main>
     <%= yield %>
+    <%= flash[:notice] %>
   </main>
 
   <!-- フッター -->
