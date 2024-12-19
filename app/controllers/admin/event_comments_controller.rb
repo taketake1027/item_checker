@@ -1,4 +1,5 @@
 class Admin::EventCommentsController < ApplicationController
+  layout 'admin'
   before_action :set_event, only: [:index, :destroy]
 
   def index

@@ -1,20 +1,20 @@
 Rails.application.routes.draw do
-  # 管理者用トップページ
+  # 管理者用ルート
   namespace :admin do
     root to: 'homes#top'
     get 'homes/top', to: 'homes#top'
-    
-    # 管理者用リソース
     resources :items
+
     resources :events do
       resources :comments, only: [:index, :destroy], controller: 'event_comments'
+      resources :posts, only: [:index, :destroy] 
   end
+
     resources :groups do
       post 'add_user_to_group', on: :member
       resources :group_users, only: [:destroy], as: 'remove_user'
     end
 
-    # ユーザー管理ページ
     resources :users, only: [:index, :show, :edit, :update, :destroy] do
       member do
         patch 'update_role', to: 'users#update_role'
