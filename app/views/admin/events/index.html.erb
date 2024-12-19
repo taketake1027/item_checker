@@ -9,7 +9,7 @@
   <!-- イベント検索フォーム -->
   <div class="mb-3 w-50">
     <%= form_with url: admin_events_path, method: :get, class: 'd-flex' do %>
-      <%= text_field_tag :search, params[:search], placeholder: "イベント名で検索", class: 'form-control me-2' %>
+      <%= select_tag :event_id, options_from_collection_for_select(Event.all, :id, :name, selected: params[:event_id]), include_blank: "イベントで検索", class: 'form-control me-2' %>
       <%= submit_tag '検索', class: 'btn btn-secondary' %>
     <% end %>
   </div>
@@ -22,7 +22,7 @@
           <th>イベント名</th>
           <th>開催日</th>
           <th>コメント数</th>
-          <th>投稿数</th>  <!-- 投稿数カラムを追加 -->
+          <th>投稿数</th>
           <th>操作</th>
         </tr>
       </thead>
@@ -32,10 +32,10 @@
             <td><%= event.name %></td>
             <td><%= event.start_date.present? ? event.start_date.strftime('%Y-%m-%d') : '未設定' %></td>
             <td>
-              <%= link_to event.comments.count, admin_event_comments_path(event), class: 'text-primary', style: 'cursor: pointer;' %> <!-- コメント数のリンク -->
+              <%= link_to event.comments.count, admin_event_comments_path(event), class: 'text-primary', style: 'cursor: pointer;' %>
             </td>
             <td>
-              <%= link_to event.posts.count, admin_event_posts_path(event), class: 'text-primary', style: 'cursor: pointer;' %>  <!-- 投稿数のリンク -->
+              <%= link_to event.posts.count, admin_event_posts_path(event), class: 'text-primary', style: 'cursor: pointer;' %>
             </td>
             <td>
               <%= link_to '詳細', admin_event_path(event), class: 'btn btn-info btn-sm' %>
@@ -57,51 +57,16 @@
 <style>
   /* テーブルを囲むスタイル */
   .table-responsive {
-    background-color: #fff; /* 白背景 */
-    border: 2px solid #007bff; /* 青い枠線 */
-    padding: 20px; /* パディング */
-    border-radius: 10px; /* 角を丸く */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 軽い影 */
+    background-color: #fff;
+    border: 2px solid #007bff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
-  /* 検索フォームのスタイル */
-  .form-group {
-    background-color: #fff; /* 白背景 */
-    border: 2px solid #007bff; /* 青い枠線 */
-    padding: 20px; /* パディング */
-    border-radius: 10px; /* 角を丸く */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 軽い影 */
-  }
-
-  /* イベント管理ページのボタンスタイル */
   .btn {
     font-size: 1rem;
     padding: 8px 16px;
-  }
-
-  .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-  }
-
-  .btn-secondary {
-    background-color: #6c757d;
-    border-color: #6c757d;
-  }
-
-  .btn-info {
-    background-color: #17a2b8;
-    border-color: #17a2b8;
-  }
-
-  .btn-warning {
-    background-color: #ffc107;
-    border-color: #ffc107;
-  }
-
-  .btn-danger {
-    background-color: #dc3545;
-    border-color: #dc3545;
   }
 
   /* ページネーション */

@@ -7,10 +7,10 @@ class Admin::EventsController < ApplicationController
     # 管理者投稿管理
     @events = Event.all
 
-    if params[:search].present?
-      @events = Event.where('name LIKE ?', "%#{params[:search]}%").page(params[:page])
+    if params[:event_id].present?
+      @events = Event.where(id: params[:event_id]).page(params[:page]).per(10)  # paginate -> pageとper
     else
-      @events = Event.page(params[:page])
+      @events = Event.page(params[:page]).per(10)  # paginate -> pageとper
     end
   end
 
