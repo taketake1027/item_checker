@@ -1,10 +1,12 @@
 <div class="container text-center">
-  <h1 class="my-5">ようこそ！アイテムチェッカーへ</h1>
-  <p class="lead">イベント準備を効率化するためのアイテム管理ツールです。</p>
+  <!-- ようこそ！アイテムチェッカーへ の大きなタイトル -->
+  <h1 class="my-5 display-4 text-dark">ようこそ！アイテムチェッカーへ</h1>
   
-  <a class="btn btn-primary mb-4" href="<%= about_path %>" aria-label="アバウトページ">
-    アバウトページへ
-  </a>
+  <!-- 説明文（少し小さくして目を引く） -->
+  <p class="lead text-dark mb-4">イベント準備を効率化するためのアイテム管理ツールです。</p>
+
+  <!-- 参加権限があるイベントを閲覧する文面 -->
+  <p class="lead text-dark mb-4">あなたが参加できるイベントを確認して、詳細をご覧ください。</p>
 
   <!-- イベント検索フォーム（横中央に配置） -->
   <div class="row justify-content-center mb-4">
@@ -19,7 +21,7 @@
   </div>
 
   <!-- イベント表示エリア -->
-  <h2 class="my-5">イベント一覧</h2>
+  <h2 class="my-5 text-dark">イベント一覧</h2>
   
   <div class="row">
     <% @events.each do |event| %>
