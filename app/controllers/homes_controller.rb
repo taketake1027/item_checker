@@ -3,7 +3,15 @@ class HomesController < ApplicationController
   before_action :restrict_guest_access, except: [:top, :about]
 
   def top
-    @events = Event.order(start_date: :asc).page(params[:page]).per(6) # ページネーションを適用
+    # 検索条件がある場合に検索を適用
+    if params[:search].present?
+      @events = Event.where('name LIKE ?', "%#{params[:search]}%")
+    else
+      @events = Event.all
+    end
+    
+    # 検索後にページネーションを適用
+    @events = @events.order(start_date: :asc).page(params[:page]).per(6)
   end
   
   def landing
@@ -19,6 +27,7 @@ class HomesController < ApplicationController
   def index
     @events = Event.page(params[:page]).per(6)
   end
+
   private
 
   def guest_user?

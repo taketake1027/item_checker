@@ -6,6 +6,18 @@
     アバウトページへ
   </a>
 
+  <!-- イベント検索フォーム（横中央に配置） -->
+  <div class="row justify-content-center mb-4">
+    <div class="col-md-8">
+      <%= form_with url: homes_top_path, method: :get, class: 'd-flex justify-content-center' do %>
+        <div class="input-group w-100"> <!-- フォームの幅を調整 -->
+          <%= text_field_tag :search, params[:search], placeholder: "イベント名で検索", class: 'form-control form-control-lg' %>
+          <button type="submit" class="btn btn-primary btn-lg ms-2">検索</button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
   <!-- イベント表示エリア -->
   <h2 class="my-5">イベント一覧</h2>
   
@@ -32,7 +44,7 @@
   </div>
 
   <!-- ページネーション -->
-  <div class="pagination mt-4">
+  <div class="pagination mb-4"> 
     <%= paginate @events %>
   </div>
 </div>
