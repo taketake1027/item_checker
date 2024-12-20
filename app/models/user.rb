@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_many :group_users, dependent: :destroy # ここで関連するグループ参加情報を削除
   has_many :groups, through: :group_users
-
+  has_many :posts
   # グループを介して関連するイベントを取得
   has_many :events, through: :groups
 

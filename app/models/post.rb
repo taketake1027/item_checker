@@ -5,6 +5,6 @@ class Post < ApplicationRecord
   has_one_attached :image
 
    # バリデーションの追加
-   validates :title, presence: true, length: { minimum: 2, message: "タイトルは5文字以上で入力してください" }
-  validates :content, presence: true, length: { minimum: 5, message: "投稿内容は10文字以上で入力してください" }
+   validates :title, presence: true
+  validates :content, presence: true
 end

@@ -7,8 +7,8 @@ Rails.application.routes.draw do
 
     resources :events do
       resources :comments, only: [:index, :destroy], controller: 'event_comments'
-      resources :posts, only: [:index, :destroy] 
-  end
+      resources :posts, only: [:index, :destroy]
+    end
 
     resources :groups do
       post 'add_user_to_group', on: :member
@@ -32,14 +32,18 @@ Rails.application.routes.draw do
   }
 
   # ユーザー関連のルート
-  resources :users, only: [:show, :create, :update, :destroy]
+  resources :users, only: [:show, :create, :update, :destroy] do
+    member do
+      get 'mypage', to: 'users#show'
+    end
+  end
 
   # イベント関連（アイテム一覧をネスト）
   resources :events do
     resources :items, only: [:index, :show]
     resources :posts, only: [:show, :create, :destroy] do
       post 'create_comment', on: :member
-    resources :comments, only: [:create, :destroy]
+      resources :comments, only: [:create, :destroy]
     end
   end
 
