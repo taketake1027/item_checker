@@ -6,6 +6,11 @@ class Event < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :items
   has_many :users, through: :group_participations
+
+  def add_users(user_ids)
+    self.users = User.where(id: user_ids)
+  end
+  
   def role_for_user(user)
     # ここでは `group_participations` などのカラム追加をしない前提で
     # 役割の取得を行いたい場合に適切な方法を考慮します。

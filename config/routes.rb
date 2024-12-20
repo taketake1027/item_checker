@@ -1,17 +1,20 @@
 Rails.application.routes.draw do
-  get 'items/index'
-
-  # 管理者用トップページ
+  # 管理者用ルート
   namespace :admin do
     root to: 'homes#top'
     get 'homes/top', to: 'homes#top'
     resources :items
-    resources :events
+
+    resources :events do
+      resources :comments, only: [:index, :destroy], controller: 'event_comments'
+      resources :posts, only: [:index, :destroy]
+    end
+
     resources :groups do
       post 'add_user_to_group', on: :member
       resources :group_users, only: [:destroy], as: 'remove_user'
     end
-    # ユーザー管理ページ
+
     resources :users, only: [:index, :show, :edit, :update, :destroy] do
       member do
         patch 'update_role', to: 'users#update_role'
@@ -25,21 +28,28 @@ Rails.application.routes.draw do
   # 管理者用のDevise設定
   devise_for :admins, path: 'admin', controllers: {
     sessions: 'admin/sessions',
-    confirmations: 'admin/confirmations'  # 修正後: Admin::ConfirmationsControllerを使用
+    confirmations: 'admin/confirmations'
   }
 
   # ユーザー関連のルート
-  resources :users, only: [:show, :edit, :update, :destroy]
+  resources :users, only: [:show, :create, :update, :destroy] do
+    member do
+      get 'mypage', to: 'users#show'
+    end
+  end
 
   # イベント関連（アイテム一覧をネスト）
   resources :events do
-    resources :items, only: [:index, :show]  # イベントに紐づくアイテム一覧と詳細
-    resources :posts, only: [:create]  # ここで投稿用のルートを定義
-    resources :comments, only: [:create]
+    resources :items, only: [:index, :show]
+    resources :posts, only: [:show, :create, :destroy] do
+      post 'create_comment', on: :member
+      resources :comments, only: [:create, :destroy]
+    end
   end
 
-  # トップページ
-  root 'homes#top'
+  # ログイン前は homes#landing、ログイン後は homes#top にリダイレクト
+  root to: 'homes#landing'  # ログイン前のトップページ
+  get 'homes/top', to: 'homes#top', as: 'homes_top'
 
   # アバウトページ
   get '/about', to: 'homes#about'

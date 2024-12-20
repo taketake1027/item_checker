@@ -2,57 +2,42 @@
 
 <div class="container d-flex justify-content-center">
   <div class="col-md-8 col-lg-6">
-    <%= form_with(model: @event, url: admin_events_path) do |form| %>
-      <div class="form-group mb-3" style="background-color: #fff; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+    <%= form_with(model: @event, url: admin_events_path, method: :post) do |form| %>
+      <!-- イベント名 -->
+      <div class="form-group mb-3">
         <%= form.label :name, 'イベント名' %>
         <%= form.text_field :name, class: 'form-control', required: true %>
       </div>
 
-      <div class="form-group mb-3" style="background-color: #fff; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+      <!-- イベント紹介 -->
+      <div class="form-group mb-3">
         <%= form.label :introduction, 'イベント紹介' %>
         <%= form.text_area :introduction, class: 'form-control', rows: 4, required: true %>
       </div>
 
-      <div class="form-group mb-3" style="background-color: #fff; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
-        <%= form.label :start_date, '開始日' %>
-        <%= form.date_field :start_date, class: 'form-control', required: true %>
+      <!-- 開始日と時間 -->
+      <div class="form-group mb-3">
+        <%= form.label :start_date, '開始日時' %>
+        <%= form.datetime_local_field :start_date, class: 'form-control', required: true, id: 'start_date' %>
       </div>
 
-      <div class="form-group mb-3" style="background-color: #fff; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
-        <%= form.label :end_date, '終了日' %>
-        <%= form.date_field :end_date, class: 'form-control', required: true %>
+      <!-- 終了日と時間 -->
+      <div class="form-group mb-3">
+        <%= form.label :end_date, '終了日時' %>
+        <%= form.datetime_local_field :end_date, class: 'form-control', required: true, id: 'end_date' %>
       </div>
 
-      <div class="form-group mb-3" style="background-color: #fff; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+      <!-- 場所 -->
+      <div class="form-group mb-3">
         <%= form.label :location, '場所' %>
         <%= form.text_field :location, class: 'form-control', required: true %>
       </div>
 
-      <div class="form-group mb-3" style="background-color: #fff; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+      <!-- グループ追加 -->
+      <div class="form-group mb-3">
         <%= form.label :group_id, 'グループ' %>
         <%= form.collection_select :group_id, @groups, :id, :name, { include_blank: true }, class: 'form-control' %>
       </div>
-
-      <!-- メンバー追加オプション -->
-      <div class="form-group mb-3" style="background-color: #fff; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
-        <%= form.radio_button :add_members, 'group', checked: @add_members == 'group', id: 'event_add_members_group' %>
-        <%= form.label :add_members_group, 'グループごと追加', for: 'event_add_members_group' %><br>
-
-        <%= form.radio_button :add_members, 'individual', checked: @add_members == 'individual', id: 'event_add_members_individual' %>
-        <%= form.label :add_members_individual, '個別に追加', for: 'event_add_members_individual' %>
-      </div>
-
-      <% if @add_members == 'individual' %>
-        <div class="form-group mb-3" style="background-color: #fff; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
-          <%= form.label :user_ids, 'メンバー' %><br>
-          <%= form.collection_check_boxes :user_ids, @event.group.users, :id, :name do |b| %>
-            <div class="form-check">
-              <%= b.check_box(class: 'form-check-input') %>
-              <%= b.label(class: 'form-check-label') { b.text } %>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
 
       <div class="form-group mb-4">
         <%= form.submit 'イベントを作成', class: 'btn btn-primary w-100' %>
@@ -60,3 +45,15 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const startDateInput = document.getElementById('start_date');
+    const endDateInput = document.getElementById('end_date');
+
+    startDateInput.addEventListener('change', function() {
+      const startDate = startDateInput.value;
+      endDateInput.setAttribute('min', startDate); // 終了日時は開始日時以上に設定
+    });
+  });
+</script>

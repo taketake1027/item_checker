@@ -1,14 +1,27 @@
 <div class="container text-center">
-  <h1 class="my-5">ようこそ！アイテムチェッカーへ</h1>
-  <p class="lead">イベント準備を効率化するためのアイテム管理ツールです。</p>
-  
-  <a class="btn btn-primary mb-4" href="<%= about_path %>" aria-label="アバウトページ">
-    アバウトページへ
-  </a>
+  <h1 class="my-5 display-4 text-dark">ようこそ！アイテムチェッカーへ</h1>
+  <p class="lead text-dark mb-4">イベント準備を効率化するためのアイテム管理ツールです。</p>
+  <p class="lead text-dark mb-4">あなたが参加できるイベントを確認して、詳細をご覧ください。</p>
 
-  <!-- イベント表示エリア -->
-  <h2 class="my-5">イベント一覧</h2>
-  
+  <!-- イベント検索フォーム -->
+  <div class="row justify-content-center mb-4">
+    <div class="col-md-8">
+      <%= form_with url: homes_top_path, method: :get, class: 'd-flex justify-content-center' do %>
+        <div class="input-group w-100">
+          <%= text_field_tag :search, params[:search], placeholder: "イベント名で検索", class: 'form-control form-control-lg' %>
+          <button type="submit" class="btn btn-primary btn-lg ms-2">検索</button>
+        </div>
+      <% end %>
+      <!-- バリデーションエラーメッセージ -->
+      <% if flash[:alert] %>
+        <div class="alert alert-danger mt-3">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <h2 class="my-5 text-dark">イベント一覧</h2>
   <div class="row">
     <% @events.each do |event| %>
       <div class="col-md-4 mb-4">
@@ -31,8 +44,7 @@
     <% end %>
   </div>
 
-  <!-- ページネーション -->
-  <div class="pagination mt-4">
+  <div class="pagination mb-4"> 
     <%= paginate @events %>
   </div>
 </div>

@@ -6,10 +6,10 @@
     <%= link_to '新規アイテム追加', new_admin_item_path, class: 'btn btn-primary' %>
   </div>
 
-  <!-- アイテム検索フォーム -->
+  <!-- イベントで検索フォーム -->
   <div class="mb-3 text-center">
     <%= form_with url: admin_items_path, method: :get, class: 'd-flex justify-content-center' do %>
-      <%= text_field_tag :search, params[:search], placeholder: "アイテム名で検索", class: 'form-control w-50 me-2' %>
+      <%= select_tag :event_id, options_from_collection_for_select(Event.all, :id, :name, selected: params[:event_id]), include_blank: "イベントで検索", class: 'form-control w-50 me-2' %>
       <%= submit_tag '検索', class: 'btn btn-secondary' %>
     <% end %>
   </div>
@@ -17,7 +17,6 @@
   <!-- アイテム一覧テーブル -->
   <div class="table-responsive">
     <table class="table table-bordered table-striped table-hover text-center">
-      <!-- ヘッダーをダーク背景に変更 -->
       <thead class="bg-dark text-white">
         <tr>
           <th>アイテム名</th>
