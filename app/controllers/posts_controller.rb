@@ -18,13 +18,10 @@ class PostsController < ApplicationController
     @event = Event.find(params[:event_id])
     @post = @event.posts.find(params[:id])
     @posts = @event.posts.includes(:user).order(created_at: :desc)
-
-    @comments = @post.comments.includes(:user)
+  
+    # コメントとコメントのユーザーを関連付けてページネーションを適用
+    @comments = @post.comments.includes(:user).page(params[:page]).per(4)
     @comment = Comment.new
-
-    # コントローラーでページネーションを設定
-    @comments = @post.comments.page(params[:page]).per(4)
-
   end
   
   def create_comment
@@ -37,7 +34,7 @@ class PostsController < ApplicationController
     if @comment.save
       redirect_to event_post_path(@event, @post)
     else
-      @comments = @post.comments.includes(:user)
+      @comments = @post.comments.page(params[:page]).per(4).includes(:user)
       render :show
     end
   end
