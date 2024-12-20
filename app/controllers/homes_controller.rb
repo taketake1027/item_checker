@@ -3,14 +3,18 @@ class HomesController < ApplicationController
   before_action :restrict_guest_access, except: [:top, :about]
 
   def top
-    # 検索条件がある場合に検索を適用
     if params[:search].present?
       @events = Event.where('name LIKE ?', "%#{params[:search]}%")
+
+      # 検索結果がない場合
+      if @events.empty?
+        flash.now[:alert] = '該当するイベントがありませんでした。'
+      end
     else
       @events = Event.all
+      flash.now[:alert] = '検索ワードを入力してください。' if params[:search].nil? || params[:search].empty?
     end
-    
-    # 検索後にページネーションを適用
+
     @events = @events.order(start_date: :asc).page(params[:page]).per(6)
   end
   
