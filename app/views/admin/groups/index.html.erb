@@ -6,12 +6,12 @@
     <%= link_to '新規グループ作成', new_admin_group_path, class: 'btn btn-primary' %>
   </div>
 
-  <!-- グループ検索フォーム -->
+  <!-- グループ検索フォーム（ドロップダウン形式） -->
   <div class="mb-4">
     <div class="row justify-content-center">
       <div class="col-md-8">
         <%= form_with url: admin_groups_path, method: :get, class: 'd-flex' do %>
-          <%= text_field_tag :search, params[:search], placeholder: "グループ名で検索", class: 'form-control w-75 me-2' %>
+          <%= select_tag :search, options_for_select(@groups.pluck(:name), params[:search]), prompt: 'グループ名を選択', class: 'form-control w-75 me-2' %>
           <%= submit_tag '検索', class: 'btn btn-secondary' %>
         <% end %>
       </div>

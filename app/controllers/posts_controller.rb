@@ -15,24 +15,45 @@ class PostsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
+    @event = Event.find(params[:event_id])
+    @post = @event.posts.find(params[:id])
     @posts = @event.posts.includes(:user).order(created_at: :desc)
-    logger.debug "Posts fetched: #{@posts.inspect}"  # ログ出力
+  
+    # コメントとコメントのユーザーを関連付けてページネーションを適用
+    @comments = @post.comments.includes(:user).page(params[:page]).per(4)
+    @comment = Comment.new
+  end
+  
+  def create_comment
+    @post = Post.find(params[:id])
+    @event = Event.find(params[:event_id])
+    @comment = @post.comments.build(comment_params)
+    @comment.user = current_user
+    @comment.event_id = @event.id
+  
+    if @comment.save
+      redirect_to event_post_path(@event, @post)
+    else
+      @comments = @post.comments.page(params[:page]).per(4).includes(:user)
+      render :show
+    end
   end
   
   def destroy
-    if @post.destroy
-      flash[:notice] = "投稿が削除されました。"
+    if @post.user == current_user  # 投稿したユーザーだけが削除できる
+      @post.destroy
+      redirect_to event_path(@event), notice: '投稿が削除されました。'
     else
-      flash[:alert] = "投稿の削除に失敗しました。"
+      redirect_to event_path(@event), alert: '削除権限がありません。'
     end
-    redirect_to event_path(@event)
   end
+
 
   private
 
   def set_event
     @event = Event.find(params[:event_id])
+    redirect_to root_path, alert: "Event not found" if @event.nil?
   end
 
   def set_post
@@ -42,5 +63,9 @@ class PostsController < ApplicationController
   # Strong Parameters: 投稿内容とファイルのパラメータを許可
   def post_params
     params.require(:post).permit(:title, :content, :image)  # :file を追加
+  end
+
+  def comment_params
+    params.require(:comment).permit(:content)
   end
 end

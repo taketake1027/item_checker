@@ -6,16 +6,17 @@
   <nav>
     <ul class="list-group list-group-flush">
       <li class="list-group-item mb-3 text-center">
-        <%= link_to 'グループ一覧', admin_groups_path, class: "btn btn-outline-primary w-75 text-center py-3" %>
+        <%= link_to 'グループ管理', admin_groups_path, class: "btn btn-outline-primary w-75 text-center py-3" %>
       </li>
       <li class="list-group-item mb-3 text-center">
-        <%= link_to 'イベント一覧', admin_events_path, class: "btn btn-outline-primary w-75 text-center py-3" %>
+        <%= link_to 'イベント管理', admin_events_path, class: "btn btn-outline-primary w-75 text-center py-3" %>
+        <p class="mt-2 text-muted">イベントに紐づいた投稿やコメントの確認・削除もここから可能です。</p> <!-- 説明を追加 -->
       </li>
       <li class="list-group-item mb-3 text-center">
-        <%= link_to 'アイテム一覧', admin_items_path, class: "btn btn-outline-primary w-75 text-center py-3" %>
+        <%= link_to 'アイテム管理', admin_items_path, class: "btn btn-outline-primary w-75 text-center py-3" %>
       </li>
       <li class="list-group-item mb-3 text-center">
-        <%= link_to 'ユーザー一覧', admin_users_path, class: "btn btn-outline-primary w-75 text-center py-3" %> <!-- ここにユーザー一覧のリンクを追加 -->
+        <%= link_to 'ユーザー管理', admin_users_path, class: "btn btn-outline-primary w-75 text-center py-3" %>
       </li>
     </ul>
   </nav>
@@ -48,5 +49,11 @@
   /* ナビゲーション全体のスタイル */
   nav {
     margin-top: 30px; /* 上部に余白を追加 */
+  }
+
+  /* 投稿・コメントの管理説明文のスタイル */
+  .text-muted {
+    font-size: 0.9rem;
+    color: #6c757d; /* 薄いグレーの色 */
   }
 </style>

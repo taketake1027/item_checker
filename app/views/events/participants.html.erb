@@ -1,0 +1,21 @@
+<!-- app/views/events/participants.html.erb -->
+<div class="container mt-4">
+  <h1><%= @event.name %> に参加しているユーザー一覧</h1>
+  <div class="row mt-3">
+    <% @participants.each do |user| %>
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= user.name %></h5>
+            <p class="card-text"><%= user.email %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- 参加者がいない場合 -->
+  <% if @participants.empty? %>
+    <p>まだ参加者がいません。</p>
+  <% end %>
+</div>

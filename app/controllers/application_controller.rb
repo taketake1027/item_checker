@@ -18,7 +18,16 @@ class ApplicationController < ActionController::Base
       user.name = 'ゲストユーザー'  # ゲストユーザーの名前を設定
     end
     sign_in user  # ゲストユーザーとしてログイン
-    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました'  # トップページへリダイレクト
+    redirect_to homes_top_path, notice: 'ゲストユーザーとしてログインしました'  # トップページへリダイレクト
+  end
+
+  # ログイン後のリダイレクト先
+  def after_sign_in_path_for(resource)
+    if resource.guest?  # ゲストユーザーの場合
+      homes_top_path  # ゲストユーザーもトップページにリダイレクト
+    else
+      homes_top_path  # 通常ユーザーもトップページにリダイレクト
+    end
   end
 
   protected

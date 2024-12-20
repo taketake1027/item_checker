@@ -4,19 +4,29 @@ class Admin::EventsController < ApplicationController
   before_action :set_event, only: [:edit, :update]  # :edit と :update に set_event を追加
 
   def index
-    if params[:search].present?
-      @events = Event.where('name LIKE ?', "%#{params[:search]}%").page(params[:page])
+    # 管理者投稿管理
+    @events = Event.all
+
+    if params[:event_id].present?
+      @events = Event.where(id: params[:event_id]).page(params[:page]).per(10)  # paginate -> pageとper
     else
-      @events = Event.page(params[:page])
+      @events = Event.page(params[:page]).per(10)  # paginate -> pageとper
+    end
+  end
+
+  def show
+    @event = Event.find_by(id: params[:id])
+    if @event.nil?
+      redirect_to admin_events_path, alert: '指定されたイベントが見つかりません。'
     end
   end
 
   def new
     @event = Event.new
     @groups = Group.all
-    @add_members = 'group'  # 新規作成時のデフォルト値
   end
-
+  
+  
   def create
     @event = Event.new(event_params)
 
@@ -37,6 +47,10 @@ class Admin::EventsController < ApplicationController
     end
   end
 
+  def posts
+    @posts = @event.posts  # イベントに関連する投稿を取得
+  end
+
   def edit
     @groups = Group.all
     # @add_membersを仮に設定 (add_members属性はEventモデルには存在しない)
@@ -50,7 +64,6 @@ class Admin::EventsController < ApplicationController
       render :edit
     end
   end
-
   # イベント削除アクション
   def destroy
     @event = Event.find(params[:id])
@@ -63,15 +76,7 @@ class Admin::EventsController < ApplicationController
     end
   end
 
-  def show
-    # find_byを使って、イベントが見つからない場合にnilを返す
-    @event = Event.find_by(id: params[:id])
-    
-    # イベントが見つからない場合にリダイレクト
-    if @event.nil?
-      redirect_to admin_events_path, alert: '指定されたイベントが見つかりません。'
-    end
-  end
+  
 
   private
 
