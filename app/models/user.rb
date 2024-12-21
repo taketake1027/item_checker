@@ -16,7 +16,7 @@ class User < ApplicationRecord
   # ユーザー削除時に関連するグループ参加情報も削除
   before_destroy :remove_from_groups
 
-  enum role: { 社員: 0, パート: 1, 役職持ち: 2 }
+  enum role: { employee: 0, staff: 1, leader: 2 }
   
   def guest?
     self.role == 'guest'  # roleがguestの場合をゲストと判断
