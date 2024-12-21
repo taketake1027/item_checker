@@ -35,7 +35,8 @@ class PostsController < ApplicationController
       redirect_to event_post_path(@event, @post)
     else
       @comments = @post.comments.page(params[:page]).per(4).includes(:user)
-      render :show
+      redirect_to event_post_path(@event, @post), alert: 'コメント内容を入力してください'
+      #render :show
     end
   end
   
