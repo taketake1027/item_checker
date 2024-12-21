@@ -117,8 +117,8 @@ ActiveRecord::Schema.define(version: 2024_12_18_144435) do
   end
 
   create_table "item_events", force: :cascade do |t|
-    t.integer "item_id", null: false
-    t.integer "event_id", null: false
+    t.bigint "item_id", null: false
+    t.bigint "event_id", null: false
     t.integer "amount", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
