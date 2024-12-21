@@ -17,7 +17,7 @@ class User < ApplicationRecord
   before_destroy :remove_from_groups
 
   enum role: { 社員: 0, パート: 1, 役職持ち: 2 }
-  validates :role, inclusion: { in: roles.keys }
+  
   def guest?
     self.role == 'guest'  # roleがguestの場合をゲストと判断
   end
