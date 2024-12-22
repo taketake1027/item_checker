@@ -14,6 +14,14 @@
     <% end %>
   </div>
 
+  <!-- ソートオプション -->
+  <div class="mb-3 text-center">
+    <%= form_with url: admin_items_path, method: :get, class: 'd-flex justify-content-center' do %>
+      <%= select_tag :sort_by, options_for_select([['新着順', 'newest'], ['準備未完了', 'incomplete'], ['準備完了', 'complete']], selected: params[:sort_by]), class: 'form-control w-50 me-2' %>
+      <%= submit_tag '並べ替え', class: 'btn btn-secondary' %>
+    <% end %>
+  </div>
+
   <!-- アイテム一覧テーブル -->
   <div class="table-responsive">
     <table class="table table-bordered table-striped table-hover text-center">
@@ -21,20 +29,32 @@
         <tr>
           <th>アイテム名</th>
           <th>イベント名</th>
-          <th>準備状態</th>
-          <th>数量</th>
+          <th>進捗状況</th> <!-- 進捗状況列 -->
           <th>操作</th>
         </tr>
       </thead>
       <tbody>
         <% if @items.any? %>
           <% @items.each do |item| %>
-            <tr>
-              <td class="bg-white"><%= item.name %></td>
-              <td class="bg-white"><%= item.event ? item.event.name : '未設定' %></td>
-              <td class="bg-white"><%= item.status %></td>
-              <td class="bg-white"><%= item.amount %></td>
-              <td class="bg-white">
+            <tr class="<%= 'bg-success' if item.status == '完了' %> <%= 'bg-light' if item.status == '未完了' %>">
+              <!-- アイテム名 -->
+              <td><%= item.name %></td>
+              <!-- イベント名 -->
+              <td><%= item.event ? item.event.name : '未設定' %></td>
+
+              <!-- 進捗状況 -->
+              <td>
+                <% if item.status == '完了' %>
+                  <span class="text-dark"><%= item.prepared_amount %> 個 準備完了</span>
+                <% elsif item.status == '未完了' %>
+                  <span class="text-dark"><%= "#{item.prepared_amount}/#{item.amount}" %> 個 準備中</span>
+                <% else %>
+                  <span class="text-muted">進捗なし</span>
+                <% end %>
+              </td>
+
+              <!-- 操作 -->
+              <td>
                 <%= link_to '詳細', admin_item_path(item), class: 'btn btn-info btn-sm' %>
                 <%= link_to '編集', edit_admin_item_path(item), class: 'btn btn-warning btn-sm' %>
                 <%= link_to '削除', admin_item_path(item), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
@@ -43,7 +63,7 @@
           <% end %>
         <% else %>
           <tr>
-            <td colspan="5" class="bg-white">検索結果が見つかりませんでした。</td>
+            <td colspan="4">検索結果が見つかりませんでした。</td>
           </tr>
         <% end %>
       </tbody>
