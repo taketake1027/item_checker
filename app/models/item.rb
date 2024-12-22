@@ -1,8 +1,7 @@
 class Item < ApplicationRecord
   has_one_attached :image
-  belongs_to :group, optional: true # グループが選択されていなくてもエラーにならない
-  has_many :item_events
-  has_many :events, through: :item_events
+  belongs_to :event
+  
 
   validates :name, presence: true
   validates :introduction, presence: true

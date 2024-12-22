@@ -42,11 +42,11 @@
   <hr>
 
   <!-- 関連アイテムの表示 -->
-  <% if @item.group.present? %>
+  <% if @item.event.present? %>
     <div class="p-3 bg-white rounded shadow-sm">
       <h3>関連アイテム:</h3>
       <ul class="list-group">
-        <% @item.group.items.each do |related_item| %>
+        <% @item.event.items.each do |related_item| %>
           <li class="list-group-item">
             <%= link_to related_item.name, admin_item_path(related_item), class: 'text-decoration-none' %>
           </li>

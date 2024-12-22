@@ -4,8 +4,7 @@ class Event < ApplicationRecord
   belongs_to :group
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :item_events
-  has_many :items, through: :item_events
+  has_many :items, dependent: :destroy
   has_many :users, through: :group_participations
 
   def add_users(user_ids)
