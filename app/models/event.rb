@@ -10,11 +10,9 @@ class Event < ApplicationRecord
   def add_users(user_ids)
     self.users = User.where(id: user_ids)
   end
-  
-  def role_for_user(user)
-    # ここでは `group_participations` などのカラム追加をしない前提で
-    # 役割の取得を行いたい場合に適切な方法を考慮します。
-    # 例えば、group_participationsの存在を仮定して、役割を判定するか、その他の条件でチェック
-    "未設定" # 仮に未設定として返す、もしroleの管理方法があれば適宜修正
+  def end_date_after_start_date
+    if start_date.present? && end_date.present? && end_date <= start_date
+      errors.add(:end_date, "終了日時は開始日時より後である必要があります")
+    end
   end
 end
