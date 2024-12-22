@@ -1,4 +1,5 @@
 <!-- app/views/admin/items/edit.html.erb -->
+
 <div class="container mt-4">
   <h1 class="text-center mb-4">アイテムの編集</h1>
 
@@ -19,16 +20,10 @@
       <%= form.text_field :name, class: 'form-control' %>
     </div>
 
-    <!-- 説明 -->
+    <!-- アイテム説明 -->
     <div class="form-group mb-3">
-      <%= form.label :introduction, '説明' %>
+      <%= form.label :introduction, 'アイテム説明' %>
       <%= form.text_area :introduction, class: 'form-control' %>
-    </div>
-
-    <!-- 在庫数 -->
-    <div class="form-group mb-3">
-      <%= form.label :amount, '在庫数' %>
-      <%= form.number_field :amount, class: 'form-control' %>
     </div>
 
     <!-- 準備状態 -->
@@ -37,11 +32,37 @@
       <%= form.select :status, options_for_select(['完了', '未完了'], @item.status), class: 'form-control' %>
     </div>
 
-    <!-- イベント -->
+    <!-- 準備数と残数 -->
     <div class="form-group mb-3">
-      <%= form.label :event_id, 'イベント' %>
-      <%= form.collection_select :event_id, Event.all, :id, :name, { prompt: 'イベントを選択' }, { class: 'form-control' } %>
+      <%= form.label :prepared_amount, '準備数' %>
+      <%= form.number_field :prepared_amount, class: 'form-control', min: 0, max: @item.amount, step: 1, 
+           data: { remaining_amount: @item.amount - @item.prepared_amount } %>
+      <span class="text-muted">残数: <%= @item.amount - @item.prepared_amount %>個</span>
     </div>
+
+    <!-- 準備状態が未完了の時に準備数制限 -->
+    <script>
+      const statusSelect = document.querySelector('select[name="item[status]"]');
+      const preparedAmountInput = document.querySelector('input[name="item[prepared_amount]"]');
+      const remainingAmountSpan = document.querySelector('.text-muted');
+
+      statusSelect.addEventListener('change', function () {
+        if (statusSelect.value === '未完了') {
+          preparedAmountInput.max = <%= @item.amount - @item.prepared_amount %>;
+        } else {
+          preparedAmountInput.max = <%= @item.amount %>;
+        }
+      });
+
+      preparedAmountInput.addEventListener('input', function () {
+        const preparedAmount = parseInt(preparedAmountInput.value);
+        const remainingAmount = <%= @item.amount - @item.prepared_amount %>;
+
+        if (preparedAmount === remainingAmount && statusSelect.value === '未完了') {
+          statusSelect.value = '完了';
+        }
+      });
+    </script>
 
     <!-- 画像 -->
     <div class="form-group mb-3">
