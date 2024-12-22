@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_12_18_144435) do
+ActiveRecord::Schema.define(version: 2024_12_22_160021) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -122,6 +122,16 @@ ActiveRecord::Schema.define(version: 2024_12_18_144435) do
     t.string "status", default: "在庫アリ", null: false
     t.integer "amount", null: false
     t.integer "event_id"
+    t.integer "prepared_amount"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "post_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_likes_on_post_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -156,6 +166,8 @@ ActiveRecord::Schema.define(version: 2024_12_18_144435) do
   add_foreign_key "comments", "users"
   add_foreign_key "event_members", "events"
   add_foreign_key "event_members", "users"
+  add_foreign_key "likes", "posts"
+  add_foreign_key "likes", "users"
   add_foreign_key "posts", "events"
   add_foreign_key "posts", "users"
 end
