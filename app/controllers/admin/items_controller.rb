@@ -6,11 +6,24 @@ class Admin::ItemsController < ApplicationController
   def index
     @items = Item.all
 
+    # イベントフィルタ
     if params[:event_id].present?
-      @items = Item.where(event_id: params[:event_id]).page(params[:page]).per(10)
-    else
-      @items = Item.all.page(params[:page]).per(10)
+      @items = @items.where(event_id: params[:event_id])
     end
+
+    # ステータスで並び替え
+    case params[:sort_by]
+    when 'newest'
+      @items = @items.order(created_at: :desc)
+    when 'incomplete'
+      # 「在庫アリ」も「未完了」として扱う
+      @items = @items.where(status: ['未完了', '在庫アリ']).order(prepared_amount: :asc)
+    when 'complete'
+      @items = @items.where(status: '完了').order(prepared_amount: :desc)
+    end
+
+    # ページネーション
+    @items = @items.page(params[:page]).per(10)
   end
 
   def show
@@ -53,6 +66,7 @@ class Admin::ItemsController < ApplicationController
       redirect_to admin_items_path, alert: 'アイテムが見つかりませんでした。'
     end
   end
+
   private
 
   def set_item

@@ -7,6 +7,11 @@ class Event < ApplicationRecord
   has_many :items, dependent: :destroy
   has_many :users, through: :group_participations
 
+   # 開始日時が終了日時より前でないことを確認するバリデーション
+   validate :end_date_after_start_date
+
+   private
+   
   def add_users(user_ids)
     self.users = User.where(id: user_ids)
   end
