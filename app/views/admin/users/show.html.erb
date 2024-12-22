@@ -1,21 +1,76 @@
 <div class="container mt-4">
   <h2 class="text-center mb-4"><%= @user.name %> の詳細情報</h2>
 
-  <h4 class="text-center mb-3">参加しているイベント</h4>
+  <!-- ユーザー基本情報 -->
+  <div class="row mb-4">
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <div class="card-header bg-primary text-white text-center">
+          <h5>ユーザー情報</h5>
+        </div>
+        <div class="card-body">
+          <!-- メールアドレス -->
+          <div class="form-group">
+            <label><strong>メールアドレス:</strong></label>
+            <p><%= @user.email %></p>
+          </div>
 
+          <!-- 役割 -->
+          <div class="form-group">
+            <label><strong>役割:</strong></label>
+            <p><%= @user.role %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 参加しているイベント -->
+  <h4 class="text-center mb-3 mt-5">参加しているイベント</h4>
   <div class="table-responsive bg-light p-3 rounded">
     <table class="table table-striped table-hover">
       <thead class="thead-dark">
         <tr>
           <th>イベント名</th>
-          <th>役割</th>
         </tr>
       </thead>
       <tbody>
-        <% @user.events.each do |event| %>
+        <% if @user.events.any? %>
+          <% @user.events.each do |event| %>
+            <tr>
+              <td><%= event.name %></td>
+            </tr>
+          <% end %>
+        <% else %>
           <tr>
-            <td><%= event.name %></td>
-            <td><%= event.role_for_user(@user).capitalize %></td>
+            <td colspan="1" class="text-center">参加しているイベントはありません。</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ユーザーの投稿 -->
+  <h4 class="text-center mb-3 mt-5">ユーザーの投稿</h4>
+  <div class="table-responsive bg-light p-3 rounded">
+    <table class="table table-striped table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th>投稿タイトル</th>
+          <th>内容</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @user.posts.any? %>
+          <% @user.posts.each do |post| %>
+            <tr>
+              <td><%= post.title %></td>
+              <td><%= post.content %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="2" class="text-center">投稿はありません。</td>
           </tr>
         <% end %>
       </tbody>

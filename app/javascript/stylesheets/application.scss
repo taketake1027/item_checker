@@ -1,2 +1,25 @@
-@use '~bootstrap/scss/bootstrap'
+@use '~bootstrap/scss/bootstrap';  // Bootstrapのスタイルをインポート
 
+/* application.scss.erb から内容を移動 */
+body {
+  background-image: url('~images/drawing-pad-1209779_1920.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  color: #333333;
+}
+
+.post-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.landing-page {
+  background-image: url('~images/events-1203275_1280.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}

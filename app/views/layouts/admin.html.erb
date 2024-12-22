@@ -71,7 +71,15 @@
 </head>
 <body>
   <%= render 'layouts/header_admin' %> <!-- ヘッダー部分 -->
-
+  <% if flash[:notice] %>
+  <div class="alert alert-success text-center" role="alert">
+    <%= flash[:notice] %>
+  </div>
+<% elsif flash[:alert] %>
+  <div class="alert alert-danger text-center" role="alert">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
   <main>
     <%= yield %> <!-- コンテンツ部分 -->
   </main>

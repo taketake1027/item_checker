@@ -6,7 +6,6 @@
   <title>イベント管理アプリ</title>
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag 'application', media: 'all' %>
-  <%= stylesheet_pack_tag 'application' %>
   <%= javascript_pack_tag 'application' %>
   
   <style>
@@ -40,11 +39,17 @@
   <%= render 'layouts/header' %>
   
   <main>
-    <p id="notice">
-      <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
-      <% end %>
-    </p>
+    <% if flash[:notice] %>
+  <div class="alert alert-success text-center" role="alert">
+    <%= flash[:notice] %>
+  </div>
+<% elsif flash[:alert] %>
+  <div class="alert alert-danger text-center" role="alert">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+
     <%= yield %>
   </main>
 
