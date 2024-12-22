@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   resources :events do
     resources :items, only: [:index, :show]
     resources :posts, only: [:show, :create, :destroy] do
+      resources :likes, only: [:create, :destroy]
       post 'create_comment', on: :member
       resources :comments, only: [:create, :destroy]
     end
