@@ -40,11 +40,17 @@
   <%= render 'layouts/header' %>
   
   <main>
-    <p id="notice">
-      <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
-      <% end %>
-    </p>
+    <% if flash[:notice] %>
+  <div class="alert alert-success text-center" role="alert">
+    <%= flash[:notice] %>
+  </div>
+<% elsif flash[:alert] %>
+  <div class="alert alert-danger text-center" role="alert">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+
     <%= yield %>
   </main>
 
