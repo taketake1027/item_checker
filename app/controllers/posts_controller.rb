@@ -32,7 +32,7 @@ class PostsController < ApplicationController
     @comment.event_id = @event.id
   
     if @comment.save
-      redirect_to event_post_path(@event, @post)
+      redirect_to event_post_path(@event, @post), notice: "コメントを投稿しました。"
     else
       @comments = @post.comments.page(params[:page]).per(4).includes(:user)
       redirect_to event_post_path(@event, @post), alert: 'コメント内容を入力してください'

@@ -116,16 +116,6 @@ ActiveRecord::Schema.define(version: 2024_12_18_144435) do
     t.index ["name"], name: "index_groups_on_name"
   end
 
-  create_table "item_events", force: :cascade do |t|
-    t.integer "item_id", null: false
-    t.integer "event_id", null: false
-    t.integer "amount", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["event_id"], name: "index_item_events_on_event_id"
-    t.index ["item_id"], name: "index_item_events_on_item_id"
-  end
-
   create_table "items", force: :cascade do |t|
     t.string "name", null: false
     t.string "introduction", null: false
@@ -166,8 +156,6 @@ ActiveRecord::Schema.define(version: 2024_12_18_144435) do
   add_foreign_key "comments", "users"
   add_foreign_key "event_members", "events"
   add_foreign_key "event_members", "users"
-  add_foreign_key "item_events", "events"
-  add_foreign_key "item_events", "items"
   add_foreign_key "posts", "events"
   add_foreign_key "posts", "users"
 end

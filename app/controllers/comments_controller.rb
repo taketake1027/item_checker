@@ -4,18 +4,6 @@ class CommentsController < ApplicationController
   before_action :set_post
   before_action :set_comment, only: [:destroy]
 
-  def create
-    @post = Post.find(params[:post_id])
-    @comment = @post.comments.build(comment_params)
-    @comment.user = current_user
-
-    if @comment.save
-      redirect_to event_path(@event), notice: "コメントを投稿しました。"
-    else
-      redirect_to event_path(@event), alert: "コメントの投稿に失敗しました。"
-    end
-  end
-
   # コメント削除
   def destroy
     if @comment.user == current_user
