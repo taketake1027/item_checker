@@ -6,14 +6,27 @@
   <div class="row">
     <!-- アイテム詳細情報 -->
     <div class="col-md-8">
+      <!-- アイテム名 -->
       <div class="mb-3 p-3 bg-white rounded shadow-sm">
-        <p><strong>アイテム紹介:</strong> <%= @item.introduction %></p>
+        <p><strong>アイテム名:</strong> <%= @item.name %></p>
       </div>
+
+      <!-- アイテム説明 -->
       <div class="mb-3 p-3 bg-white rounded shadow-sm">
-        <p><strong>準備状態:</strong> <%= @item.status %></p>
+        <p><strong>アイテム説明:</strong> <%= @item.introduction %></p>
       </div>
+
+      <!-- 進捗状況 -->
       <div class="mb-3 p-3 bg-white rounded shadow-sm">
-        <p><strong>数量:</strong> <%= @item.amount %></p>
+        <p><strong>進捗状況:</strong>
+          <% if @item.status == '完了' %>
+            <span class="text-success"><%= @item.prepared_amount %> 個 準備完了</span>
+          <% elsif @item.status == '未完了' %>
+            <span class="text-warning"><%= "#{@item.prepared_amount}/#{@item.amount}" %> 個 準備中</span>
+          <% else %>
+            <span class="text-muted">進捗なし</span>
+          <% end %>
+        </p>
       </div>
     </div>
 
@@ -40,18 +53,4 @@
     </div>
   </div>
   <hr>
-
-  <!-- 関連アイテムの表示 -->
-  <% if @item.event.present? %>
-    <div class="p-3 bg-white rounded shadow-sm">
-      <h3>関連アイテム:</h3>
-      <ul class="list-group">
-        <% @item.event.items.each do |related_item| %>
-          <li class="list-group-item">
-            <%= link_to related_item.name, admin_item_path(related_item), class: 'text-decoration-none' %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
 </div>
