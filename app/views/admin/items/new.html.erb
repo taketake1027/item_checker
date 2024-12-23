@@ -31,13 +31,13 @@
     </div>
 
     <!-- 必要数量 -->
-    <div class="form-group mb-3" id="amount-field">
+    <div class="form-group mb-3">
       <%= form.label :amount, '必要数量' %>
       <%= form.number_field :amount, class: 'form-control' %>
     </div>
 
     <!-- 準備済み数量 -->
-    <div class="form-group mb-3" id="prepared-amount-field">
+    <div class="form-group mb-3">
       <%= form.label :prepared_amount, '準備済み数量' %>
       <%= form.number_field :prepared_amount, class: 'form-control' %>
     </div>
@@ -65,32 +65,3 @@
     <%= link_to 'アイテム一覧に戻る', admin_items_path, class: 'btn btn-secondary' %>
   </div>
 </div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const statusSelect = document.getElementById('status-select');
-    const amountField = document.getElementById('amount-field');
-    const preparedAmountField = document.getElementById('prepared-amount-field');
-
-    function toggleFields() {
-      if (statusSelect.value === '完了') {
-        amountField.style.display = 'none'; // 必要数量を非表示
-        preparedAmountField.style.display = 'none'; // 準備済み数量を非表示
-        // フィールドの値をクリア
-        const amountInput = amountField.querySelector('input');
-        const preparedAmountInput = preparedAmountField.querySelector('input');
-        if (amountInput) amountInput.value = '';
-        if (preparedAmountInput) preparedAmountInput.value = '';
-      } else {
-        amountField.style.display = 'block'; // 必要数量を表示
-        preparedAmountField.style.display = 'block'; // 準備済み数量を表示
-      }
-    }
-
-    // 初期表示を切り替え
-    toggleFields();
-
-    // 状態変更時に切り替え
-    statusSelect.addEventListener('change', toggleFields);
-  });
-</script>
