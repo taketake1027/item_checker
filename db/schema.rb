@@ -119,10 +119,10 @@ ActiveRecord::Schema.define(version: 2024_12_22_160021) do
   create_table "items", force: :cascade do |t|
     t.string "name", null: false
     t.string "introduction", null: false
-    t.string "status", default: "在庫アリ", null: false
+    t.string "status", default: "active", null: false
     t.integer "amount", null: false
-    t.integer "event_id"
-    t.integer "prepared_amount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "likes", force: :cascade do |t|
