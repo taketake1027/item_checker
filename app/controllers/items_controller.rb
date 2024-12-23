@@ -18,6 +18,18 @@ class ItemsController < ApplicationController
       @items = @items.where('name LIKE ?', "%#{params[:search]}%")  # アイテム名で絞り込み
     end
 
+   # ソート機能
+   case params[:sort_by]
+   when 'newest'
+     @items = @items.order(created_at: :desc)  # 新着順
+   when 'complete'
+     @items = @items.where(status: '完了').order(created_at: :desc)  # 準備完了
+   when 'incomplete'
+     @items = @items.where(status: '未完了').order(created_at: :desc)  # 準備中
+   else
+     @items = @items.order(created_at: :desc)  # デフォルトで新着順
+   end
+
     @items = @items.page(params[:page])  # ページネーションを適用
   end
   def show
