@@ -1,5 +1,3 @@
-<!-- app/views/admin/items/show.html.erb -->
-
 <div class="container mt-4">
   <h1 class="text-center mb-4"><%= @item.name %></h1>
 
@@ -23,9 +21,14 @@
             <span class="text-success"><%= @item.prepared_amount %> 個 準備完了</span>
           <% elsif @item.status == '未完了' %>
             <span class="text-warning"><%= "#{@item.prepared_amount}/#{@item.amount}" %> 個 準備中</span>
-          <% else %>
-            <span class="text-muted">進捗なし</span>
           <% end %>
+        </p>
+      </div>
+
+      <!-- 関連イベントの表示 -->
+      <div class="mb-3 p-3 bg-white rounded shadow-sm">
+        <p><strong>関連イベント:</strong> 
+          <%= @item.event.name %>（開催日: <%= @item.event.start_date.strftime('%Y-%m-%d') %>）
         </p>
       </div>
     </div>
@@ -35,22 +38,8 @@
       <% if @item.image.attached? %>
         <%= image_tag @item.image, class: 'img-fluid rounded shadow', alt: @item.name %>
       <% else %>
-        <p>画像はありません。</p>
+        <p>画像は登録されていません。</p>
       <% end %>
     </div>
   </div>
-
-  <!-- 関連イベントの表示 -->
-  <div class="mt-4">
-    <div class="p-3 bg-white rounded shadow-sm">
-      <p><strong>関連イベント:</strong> 
-        <% if @item.event.present? %>
-          <%= @item.event.name %>（開催日: <%= @item.event.start_date.strftime('%Y-%m-%d') if @item.event.start_date %>）
-        <% else %>
-          <span>イベントはありません。</span>
-        <% end %>
-      </p>
-    </div>
-  </div>
-  <hr>
 </div>
