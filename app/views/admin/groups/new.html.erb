@@ -1,7 +1,20 @@
 <div class="container my-4">
   <h1 class="text-center mb-4">新規グループ作成</h1>
 
+  
   <%= form_with model: @group, url: admin_groups_path, local: true do |f| %>
+    <!-- バリデーションエラーメッセージの表示 -->
+    <% if @group.errors.any? %>
+      <div class="alert alert-danger">
+        <strong><%= @group.errors.count %>件のエラーがあります。</strong>
+        <ul>
+          <% @group.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
     <!-- グループ名 -->
     <div class="form-group mb-3">
       <%= f.label :name, 'グループ名', class: 'form-label' %>

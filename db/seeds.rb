@@ -1,6 +1,4 @@
 # 既存データをクリア
-Admin.delete_all
-User.delete_all
 Group.delete_all
 GroupUser.delete_all
 Event.delete_all
@@ -50,37 +48,17 @@ groups.each do |group|
   puts group.persisted? ? "グループ '#{group.name}' を作成しました" : "グループ '#{group.name}' の作成に失敗しました"
 end
 
-# 各グループにユーザーを追加
-group_user_mapping = {
-  groups[0] => [
-    { email: "misaki.tanaka@example.com", position: "Member", status: "Active" },
-    { email: "test@test", position: "Member", status: "Active" },
-    { email: "hanako.suzuki@example.com", position: "Member", status: "Inactive" }
-  ],
-  groups[1] => [
-    { email: "kenta.kobayashi@example.com", position: "Leader", status: "Active" },
-    { email: "yuki.matsumoto@example.com", position: "Member", status: "Active" }
-  ],
-  groups[2] => [
-    { email: "test@test", position: "Leader", status: "Active" },
-    { email: "misaki.tanaka@example.com", position: "Member", status: "Inactive" }
-  ]
-}
 
-group_user_mapping.each do |group, users_data|
-  users_data.each do |user_data|
-    user = User.find_by(email: user_data[:email])
-    if user
-      GroupUser.find_or_create_by(group: group, user: user) do |gu|
-        gu.position = user_data[:position]
-        gu.status = user_data[:status]
-        gu.joined_date = Date.today
-      end
-      puts "ユーザー #{user.name} をグループ '#{group.name}' に追加しました"
-    else
-      puts "メールアドレス #{user_data[:email]} に該当するユーザーが見つかりません"
+# 各グループにユーザーを追加
+user_ids = User.all.ids
+Group.all.each do |group|
+  User.find(user_ids.sample(2)).each do |user|
+    GroupUser.find_or_create_by(group: group, user: user) do |gu|
+      gu.position = user.role
+      gu.status = "active"
+      gu.joined_date = Date.today
     end
-  end
+  end 
 end
 
 # イベントデータを作成
@@ -253,3 +231,65 @@ posts_data.each do |post_data|
 end
 
 puts "データの作成が完了しました"
+
+
+Comment.destroy_all
+
+# 複数のコメントを一度に作成
+comments = Comment.create(
+  [
+    {
+      content: "年次総会のハイライト、非常に興味深いです！来年の計画も気になります。",
+      user_id: 1,
+      post_id: 1,
+      event_id: 1
+    },
+    {
+      content: "チームビルディングワークショップの振り返り、次回の改善点を共有してほしいです。",
+      user_id: 1,
+      post_id: 2,
+      event_id: 2
+    },
+    {
+      content: "プロジェクターのセットアップに関して、実際の事例を見てみたいです。",
+      user_id: 2,
+      post_id: 3,
+      event_id: 1
+    },
+    {
+      content: "クライアントからのフィードバック、どのように改善点を取り入れたか気になります。",
+      user_id: 3,
+      post_id: 4,
+      event_id: 3
+    },
+    {
+      content: "財務レビューは詳細で分かりやすかったです。次回の予算案についても知りたいです。",
+      user_id: 4,
+      post_id: 5,
+      event_id: 4
+    },
+    {
+      content: "次期マーケティング戦略について、更なる戦略の具体例が知りたいです。",
+      user_id: 2,
+      post_id: 6,
+      event_id: 5
+    },
+    {
+      content: "リーダーシップ開発プログラム、次のステップで何を学ぶか楽しみです。",
+      user_id: 1,
+      post_id: 7,
+      event_id: 6
+    }
+  ]
+)
+
+# 作成されたコメントを確認
+if comments.all?(&:persisted?)
+  puts "コメントが正常に作成されました"
+else
+  comments.each do |comment|
+    unless comment.persisted?
+      puts "コメント作成失敗: #{comment.errors.full_messages.join(", ")}"
+    end
+  end
+end
