@@ -21,7 +21,6 @@
         <tr>
           <th>イベント名</th>
           <th>開催日</th>
-          <th>コメント数</th>
           <th>投稿数</th>
           <th>操作</th>
         </tr>
@@ -31,9 +30,6 @@
           <tr>
             <td><%= event.name %></td>
             <td><%= event.start_date.present? ? event.start_date.strftime('%Y-%m-%d') : '未設定' %></td>
-            <td>
-              <%= link_to event.comments.count, admin_event_comments_path(event), class: 'text-primary', style: 'cursor: pointer;' %>
-            </td>
             <td>
               <%= link_to event.posts.count, admin_event_posts_path(event), class: 'text-primary', style: 'cursor: pointer;' %>
             </td>

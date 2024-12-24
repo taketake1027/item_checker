@@ -43,7 +43,7 @@
         <%= form_with url: add_user_to_group_admin_group_path(@group), method: :post, local: true do |f| %>
           <div class="form-group mb-3">
             <%= f.label :email, '追加するユーザーのメールアドレス', class: 'form-label' %>
-            <%= f.email_field :email, class: 'form-control', required: true %>
+            <%= f.email_field :email, class: 'form-control'%>
           </div>
           <%= f.submit 'ユーザー追加', class: 'btn btn-primary' %>
         <% end %>

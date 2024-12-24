@@ -39,6 +39,17 @@
               <%= link_to '削除', admin_event_post_path(event_id: @event.id, id: post.id), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
             </td>
           </tr>
+
+          <!-- コメント表示 -->
+          <% post.comments.each do |comment| %>
+            <tr>
+              <td colspan="5" style="background-color: #f9f9f9; border-top: 1px solid #ddd; padding: 10px;">
+                <strong><%= comment.user.name %>:</strong>
+                <p><%= comment.content %></p>
+              </td>
+            </tr>
+          <% end %>
+
         <% end %>
       </tbody>
     </table>
@@ -48,7 +59,7 @@
   <div class="mt-3">
     <%= paginate @posts %>
   </div>
-  
+
   <!-- 戻るボタン -->
   <div class="mt-4">
     <%= link_to 'イベント管理ページに戻る', admin_events_path, class: 'btn btn-secondary' %>

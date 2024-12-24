@@ -29,31 +29,29 @@
         <h3>イベントに関する投稿</h3>
 
         <% if @post.errors.any? %>
-          <div class="alert alert-danger">
-            <p><%= @post.errors.count %>件のエラーが発生しました:</p>
-            <ul>
-              <% @post.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
+            <div class="alert alert-danger">
+              <ul>
+                <% @post.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
 
         <%= form_with(model: [@event, @event.posts.build], local: true, html: { multipart: true }) do |f| %>
           <div class="form-group mb-3">
             <%= f.label :title, "投稿タイトル", class: "form-label" %>
-            <%= f.text_field :title, class: "form-control form-control-sm", required: true %>
+            <%= f.text_field :title, class: "form-control form-control-sm"%>
           </div>
           <div class="form-group mb-3">
             <%= f.label :content, "投稿内容", class: "form-label" %>
-            <%= f.text_area :content, class: "form-control form-control-sm", rows: 3, required: true %>
+            <%= f.text_area :content, class: "form-control form-control-sm", rows: 3%>
           </div>
           <div class="form-group mb-3">
             <%= f.label :image, "画像を添付", class: "form-label" %>
             <%= f.file_field :image, accept: "image/*", class: "form-control form-control-sm" %>
           </div>
-          <!-- バリデーションエラーがある場合にボタンを無効化 -->
-          <%= f.submit "投稿する", class: "btn btn-primary btn-sm btn-block", disabled: @post.errors.any? %>
+          <%= f.submit "投稿する", class: "btn btn-primary btn-sm btn-block" %>
         <% end %>
       </div>
     </div>
@@ -61,48 +59,41 @@
 
   <!-- 投稿一覧 -->
   <div class="mt-4">
-  <!-- 投稿一覧 -->
-<% if @posts.nil? || @posts.empty? %>
-  <p>まだ投稿はありません。</p>
-<% else %>
-  <% @posts.each_with_index do |post, index| %>
-    <% if index % 2 == 0 %>
-      <div class="row">
-    <% end %>
+    <% if @posts.blank? %>
+      <p>まだ投稿はありません。</p>
+    <% else %>
+      <% @posts.each_slice(2).with_index do |posts_pair, row_index| %>
+        <div class="row">
+          <% posts_pair.each do |post| %>
+            <div class="col-md-6 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <%= link_to post.user.name, event_post_path(@event, post), class: "link-style" %>
+                  </h5>
+                  <p class="card-text"><%= truncate(post.content, length: 20) %></p>
+                  <p class="text-muted"><%= post.created_at.strftime('%Y-%m-%d %H:%M') %></p>
 
-    <div class="col-md-6 mb-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">
-            <%= link_to post.user.name, event_post_path(@event, post), class: "link-style" %>
-          </h5>
-          <p class="card-text"><%= truncate(post.content, length: 20) %></p>
-          <p class="text-muted"><%= post.created_at.strftime('%Y-%m-%d %H:%M') %></p>
+                  <% if current_user %>
+                    <% if current_user.likes.exists?(post_id: post.id) %>
+                      <%= link_to 'いいねを取り消す', event_post_like_path(@event, post), method: :delete, class: 'btn btn-danger btn-sm' %>
+                    <% else %>
+                      <%= link_to 'いいね', event_post_likes_path(@event, post), method: :post, class: 'btn btn-primary btn-sm' %>
+                    <% end %>
+                  <% end %>
 
-          <!-- いいねボタン -->
-          <% if current_user %>
-            <% if current_user.likes.exists?(post_id: post.id) %>
-              <!-- いいね済み -->
-              <%= link_to 'いいねを取り消す', event_post_like_path(@event, post), method: :delete, class: 'btn btn-danger btn-sm' %>
-            <% else %>
-              <!-- まだいいねしていない -->
-              <%= link_to 'いいね', event_post_likes_path(@event, post), method: :post, class: 'btn btn-primary btn-sm' %>
-            <% end %>
-          <% end %>
+                  <p><%= post.likes.count %> いいね</p>
 
-          <!-- いいね数 -->
-          <p><%= post.likes.count %> いいね</p>
-
-          <% if post.user == current_user %>
-            <%= link_to '削除', event_post_path(@event, post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
+                  <% if post.user == current_user %>
+                    <%= link_to '削除', event_post_path(@event, post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
           <% end %>
         </div>
-      </div>
-    </div>
-
-    <% if index % 2 == 1 || index == @posts.size - 1 %>
-      </div>
+      <% end %>
+      <%= paginate @posts %>
     <% end %>
-  <% end %>
-  <%= paginate @posts %>
-<% end %>
+  </div>
+</div>
