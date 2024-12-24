@@ -39,7 +39,6 @@ class UsersController < ApplicationController
   end
   
 
-  # ユーザー削除
   def destroy
     if current_user == @user || current_user.admin?  # 管理者の場合も削除可能
       @user.destroy
@@ -49,7 +48,7 @@ class UsersController < ApplicationController
       redirect_to root_path, alert: '他のユーザーのアカウントは削除できません。'
     end
   end
-
+  
   private
 
   # Strong Parameters

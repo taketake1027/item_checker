@@ -1,67 +1,38 @@
-<div class="container mt-4">
-  <h1 class="text-center mb-4">新規アイテム追加</h1>
+<div class="container my-4">
+  <h1 class="text-center mb-4">新規グループ作成</h1>
 
-  <%= form_with(model: @item, url: admin_items_path, local: true, html: { multipart: true, id: 'item-form' }) do |form| %>
-    <% if @item.errors.any? %>
-      <div class="alert alert-danger">
-        <ul>
-          <% @item.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+  <!-- バリデーションエラーメッセージの表示 -->
+  <% if @group.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% @group.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-    <!-- アイテム名 -->
+  <%= form_with model: @group, url: admin_groups_path, local: true do |f| %>
+    <!-- グループ名 -->
     <div class="form-group mb-3">
-      <%= form.label :name, 'アイテム名' %>
-      <%= form.text_field :name, class: 'form-control' %>
+      <%= f.label :name, 'グループ名', class: 'form-label' %>
+      <%= f.text_field :name, class: 'form-control' %>  <!-- required: true を削除 -->
     </div>
 
-    <!-- アイテム説明 -->
+    <!-- グループの詳細 -->
     <div class="form-group mb-3">
-      <%= form.label :introduction, 'アイテム説明' %>
-      <%= form.text_area :introduction, class: 'form-control' %>
+      <%= f.label :introduction, 'グループの詳細', class: 'form-label' %>
+      <%= f.text_area :introduction, class: 'form-control', rows: 4 %>
     </div>
 
-    <!-- 準備状態 -->
-    <div class="form-group mb-3">
-      <%= form.label :status, '準備状態' %>
-      <%= form.select :status, options_for_select(['完了', '未完了'], @item.status), class: 'form-control', id: 'status-select' %>
-    </div>
-
-    <!-- 必要数量 -->
-    <div class="form-group mb-3">
-      <%= form.label :amount, '必要数量' %>
-      <%= form.number_field :amount, class: 'form-control' %>
-    </div>
-
-    <!-- 準備済み数量 -->
-    <div class="form-group mb-3">
-      <%= form.label :prepared_amount, '準備済み数量' %>
-      <%= form.number_field :prepared_amount, class: 'form-control' %>
-    </div>
-
-    <!-- イベント -->
-    <div class="form-group mb-3">
-      <%= form.label :event_id, 'イベント' %>
-      <%= form.collection_select :event_id, Event.all, :id, :name, prompt: 'イベントを選択', class: 'form-control' %>
-    </div>
-
-    <!-- アイテム画像 -->
-    <div class="form-group mb-3">
-      <%= form.label :image, 'アイテム画像' %>
-      <%= form.file_field :image, class: 'form-control' %>
-    </div>
-
-    <!-- アイテム作成ボタン -->
-    <div class="text-center">
-      <%= form.submit 'アイテムを作成', class: 'btn btn-primary' %>
+    <!-- 作成ボタン -->
+    <div class="text-center mb-3">
+      <%= f.submit '作成', class: 'btn btn-primary' %>
     </div>
   <% end %>
 
   <!-- 戻るボタン -->
-  <div class="text-center mt-3">
-    <%= link_to 'アイテム一覧に戻る', admin_items_path, class: 'btn btn-secondary' %>
+  <div class="text-center">
+    <%= link_to '戻る', admin_groups_path, class: 'btn btn-secondary' %>
   </div>
 </div>
