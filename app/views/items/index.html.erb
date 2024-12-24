@@ -1,19 +1,17 @@
 <div class="container my-4">
   <h1 class="text-center mb-4"><%= @event.name %> のアイテム一覧</h1>
 
-  <!-- アイテム検索フォーム -->
+  <!-- 検索とソートフォーム -->
   <div class="mb-3 text-center">
     <%= form_with url: event_items_path(@event), method: :get, class: 'd-flex justify-content-center' do %>
+      <!-- アイテム名検索 -->
       <%= text_field_tag :search, params[:search], placeholder: "アイテム名で検索", class: 'form-control w-50 me-2' %>
-      <%= submit_tag '検索', class: 'btn btn-secondary' %>
-    <% end %>
-  </div>
 
-  <!-- 進捗状況でソート -->
-  <div class="mb-3 text-center">
-    <%= form_with url: event_items_path(@event), method: :get, class: 'd-flex justify-content-center' do %>
+      <!-- 進捗状況でソート -->
       <%= select_tag :sort_by, options_for_select([['新着順', 'newest'], ['準備完了', 'complete'], ['準備中', 'incomplete']], selected: params[:sort_by]), class: 'form-control w-50 me-2' %>
-      <%= submit_tag '並べ替え', class: 'btn btn-secondary' %>
+
+      <!-- 検索と並べ替えのボタン -->
+      <%= submit_tag '検索・並べ替え', class: 'btn btn-secondary' %>
     <% end %>
   </div>
 
