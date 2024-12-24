@@ -52,6 +52,7 @@ class Admin::EventsController < ApplicationController
   end
 
   def edit
+    @event = Event.find(params[:id])
     @groups = Group.all
     # @add_membersを仮に設定 (add_members属性はEventモデルには存在しない)
     @add_members = 'group'  # 例: 'group' をデフォルトとして設定

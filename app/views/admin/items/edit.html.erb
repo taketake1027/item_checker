@@ -1,11 +1,10 @@
-<!-- app/views/admin/items/edit.html.erb -->
-
 <div class="container mt-4">
   <h1 class="text-center mb-4">アイテムの編集</h1>
 
   <%= form_with(model: @item, local: true, url: admin_item_path(@item), method: :patch) do |form| %>
     <% if @item.errors.any? %>
       <div class="alert alert-danger">
+        <strong><%= @item.errors.count %>件のエラーが発生しました:</strong>
         <ul>
           <% @item.errors.full_messages.each do |message| %>
             <li><%= message %></li>

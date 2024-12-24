@@ -7,8 +7,9 @@ Rails.application.routes.draw do
 
     resources :events do
       resources :comments, only: [:index, :destroy], controller: 'event_comments'
-      resources :posts, only: [:index, :destroy]
-    end
+      resources :posts, only: [:new, :create]
+        resources :comments, only: [:index, :show]
+      end 
 
     resources :groups do
       post 'add_user_to_group', on: :member
