@@ -7,8 +7,8 @@ Rails.application.routes.draw do
 
     resources :events do
       resources :comments, only: [:index, :destroy], controller: 'event_comments'
-      resources :posts, only: [:new, :create]
-        resources :comments, only: [:index, :show]
+      resources :posts, only: [:index, :show, :destroy]
+        resources :comments, only: [:index, :show,]
       end 
 
     resources :groups do
