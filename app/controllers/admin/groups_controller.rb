@@ -59,7 +59,7 @@ class Admin::GroupsController < ApplicationController
   def add_user_to_group
     email = params[:email]
     user = User.find_by(email: email)
-
+  
     if user.blank?
       flash[:alert] = "指定されたメールアドレスのユーザーは存在しません。"
     elsif @group.group_users.exists?(user_id: user.id)
@@ -70,26 +70,13 @@ class Admin::GroupsController < ApplicationController
         flash[:notice] = "#{email}さんをグループに追加しました。"
       else
         flash[:alert] = "#{email}さんをグループに追加できませんでした。"
+        Rails.logger.debug group_user.errors.full_messages # エラーメッセージをログに出力
       end
     end
-
+  
     redirect_to admin_group_path(@group)
   end
-
-  # グループからユーザーを削除
-  def remove_user_from_group
-    group_user = @group.group_users.find_by(user_id: params[:id])
-
-    if group_user
-      group_user.destroy
-      flash[:notice] = 'ユーザーがグループから削除されました。'
-    else
-      flash[:alert] = '指定されたユーザーはこのグループに参加していません。'
-    end
-
-    redirect_to admin_group_path(@group)
-  end
-
+  
   private
 
   def set_group
