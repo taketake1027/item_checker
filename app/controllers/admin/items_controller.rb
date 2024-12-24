@@ -51,11 +51,18 @@ class Admin::ItemsController < ApplicationController
   # アイテムの情報を更新
   def update
     if @item.update(item_params)
-      redirect_to admin_items_path, notice: 'アイテムが正常に更新されました。'
+      # 変更があった場合のみ「アイテムが更新されました」のメッセージ
+      if @item.saved_changes.empty?
+        flash[:notice] = '変更はありませんでした。'
+      else
+        flash[:notice] = 'アイテムが正常に更新されました。'
+      end
+      redirect_to admin_items_path
     else
       render :edit
     end
   end
+  
 
   def destroy
     @item = Item.find_by(id: params[:id])

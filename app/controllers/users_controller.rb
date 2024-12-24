@@ -23,16 +23,22 @@ class UsersController < ApplicationController
       params[:user].delete(:password)
       params[:user].delete(:password_confirmation)
     end
-
+  
     if @user.update(user_params)
+      # 変更があった場合のみ「プロフィールが更新されました」のメッセージ
+      if @user.saved_changes.empty?
+        flash[:notice] = '変更はありませんでした。'
+      else
+        flash[:notice] = 'プロフィールが更新されました。'
+      end
       bypass_sign_in @user, scope: :user
-      redirect_to mypage_path, notice: 'プロフィールが更新されました。'
+      redirect_to mypage_path
     else
       render :edit
     end
   end
+  
 
-  # ユーザー削除
   def destroy
     if current_user == @user || current_user.admin?  # 管理者の場合も削除可能
       @user.destroy
@@ -42,7 +48,7 @@ class UsersController < ApplicationController
       redirect_to root_path, alert: '他のユーザーのアカウントは削除できません。'
     end
   end
-
+  
   private
 
   # Strong Parameters
