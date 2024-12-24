@@ -240,13 +240,13 @@ comments = Comment.create(
   [
     {
       content: "年次総会のハイライト、非常に興味深いです！来年の計画も気になります。",
-      user_id: 1,
+      user_id: 5,
       post_id: 1,
       event_id: 1
     },
     {
       content: "チームビルディングワークショップの振り返り、次回の改善点を共有してほしいです。",
-      user_id: 1,
+      user_id: 3,
       post_id: 2,
       event_id: 2
     },
