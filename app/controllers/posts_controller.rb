@@ -10,7 +10,7 @@ class PostsController < ApplicationController
       redirect_to event_path(@event), notice: '投稿が作成されました。'
     else
       @posts = @event.posts.includes(:user).order(created_at: :desc).page(params[:page]).per(10)
-      render 'events/show'
+      redirect_to event_path(@event), alert: '投稿を作成できませんでした。必要な情報を入力してください。'
     end
   end
 
