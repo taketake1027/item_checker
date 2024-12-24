@@ -9,7 +9,11 @@ class Event < ApplicationRecord
 
    # 開始日時が終了日時より前でないことを確認するバリデーション
    validate :end_date_after_start_date
-
+   validates :name, presence: true
+   validates :introduction, presence: true
+   validates :start_date, presence: true
+   validates :end_date, presence: true
+   validates :location, presence: true
    private
    
   def add_users(user_ids)

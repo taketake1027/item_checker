@@ -4,34 +4,45 @@
   <div class="col-md-8 col-lg-6">
     <%= form_with(model: @event, url: admin_event_path(@event), method: :patch) do |form| %>
       
+      <% if @event.errors.any? %>
+        <div class="alert alert-danger">
+          <strong><%= @event.errors.count %>件のエラーが発生しました:</strong>
+          <ul>
+            <% @event.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
       <!-- イベント名 -->
       <div class="form-group mb-3" style="background-color: #fff; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
         <%= form.label :name, 'イベント名' %>
-        <%= form.text_field :name, class: 'form-control', required: true %>
+        <%= form.text_field :name, class: 'form-control'%>
       </div>
 
       <!-- イベント紹介 -->
       <div class="form-group mb-3" style="background-color: #fff; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
         <%= form.label :introduction, 'イベント紹介' %>
-        <%= form.text_area :introduction, class: 'form-control', rows: 4, required: true %>
+        <%= form.text_area :introduction, class: 'form-control', rows: 4%>
       </div>
 
       <!-- 開始日時 -->
       <div class="form-group mb-3" style="background-color: #fff; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
         <%= form.label :start_date, '開始日時' %>
-        <%= form.datetime_local_field :start_date, class: 'form-control', required: true %>
+        <%= form.datetime_local_field :start_date, class: 'form-control'%>
       </div>
 
       <!-- 終了日時 -->
       <div class="form-group mb-3" style="background-color: #fff; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
         <%= form.label :end_date, '終了日時' %>
-        <%= form.datetime_local_field :end_date, class: 'form-control', required: true %>
+        <%= form.datetime_local_field :end_date, class: 'form-control' %>
       </div>
 
       <!-- 場所 -->
       <div class="form-group mb-3" style="background-color: #fff; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
         <%= form.label :location, '場所' %>
-        <%= form.text_field :location, class: 'form-control', required: true %>
+        <%= form.text_field :location, class: 'form-control'%>
       </div>
 
       <!-- グループ -->

@@ -42,18 +42,18 @@
         <%= form_with(model: [@event, @event.posts.build], local: true, html: { multipart: true }) do |f| %>
           <div class="form-group mb-3">
             <%= f.label :title, "投稿タイトル", class: "form-label" %>
-            <%= f.text_field :title, class: "form-control form-control-sm", required: true %>
+            <%= f.text_field :title, class: "form-control form-control-sm"%>
           </div>
           <div class="form-group mb-3">
             <%= f.label :content, "投稿内容", class: "form-label" %>
-            <%= f.text_area :content, class: "form-control form-control-sm", rows: 3, required: true %>
+            <%= f.text_area :content, class: "form-control form-control-sm", rows: 3%>
           </div>
           <div class="form-group mb-3">
             <%= f.label :image, "画像を添付", class: "form-label" %>
             <%= f.file_field :image, accept: "image/*", class: "form-control form-control-sm" %>
           </div>
           <!-- バリデーションエラーがある場合にボタンを無効化 -->
-          <%= f.submit "投稿する", class: "btn btn-primary btn-sm btn-block", disabled: @post.errors.any? %>
+          <%= f.submit "投稿する", class: "btn btn-primary btn-sm btn-block" %>
         <% end %>
       </div>
     </div>
