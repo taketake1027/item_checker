@@ -18,7 +18,7 @@ puts admin.persisted? ? "管理者アカウントを作成しました" : "管�
 # 一般ユーザーを作成
 users = [
   { name: "Misaki Tanaka", email: "misaki.tanaka@example.com", role: "employee" },
-  { name: "Taro Yamada", email: "taro.yamada@example.com", role: "employee" },
+  { name: "Taro Yamada", email: "test@test", role: "employee" },
   { name: "Hanako Suzuki", email: "hanako.suzuki@example.com", role: "staff" },
   { name: "Kenta Kobayashi", email: "kenta.kobayashi@example.com", role: "leader" },
   { name: "Yuki Matsumoto", email: "yuki.matsumoto@example.com", role: "employee" }
@@ -54,7 +54,7 @@ end
 group_user_mapping = {
   groups[0] => [
     { email: "misaki.tanaka@example.com", position: "Member", status: "Active" },
-    { email: "taro.yamada@example.com", position: "Member", status: "Active" },
+    { email: "test@test", position: "Member", status: "Active" },
     { email: "hanako.suzuki@example.com", position: "Member", status: "Inactive" }
   ],
   groups[1] => [
@@ -62,7 +62,7 @@ group_user_mapping = {
     { email: "yuki.matsumoto@example.com", position: "Member", status: "Active" }
   ],
   groups[2] => [
-    { email: "taro.yamada@example.com", position: "Leader", status: "Active" },
+    { email: "test@test", position: "Leader", status: "Active" },
     { email: "misaki.tanaka@example.com", position: "Member", status: "Inactive" }
   ]
 }
@@ -119,7 +119,7 @@ event_data = [
     end_date: DateTime.new(2024, 4, 20, 17, 0),
     location: "Tokyo HQ Conference Room",
     group: groups[0],  # Team Alpha
-    user: User.find_by(email: "taro.yamada@example.com")
+    user: User.find_by(email: "test@test")
   },
   {
     name: "Marketing Strategy Meeting",
@@ -207,7 +207,7 @@ posts_data = [
   {
     title: "Projector Setup Tips",
     content: "プロジェクターのセットアップ方法について。",
-    user_email: "taro.yamada@example.com",
+    user_email: "test@test",
     event_name: "Annual Sales Meeting"
   },
   {
@@ -227,12 +227,19 @@ posts_data = [
     content: "次期マーケティング戦略の概要。",
     user_email: "kenta.kobayashi@example.com",
     event_name: "Marketing Strategy Overview"
+  },
+  {
+    title: "Leadership Development Key Points",
+    content: "リーダーシップ開発プログラムの要点。",
+    user_email: "misaki.tanaka@example.com",
+    event_name: "Leadership Development Program"
   }
 ]
 
 posts_data.each do |post_data|
   user = User.find_by(email: post_data[:user_email])
   event = Event.find_by(name: post_data[:event_name])
+  
   if user && event
     post = event.posts.create!(
       title: post_data[:title],
@@ -241,8 +248,8 @@ posts_data.each do |post_data|
     )
     puts "投稿 '#{post.title}' を作成しました"
   else
-    puts "ユーザーまたはイベントが見つかりません: #{post_data[:title]}"
+    puts "イベントまたはユーザーが見つかりません"
   end
 end
 
-puts "データベースの作成が完了しました！"
+puts "データの作成が完了しました"
