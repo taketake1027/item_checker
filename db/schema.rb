@@ -121,6 +121,8 @@ ActiveRecord::Schema.define(version: 2024_12_22_160021) do
     t.string "introduction", null: false
     t.string "status", default: "在庫アリ", null: false
     t.integer "amount", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.integer "event_id"
     t.integer "prepared_amount"
   end

@@ -4,4 +4,7 @@ class Group < ApplicationRecord
   # グループに紐づくイベント
   has_many :events
   has_many :items, through: :events
+  
+  validates :name, presence: true
+  validates :introduction, presence: true
 end

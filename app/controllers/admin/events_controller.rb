@@ -59,11 +59,18 @@ class Admin::EventsController < ApplicationController
 
   def update
     if @event.update(event_params)
-      redirect_to admin_events_path, notice: 'イベントが更新されました'
+      # 変更があった場合のみ「イベントが更新されました」のメッセージ
+      if @event.saved_changes.empty?
+        flash[:notice] = '変更はありませんでした。'
+      else
+        flash[:notice] = 'イベントが更新されました'
+      end
+      redirect_to admin_events_path
     else
       render :edit
     end
   end
+  
   # イベント削除アクション
   def destroy
     @event = Event.find(params[:id])

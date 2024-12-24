@@ -20,14 +20,16 @@ class Admin::GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     @group.creator_id = current_admin.id
-    
+  
     if @group.save
       redirect_to admin_groups_path, notice: 'グループが作成されました'
     else
       flash.now[:alert] = 'グループの作成に失敗しました。'
+      Rails.logger.debug @group.errors.full_messages  # エラーメッセージをログで確認
       render :new
     end
   end
+  
 
   def show
     @group_users = @group.group_users.includes(:user).page(params[:page]).per(3)
@@ -35,13 +37,19 @@ class Admin::GroupsController < ApplicationController
 
   def update
     if @group.update(group_params)
-      redirect_to admin_group_path(@group), notice: 'グループ情報が更新されました。'
+      # 変更があった場合のみ「グループ情報が更新されました」のメッセージ
+      if @group.saved_changes.empty?
+        flash[:notice] = '変更はありませんでした。'
+      else
+        flash[:notice] = 'グループ情報が更新されました。'
+      end
+      redirect_to admin_group_path(@group)
     else
       flash.now[:alert] = 'グループ情報の更新に失敗しました。'
       render :edit
     end
   end
-
+  
   def destroy
     @group.destroy
     redirect_to admin_groups_path, notice: 'グループが削除されました。'
