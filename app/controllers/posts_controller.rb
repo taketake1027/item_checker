@@ -3,13 +3,13 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def create
-    @event = Event.find(params[:event_id])
     @post = @event.posts.build(post_params)
-    @post.user = current_user
+    @post.user = current_user  # 現在のユーザーを関連付ける
 
     if @post.save
-      redirect_to event_path(@event), notice: '投稿が成功しました！'
+      redirect_to event_path(@event), notice: '投稿が作成されました。'
     else
+      @posts = @event.posts.includes(:user).order(created_at: :desc).page(params[:page]).per(10)
       render 'events/show'
     end
   end
