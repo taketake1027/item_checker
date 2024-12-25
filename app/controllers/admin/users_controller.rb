@@ -1,12 +1,10 @@
 class Admin::UsersController < ApplicationController
   layout 'admin'
-  before_action :authenticate_admin!  # 管理者の認証を行う
+  before_action :authenticate_admin!
   before_action :set_user, only: [:update_role, :destroy]
 
-  # ユーザー一覧ページを表示
   def index
     @user = User.find_by(id: params[:id]) # find_byを使ってユーザーが存在しない場合はnilを返す
-
     @users = User.all
     @users = User.where.not(email: 'guest@example.com')
     # 検索機能
@@ -62,10 +60,9 @@ class Admin::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :role, :status, tag_ids: [])   # 必要なパラメータを許可
+    params.require(:user).permit(:name, :email, :role, :status, tag_ids: [])
   end
 
-  # 管理者のみアクセスできるように制限
   def authenticate_admin!
     redirect_to root_path, alert: '管理者専用ページです。' unless current_admin
   end

@@ -36,7 +36,8 @@
     <% end %>
   </div>
 
-  <div class="pagination mb-3">
-    <%= paginate @events %>
+  <!-- ページネーション -->
+  <div class="d-flex justify-content-center mb-3">
+    <%= paginate @events, class: 'pagination' %>
   </div>
 </div>

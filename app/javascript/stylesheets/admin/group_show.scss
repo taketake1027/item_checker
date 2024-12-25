@@ -1,6 +1,5 @@
-// グループ詳細ページのスタイル
-
-.form-container {
+/* グループ詳細ページのスタイル */
+.group-show-page .form-container {
   background-color: #fff; /* 白背景 */
   border: 2px solid #007bff; /* 青い枠線 */
   padding: 25px; /* 十分なパディング */
@@ -8,7 +7,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 軽い影をつける */
 }
 
-.form-group {
+.group-show-page .form-group {
   background-color: #fff; /* 白背景 */
   border: 2px solid #007bff; /* 青い枠線 */
   padding: 20px; /* パディング */
@@ -16,8 +15,8 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 軽い影 */
 }
 
-// メンバーリストの項目スタイル
-.d-flex.flex-column {
+/* メンバーリストの項目スタイル */
+.group-show-page .d-flex.flex-column {
   background-color: #f8f9fa; /* 明るい灰色の背景 */
   padding: 15px 25px; /* パディングを広めに */
   border-radius: 8px; /* 角を丸く */
@@ -25,39 +24,39 @@
   flex: 0 0 30%; /* メンバーが横並びに表示されるように調整 */
 }
 
-// メンバー名
-.h5 {
+/* メンバー名 */
+.group-show-page .h5 {
   font-size: 1.2rem;
   font-weight: 600;
 }
 
-// フォームラベル
-.form-label {
+/* フォームラベル */
+.group-show-page .form-label {
   font-weight: 500;
 }
 
-// ページネーション
-.pagination {
+/* ページネーション */
+.group-show-page .pagination {
   justify-content: center;
 }
 
-// ボタン
-.btn {
+/* ボタン */
+.group-show-page .btn {
   font-size: 1rem;
   padding: 8px 16px;
 }
 
-.btn-primary {
+.group-show-page .btn-primary {
   background-color: #007bff;
   border-color: #007bff;
 }
 
-.btn-secondary {
+.group-show-page .btn-secondary {
   background-color: #6c757d;
   border-color: #6c757d;
 }
 
-.btn-danger {
+.group-show-page .btn-danger {
   background-color: #dc3545;
   border-color: #dc3545;
 }

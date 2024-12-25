@@ -6,13 +6,13 @@ class LikesController < ApplicationController
     if @post.likers.exclude?(current_user)
       @post.likes.create(user: current_user)
     end
-    redirect_to event_path(@event, @post) # リダイレクト先を統一
+    redirect_to event_path(@event, @post) 
   end
 
   def destroy
     like = @post.likes.find_by(user: current_user)
     like.destroy if like
-    redirect_to event_path(@event, @post) # リダイレクト先を統一
+    redirect_to event_path(@event, @post) 
   end
 
   private

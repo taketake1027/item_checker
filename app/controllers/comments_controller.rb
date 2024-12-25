@@ -3,7 +3,6 @@ class CommentsController < ApplicationController
   before_action :set_event
   before_action :set_post
   before_action :set_comment, only: [:destroy]
-
   # コメント削除
   def destroy
     if @comment.user == current_user

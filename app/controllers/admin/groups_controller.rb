@@ -25,11 +25,9 @@ class Admin::GroupsController < ApplicationController
       redirect_to admin_groups_path, notice: 'グループが作成されました'
     else
       flash.now[:alert] = 'グループの作成に失敗しました。'
-      Rails.logger.debug @group.errors.full_messages  # エラーメッセージをログで確認
       render :new
     end
   end
-  
 
   def show
     @group_users = @group.group_users.includes(:user).page(params[:page]).per(3)
@@ -55,7 +53,6 @@ class Admin::GroupsController < ApplicationController
     redirect_to admin_groups_path, notice: 'グループが削除されました。'
   end
 
-  # ユーザーをグループに追加
   def add_user_to_group
     email = params[:email]
     user = User.find_by(email: email)
@@ -70,7 +67,6 @@ class Admin::GroupsController < ApplicationController
         flash[:notice] = "#{email}さんをグループに追加しました。"
       else
         flash[:alert] = "#{email}さんをグループに追加できませんでした。"
-        Rails.logger.debug group_user.errors.full_messages # エラーメッセージをログに出力
       end
     end
   

@@ -6,7 +6,6 @@ class Admin::ItemsController < ApplicationController
   def index
     @items = Item.all
 
-    # イベントフィルタ
     if params[:event_id].present?
       @items = @items.where(event_id: params[:event_id])
     end
@@ -63,7 +62,6 @@ class Admin::ItemsController < ApplicationController
     end
   end
   
-
   def destroy
     @item = Item.find_by(id: params[:id])
     if @item
@@ -83,7 +81,6 @@ class Admin::ItemsController < ApplicationController
     end
   end
   
-  # アイテムのパラメータをストロングパラメータで設定
   def item_params
     params.require(:item).permit(:name, :introduction, :status, :amount, :prepared_amount, :event_id, :image)
   end

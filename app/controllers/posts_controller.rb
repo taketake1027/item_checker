@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 
   def create
     @post = @event.posts.build(post_params)
-    @post.user = current_user  # 現在のユーザーを関連付ける
+    @post.user = current_user
 
     if @post.save
       redirect_to event_path(@event), notice: '投稿が作成されました。'
@@ -61,9 +61,8 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
-  # Strong Parameters: 投稿内容とファイルのパラメータを許可
   def post_params
-    params.require(:post).permit(:title, :content, :image)  # :file を追加
+    params.require(:post).permit(:title, :content, :image)
   end
 
   def comment_params

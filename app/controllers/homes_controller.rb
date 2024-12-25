@@ -5,7 +5,6 @@ class HomesController < ApplicationController
   def top
     if params[:search].present?
       @events = Event.where('name LIKE ?', "%#{params[:search]}%")
-
       # 検索結果がない場合
       if @events.empty?
         flash.now[:alert] = '該当するイベントがありませんでした。'
@@ -14,7 +13,6 @@ class HomesController < ApplicationController
       @events = Event.all
       flash.now[:alert] = '検索ワードを入力してください。' if params[:search].nil? || params[:search].empty?
     end
-
     @events = @events.order(start_date: :asc).page(params[:page]).per(6)
   end
   
@@ -25,7 +23,7 @@ class HomesController < ApplicationController
   end
 
   def about
-    # Aboutページの処理
+    
   end
 
   def index
@@ -35,7 +33,7 @@ class HomesController < ApplicationController
   private
 
   def guest_user?
-    current_user && current_user.guest?  # current_user がゲストユーザーかどうかを判定
+    current_user && current_user.guest?
   end
   
   def restrict_guest_access
