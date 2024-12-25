@@ -2,6 +2,7 @@
 /* ログイン前TOPページ */
 @import "landing-page";
 /* application全体 */
+@import 'background';
 @import "stylesheets/custom.scss";
 @import "stylesheets/admin.scss";
 @import 'header';
@@ -13,22 +14,3 @@
 @import 'admin/homes.scss';
 @import 'admin/groups.scss';
 @import 'admin/events.scss';
-/* ログイン後の背景画像 */
-body {
-  background-image: url('~images/drawing-pad-1209779_1920.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin: 0;
-  color: #333333;
-}
-
-.post-image {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  margin-bottom: 1rem;
-}
-
-
-
