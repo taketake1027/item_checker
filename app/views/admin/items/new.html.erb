@@ -4,6 +4,7 @@
   <%= form_with(model: @item, url: admin_items_path, local: true, html: { multipart: true, id: 'item-form' }) do |form| %>
     <% if @item.errors.any? %>
       <div class="alert alert-danger">
+        <strong><%= @item.errors.count %>件のエラーがあります:</strong>
         <ul>
           <% @item.errors.full_messages.each do |message| %>
             <li><%= message %></li>
