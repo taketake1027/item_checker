@@ -1,15 +1,15 @@
-/* グループ管理ページのカードデザインを青に変更 */
+/* グループ管理ページのカードデザインを白に変更 */
 .card {
-  background-color: #007bff; /* 背景色を青に変更 */
+  background-color: #ffffff; /* 背景色を白に変更 */
   border-radius: 8px; /* 角を丸くする */
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 軽い影をつけて立体感を出す */
-  color: white; /* 文字色を白に変更 */
+  color: #343a40; /* 文字色をダークに変更 */
 }
 
 /* グループ名の文字色を強調 */
 .card .table th, .card .table td {
-  color: white; /* テーブル内の文字色を白に変更 */
+  color: #343a40; /* テーブル内の文字色をダークに変更 */
 }
 
 /* 検索フォームのスタイル */

@@ -1,0 +1,37 @@
+/* イベントテーブルのスタイル */
+.event-table-container {
+  background-color: #ffffff;
+  border: 2px solid #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  /* テーブル内の文字色を黒か白に変更して視認性を向上 */
+  .table {
+    color: #333;  /* 文字色を暗めのグレーに設定（視認性の向上） */
+
+    thead {
+      background-color: #28a745;  /* 緑色の背景 */
+      color: white;
+    }
+
+    tbody {
+      tr {
+        td {
+          color: #333;  /* テーブルデータの文字色を暗めのグレーに設定 */
+        }
+      }
+    }
+  }
+}
+
+/* ページネーションのスタイル */
+.pagination {
+  justify-content: center;
+}
+
+/* ボタンのスタイル */
+.btn {
+  font-size: 1rem;
+  padding: 8px 16px;
+}

@@ -15,7 +15,7 @@
   </div>
 
   <!-- イベント一覧テーブル -->
-  <div class="table-responsive w-75 mb-4" style="background-color: white; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+  <div class="event-table-container table-responsive w-75 mb-4">
     <table class="table table-bordered text-center">
       <thead class="bg-dark text-white">
         <tr>
@@ -49,24 +49,3 @@
     <%= paginate @events %>
   </div>
 </div>
-
-<style>
-  /* テーブルを囲むスタイル */
-  .table-responsive {
-    background-color: #fff;
-    border: 2px solid #007bff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-
-  .btn {
-    font-size: 1rem;
-    padding: 8px 16px;
-  }
-
-  /* ページネーション */
-  .pagination {
-    justify-content: center;
-  }
-</style>
