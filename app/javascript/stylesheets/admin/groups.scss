@@ -8,14 +8,18 @@
 }
 
 /* グループ名の文字色を強調 */
-.card .table th, .card .table td {
-  color: #343a40; /* テーブル内の文字色をダークに変更 */
+.card .table th {
+  color: white; /* ヘッダーの文字色を白に変更 */
+}
+
+.card .table td {
+  color: #343a40; /* テーブル内の文字色を元のダーク色に戻す */
 }
 
 /* 検索フォームのスタイル */
 .form-control {
   font-size: 1rem;
-  color: #495057; /* フォーム内の文字色をダークに */
+  color: white; /* フォーム内の文字色を白に変更 */
   background-color: #ffffff; /* 背景色を白にしてコントラストを強く */
   border-color: #ced4da; /* ボーダーの色を少し薄いグレーに */
 }
