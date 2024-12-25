@@ -7,10 +7,10 @@
   </div>
 
   <!-- グループ検索フォーム（ドロップダウン形式） -->
-  <div class="mb-4">
+  <div class="mb-4 text-center"> <!-- ここをtext-centerで中央寄せ -->
     <div class="row justify-content-center">
-      <div class="col-md-8">
-        <%= form_with url: admin_groups_path, method: :get, class: 'd-flex' do %>
+      <div class="col-md-6"> <!-- 幅を狭めるためにcol-md-8からcol-md-6に変更 -->
+        <%= form_with url: admin_groups_path, method: :get, class: 'd-flex justify-content-center' do %>
           <%= select_tag :search, options_for_select(@groups.pluck(:name), params[:search]), prompt: 'グループ名を選択', class: 'form-control w-75 me-2' %>
           <%= submit_tag '検索', class: 'btn btn-secondary' %>
         <% end %>
@@ -21,7 +21,7 @@
   <!-- グループの一覧 -->
   <div class="card p-4 shadow-sm mb-4">
     <div class="table-responsive">
-      <table class="table table-striped table-hover text-center">
+      <table class="table table-striped table-hover text-center table-sm"> <!-- table-smを追加して横幅を狭める -->
         <thead class="thead-dark">
           <tr>
             <th>グループ名</th>
