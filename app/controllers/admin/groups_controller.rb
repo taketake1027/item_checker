@@ -7,7 +7,7 @@ class Admin::GroupsController < ApplicationController
     @groups = Group.all
 
     if params[:search].present?
-      @groups = Group.where('name LIKE ?', "%#{params[:search]}%").page(params[:page]).per(10)
+      @groups = Group.where('name LIKE ?', "%#{params[:search]}%").page(params[:page]).per(8)
     else
       @groups = Group.all.page(params[:page]).per(10)
     end

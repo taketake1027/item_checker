@@ -23,7 +23,7 @@ class Admin::ItemsController < ApplicationController
     end
 
     # ページネーション
-    @items = @items.page(params[:page]).per(10)
+    @items = @items.page(params[:page]).per(8)
   end
 
   def show

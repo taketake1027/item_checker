@@ -8,7 +8,7 @@ class Admin::EventsController < ApplicationController
     @events = Event.all
 
     if params[:event_id].present?
-      @events = Event.where(id: params[:event_id]).page(params[:page]).per(10)  # paginate -> pageとper
+      @events = Event.where(id: params[:event_id]).page(params[:page]).per(8) 
     else
       @events = Event.page(params[:page]).per(10)  # paginate -> pageとper
     end

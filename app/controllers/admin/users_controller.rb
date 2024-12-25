@@ -19,7 +19,7 @@ class Admin::UsersController < ApplicationController
     if params[:role].present?
       @users = @users.where(role: params[:role])
     end
-    @users = @users.page(params[:page]).per(10)  # 1ページあたり10件表示
+    @users = @users.page(params[:page]).per(5)  
   end
 
   def show
