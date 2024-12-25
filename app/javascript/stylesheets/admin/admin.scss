@@ -1,0 +1,55 @@
+/* app/javascript/stylesheets/admin.scss */
+
+/* ページ全体のレイアウト設定 */
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* 最低でも画面いっぱいに広がる */
+}
+
+/* メインコンテンツ */
+main {
+  flex-grow: 1; /* メインコンテンツ部分が画面の残りのスペースを占める */
+}
+
+/* フッター */
+footer {
+  margin-top: auto; /* フッターを最下部に固定 */
+  background-color: #001f3d; /* ネイビーブルーに変更 */
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+/* ヘッダー部分 */
+.custom-header {
+  padding: 10px 0; /* 上下のパディング */
+  color: white; /* ヘッダーテキストの色 */
+  /* background-color: rgba(0, 0, 0, 0.7) !important; ここを削除 */
+}
+
+/* ナビゲーションリンクのスタイル */
+.custom-header a {
+  color: white !important; /* リンクの文字色を白 */
+  font-size: 1.1rem; /* フォントサイズ */
+  font-weight: bold; /* フォントを太く */
+  text-decoration: none; /* アンダーラインを除去 */
+  margin-right: 15px; /* リンク間の余白 */
+}
+
+.custom-header a:hover {
+  color: #ffd700 !important; /* ホバー時の文字色をゴールドに */
+}
+
+/* ナビゲーションメニュー右寄せ */
+.custom-header .navbar-nav {
+  margin-left: auto; /* 左の余白を自動にして右寄せ */
+}
+
+/* 小さい画面で中央寄せ */
+@media (max-width: 767px) {
+  .custom-header .navbar-nav {
+    text-align: center; /* ナビゲーションリンクを中央寄せ */
+  }
+}

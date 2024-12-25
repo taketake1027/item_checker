@@ -1,0 +1,37 @@
+/* app/javascript/stylesheets/_admin-navbar.scss */
+
+/* カスタムナビゲーションバー */
+.custom-navbar {
+  background-color: #001f3d !important; /* ネイビーブルーに変更 */
+  border-bottom: 2px solid #001f3d; /* ネイビーブルーの枠線 */
+  padding: 10px 0; /* 上下のパディング */
+}
+
+/* ナビゲーションリンクのスタイル */
+.custom-navbar .nav-link {
+  color: white !important; /* リンク文字色を白 */
+  font-size: 1.1rem; /* フォントサイズ */
+  font-weight: bold; /* フォントを太く */
+}
+
+.custom-navbar .nav-link:hover {
+  color: #ffd700 !important; /* ホバー時の文字色をゴールドに */
+}
+
+/* ブランド名のスタイル */
+.navbar-brand {
+  color: white !important; /* ブランド名の文字色を白 */
+  font-weight: bold; /* 太字 */
+}
+
+/* ナビゲーションメニューの右寄せ */
+.navbar-nav {
+  margin-left: auto; /* 左側のマージンを自動にして右寄せ */
+}
+
+/* 小さい画面で中央寄せ */
+@media (max-width: 767px) {
+  .custom-navbar .navbar-nav {
+    text-align: center; /* テキスト中央寄せ */
+  }
+}
