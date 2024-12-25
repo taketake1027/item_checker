@@ -1,6 +1,13 @@
 @use '~bootstrap/scss/bootstrap';  // Bootstrapのスタイルをインポート
+@import "landing-page";
 
-/* application.scss.erb から内容を移動 */
+
+
+
+
+
+
+/* ログイン後の背景画像 */
 body {
   background-image: url('~images/drawing-pad-1209779_1920.jpg');
   background-size: cover;
@@ -17,11 +24,5 @@ body {
   margin-bottom: 1rem;
 }
 
-.landing-page {
-  background-image: url('~images/events-1203275_1280.jpg');
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-}
 
 
