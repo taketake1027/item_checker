@@ -26,6 +26,9 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
     @user_events = @user.events
     @user_groups = @user.groups
+
+    @events = @user.events.page(params[:page]).per(2)
+    @posts = @user.posts.page(params[:page]).per(2)
   end
   
   # ユーザーを更新

@@ -35,8 +35,8 @@
         </tr>
       </thead>
       <tbody>
-        <% if @user.events.any? %>
-          <% @user.events.each do |event| %>
+        <% if @events.any? %>
+          <% @events.each do |event| %>
             <tr>
               <td><%= event.name %></td>
             </tr>
@@ -48,6 +48,7 @@
         <% end %>
       </tbody>
     </table>
+    <%= paginate @events %> <!-- ページネーションを追加 -->
   </div>
 
   <!-- ユーザーの投稿 -->
@@ -61,8 +62,8 @@
         </tr>
       </thead>
       <tbody>
-        <% if @user.posts.any? %>
-          <% @user.posts.each do |post| %>
+        <% if @posts.any? %>
+          <% @posts.each do |post| %>
             <tr>
               <td><%= post.title %></td>
               <td><%= post.content %></td>
@@ -75,5 +76,6 @@
         <% end %>
       </tbody>
     </table>
+    <%= paginate @posts %> <!-- ページネーションを追加 -->
   </div>
 </div>
