@@ -19,19 +19,6 @@ class User < ApplicationRecord
     self.role == 'guest'  
   end
   
-  def role_name
-    case role
-    when "employee"
-      "社員"
-    when "staff"
-      "スタッフ"
-    when "leader"
-      "リーダー"
-    else
-      "ゲスト"
-    end
-  end
-
   private
 
   def remove_from_groups

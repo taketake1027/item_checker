@@ -1,10 +1,11 @@
 <div class="container mt-4">
   <h2 class="text-center mb-4">ユーザー管理ページ</h2>
+  <%= flash[:notice] %>
   <%= form_with(url: admin_users_path, method: :get, local: true) do %>
   <div class="d-flex justify-content-center mb-3 align-items-center">
     <!-- 役職入力フォーム -->
     <div class="my-1">
-      <%= select_tag :role, options_for_select(User.roles.keys.map { |role| [role.capitalize, role] }, params[:role]), class: "form-control form-control-lg", include_blank: "役職で検索" %>
+      <%= select_tag :role, options_for_select([["役職で検索", ""]]+User.roles.keys.map { |role| [role.capitalize, role] }, params[:role]), class: "form-control form-control-lg" %>
     </div>
     <!-- 検索ボタン -->
     <div class="my-1 ml-2">
@@ -29,13 +30,10 @@
             <td><%= user.name %></td>
             <td><%= user.email %></td>
             <td>
-              <%= form_with model: user, url: update_role_admin_user_path(user), method: :patch, local: true do |form| %>
-                <!-- 役職選択フォーム -->
+              <%= form_with model: user, url: update_role_admin_user_path(user), method: :patch do |form| %>
                 <%= form.select :role, options_for_select(User.roles.keys.map { |role| [role.capitalize, role] }, user.role), class: 'form-control form-control-sm' %>
-                <%= form.submit "更新", class: "btn btn-sm btn-primary mt-2" %>
+                <%= form.submit "更新", class: "btn btn-sm btn-primary" %>
               <% end %>
-              <!-- 現在の役職（日本語表示） -->
-              <p><%= user.role_name %></p>
             </td>
             <td>
               <!-- 詳細ページへのリンク -->
