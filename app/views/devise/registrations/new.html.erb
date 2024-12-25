@@ -1,11 +1,11 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-lg-6 col-md-8 col-sm-10"> <!-- レスポンシブ対応 -->
       <!-- 白い枠を作成 -->
       <div class="card shadow">
         <div class="card-body">
           <h1 class="text-center mb-4">新規登録</h1>
-          
+
           <%= form_for(@user, as: :user, url: user_registration_path) do |f| %>
             <% if @user.errors.any? %>
               <div class="alert alert-danger">
@@ -17,22 +17,22 @@
               </div>
             <% end %>
 
-            <div class="form-group">
+            <div class="form-group mb-3">
               <%= f.label :name, "名前", class: 'form-label' %>
               <%= f.text_field :name, class: 'form-control' %>
             </div>
 
-            <div class="form-group">
+            <div class="form-group mb-3">
               <%= f.label :email, "メールアドレス", class: 'form-label' %>
               <%= f.email_field :email, class: 'form-control' %>
             </div>
 
-            <div class="form-group">
+            <div class="form-group mb-3">
               <%= f.label :password, "パスワード", class: 'form-label' %>
               <%= f.password_field :password, class: 'form-control' %>
             </div>
 
-            <div class="form-group">
+            <div class="form-group mb-3">
               <%= f.label :password_confirmation, "パスワード確認", class: 'form-label' %>
               <%= f.password_field :password_confirmation, class: 'form-control' %>
             </div>

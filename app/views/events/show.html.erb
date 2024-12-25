@@ -93,7 +93,11 @@
           <% end %>
         </div>
       <% end %>
-      <%= paginate @posts %>
+
+      <!-- ページネーションボタンを中央に配置 -->
+      <div class="d-flex justify-content-center mt-4">
+        <%= paginate @posts %>
+      </div>
     <% end %>
   </div>
 </div>

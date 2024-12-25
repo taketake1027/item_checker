@@ -2,7 +2,6 @@ class Admin::GroupUsersController < ApplicationController
   before_action :authenticate_admin!
   before_action :set_group_user, only: [:destroy]
 
-   # ユーザー削除
   def destroy
     if @group_user.destroy
       flash[:notice] = "ユーザーが削除されました"

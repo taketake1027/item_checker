@@ -1,21 +1,18 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:guest_login, :destroy] # 認証が必要なアクションを指定
+  before_action :authenticate_user!, except: [:guest_login, :destroy] 
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def show
-    # ユーザーが参加しているイベントを取得
-  @events = @user.events  # ユーザーが参加しているイベント
-  @posts = @user.posts    # ユーザーが作成した投稿
+  @events = @user.events 
+  @posts = @user.posts
 
-  @events = @user.events.page(params[:page]).per(5)  # 5件ずつ表示
-  @posts = @user.posts.page(params[:page]).per(5)    # 5件ずつ表示
+  @events = @user.events.page(params[:page]).per(5)
+  @posts = @user.posts.page(params[:page]).per(5)
   end
 
-  # ユーザー情報の編集フォームを表示
   def edit
   end
 
-  # ユーザー情報を更新
   def update
     # パスワードを空欄にした場合、パスワードの更新をスキップする
     if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
@@ -51,15 +48,11 @@ class UsersController < ApplicationController
   
   private
 
-  # Strong Parameters
   def user_params
-    # パスワードと確認パスワードが空でない場合のみ、パスワードを許可する
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
-  # ユーザー情報を取得
   def set_user
-    # マイページや編集ページでは、現在ログインしているユーザーを取得
     @user = current_user
   end
 end

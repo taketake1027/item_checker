@@ -1,15 +1,12 @@
-<div class="landing-page d-flex justify-content-center align-items-center" style="position: relative; background-color: green;">
+<div class="landing-page">
   <!-- 右上のテキスト -->
-  <div style="position: absolute; top: 20px; right: 20px; text-align: right;">
-    <div style= padding-top: 10vh;> <!-- padding-topを追加して上下にスペースを確保 -->
-  <h1 style="font-size: 5rem; font-weight: bold; color: #ffffff; text-shadow: 1px 1px 3px #000;">ようこそ！</h1>
-  <p style="font-size: 3.5rem; font-weight: bold; color: #f8f9fa; text-shadow: 1px 1px 3px #000;">アイテムチェッカーへ。</p>
-</div>
-
+  <div class="landing-page__header-text">
+    <h1 class="landing-page__main-title">ようこそ！</h1>
+    <p class="landing-page__sub-title">アイテムチェッカーへ。</p>
   </div>
 
   <!-- 中央のコンテンツ -->
-  <div class="text-center">
-    <%= button_to 'ゲストログイン', guest_login_path, method: :post, class: 'btn btn-lg', style: 'font-size: 1.5rem; font-weight: bold; padding: 15px 30px; background-color: #1e88e5; color: #ffffff; border: none;' %>
+  <div class="landing-page__center-content">
+    <%= button_to 'ゲストログイン', guest_login_path, method: :post, class: 'guest-login-btn' %>
   </div>
 </div>

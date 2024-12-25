@@ -10,7 +10,7 @@
   <div class="mb-3 text-center">
     <%= form_with url: admin_items_path, method: :get, class: 'd-flex justify-content-center' do %>
       <!-- イベントで検索フォーム -->
-      <%= select_tag :event_id, options_from_collection_for_select(Event.all, :id, :name, selected: params[:event_id]), include_blank: "イベントで検索", class: 'form-control w-50 me-2' %>
+      <%= select_tag :event_id, options_from_collection_for_select(Event.all, :id, :name, selected: params[:event_id]), include_blank: "アイテムに紐づくイベントを選択", class: 'form-control w-50 me-2' %>
 
       <!-- ソートオプション -->
       <%= select_tag :sort_by, options_for_select([['新着順', 'newest'], ['準備未完了', 'incomplete'], ['準備完了', 'complete']], selected: params[:sort_by]), class: 'form-control w-50 me-2' %>
@@ -69,7 +69,7 @@
   </div>
 
   <!-- ページネーション -->
-  <div class="text-center">
-    <%= paginate @items %>
+  <div class="d-flex justify-content-center">
+    <%= paginate @items, class: 'pagination' %>
   </div>
 </div>
