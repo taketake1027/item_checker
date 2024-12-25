@@ -1,0 +1,94 @@
+/* 変数設定（必要に応じて追加） */
+$main-bg-color: green;
+$main-bg-image: url('~images/events-1203275_1280.jpg');
+$btn-bg-color: #1e88e5;
+$btn-text-color: #ffffff;
+$header-text-color: #ffffff;
+$sub-header-text-color: #f8f9fa;
+$text-shadow: 1px 1px 3px #000;
+
+.landing-page {
+  position: relative;
+  background-color: $main-bg-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: $main-bg-image;
+  background-size: cover;
+  background-position: center;
+
+  .landing-page__header-text {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    text-align: right;
+
+    .landing-page__main-title {
+      font-size: 5rem;
+      font-weight: bold;
+      color: $header-text-color;
+      text-shadow: $text-shadow;
+    }
+
+    .landing-page__sub-title {
+      font-size: 3.5rem;
+      font-weight: bold;
+      color: $sub-header-text-color;
+      text-shadow: $text-shadow;
+    }
+  }
+
+  .guest-login-btn {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 15px 30px;
+    background-color: $btn-bg-color;
+    color: $btn-text-color;
+    border: none;
+    border-radius: 5px;
+  }
+}
+
+/* レスポンシブ対応: 画面幅が768px以下の場合 */
+@media (max-width: 768px) {
+  .landing-page__header-text {
+    top: 5px;
+    right: 10px;
+    text-align: center;
+
+    .landing-page__main-title {
+      font-size: 3.5rem;
+    }
+
+    .landing-page__sub-title {
+      font-size: 2.5rem;
+    }
+  }
+
+  .guest-login-btn {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+  }
+}
+
+/* レスポンシブ対応: 画面幅が480px以下の場合 */
+@media (max-width: 480px) {
+  .landing-page__header-text {
+    top: 5px;
+    right: 5px;
+
+    .landing-page__main-title {
+      font-size: 2.5rem;
+    }
+
+    .landing-page__sub-title {
+      font-size: 1.8rem;
+    }
+  }
+
+  .guest-login-btn {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+}

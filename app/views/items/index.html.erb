@@ -1,4 +1,4 @@
-<div class="container my-4">
+<div class="container my-4 event-items">
   <h1 class="text-center mb-4"><%= @event.name %> のアイテム一覧</h1>
 
   <!-- 検索とソートフォーム -->
@@ -61,17 +61,3 @@
     <%= paginate @items %>
   </div>
 </div>
-
-<style>
-  .table {
-    margin-bottom: 0;
-  }
-
-  .table td, .table th {
-    padding: 10px;
-  }
-
-  .pagination {
-    margin-top: 20px;
-  }
-</style>
