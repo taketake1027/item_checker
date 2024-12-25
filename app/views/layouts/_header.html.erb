@@ -8,8 +8,7 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarNav">
-        <!-- 右寄せのために text-end と ms-auto を適用 -->
-        <ul class="navbar-nav ms-auto text-end">
+        <ul class="navbar-nav ms-0 text-start"> <!-- ms-0 と text-start を使って左寄せ -->
           <% if user_signed_in? %>
             <% unless current_user.email == 'guest@example.com' %>
               <li class="nav-item">
@@ -41,29 +40,3 @@
     </div>
   </nav>
 </header>
-
-<style>
-  .custom-header {
-    background-color: #001f3d; /* ネイビーブルーに変更 */
-    color: white;
-  }
-
-  .custom-navbar .navbar-brand,
-  .custom-navbar .nav-link {
-    color: white !important;
-  }
-
-  .custom-navbar .nav-link:hover {
-    color: #ffd700 !important;
-  }
-
-  .navbar-nav {
-    margin-left: auto !important; /* 確実に右寄せする */
-  }
-
-  @media (max-width: 767px) {
-    .custom-navbar .navbar-nav {
-      text-align: center;
-    }
-  }
-</style>

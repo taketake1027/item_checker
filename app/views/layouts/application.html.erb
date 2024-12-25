@@ -5,34 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>イベント管理アプリ</title>
   <%= csrf_meta_tags %>
-  <%= stylesheet_link_tag 'application', media: 'all' %>
-  <%= javascript_pack_tag 'application' %>
-  
-  <style>
-  /* 共通スタイル */
-  body {
-    background-color: #FFFFFF;
-    color: #333333;
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  main {
-    flex-grow: 1;
-    padding-bottom: 60px;
-  }
-
-  footer {
-    margin-top: auto;
-    background-color: #001f3d; /* ネイビーブルーに変更 */
-    color: white;
-    text-align: center;
-    padding: 20px 0;
-  }
-</style>
-
+  <%= stylesheet_link_tag 'application', media: 'all' %> <!-- CSS ファイルを読み込む -->
+  <%= javascript_pack_tag 'application' %> <!-- JavaScript ファイルを読み込む -->
 </head>
 <body>
   <!-- ヘッダー -->
@@ -40,17 +14,16 @@
   
   <main>
     <% if flash[:notice] %>
-  <div class="alert alert-success text-center" role="alert">
-    <%= flash[:notice] %>
-  </div>
-<% elsif flash[:alert] %>
-  <div class="alert alert-danger text-center" role="alert">
-    <%= flash[:alert] %>
-  </div>
-<% end %>
+      <div class="alert alert-success text-center" role="alert">
+        <%= flash[:notice] %>
+      </div>
+    <% elsif flash[:alert] %>
+      <div class="alert alert-danger text-center" role="alert">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
 
-
-    <%= yield %>
+    <%= yield %> <!-- コンテンツの表示 -->
   </main>
 
   <!-- フッター -->

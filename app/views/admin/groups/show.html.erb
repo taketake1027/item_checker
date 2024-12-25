@@ -1,14 +1,15 @@
-<div class="container my-4">
+<div class="group-show-page container my-4">
   <div class="row justify-content-center">
     <div class="col-lg-8 col-md-10 col-sm-12">
-
       <h1 class="text-center mb-4">
         <%= @group.present? ? @group.name : 'グループ名が設定されていません' %>の詳細
       </h1>
 
       <!-- グループ紹介 -->
-      <div class="form-group mb-4" style="background-color: white; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
-        <p class="lead text-center"><%= @group.introduction.present? ? @group.introduction : '紹介文はありません' %></p>
+      <div class="form-group mb-4">
+        <p class="lead text-center">
+          <%= @group.introduction.present? ? @group.introduction : '紹介文はありません' %>
+        </p>
       </div>
 
       <!-- グループに追加された人数 -->
@@ -18,12 +19,11 @@
 
       <!-- グループメンバー -->
       <h4 class="mb-3">グループメンバー</h4>
-      <ul class="d-flex flex-wrap justify-content-start gap-3" style="list-style-type: none; padding: 0;">
+      <ul class="d-flex flex-wrap justify-content-start gap-3">
         <% @group_users.each do |group_user| %>
-          <li class="d-flex flex-column" style="background: #f8f9fa; padding: 15px 25px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); flex: 0 0 30%;">
+          <li class="d-flex flex-column">
             <% if group_user.user.present? %>
               <p class="h5"><%= group_user.user.name %>（<%= group_user.status %>）</p>
-              <!-- ユーザー削除ボタン -->
               <%= link_to '削除', admin_group_remove_user_path(@group, group_user), method: :delete, data: { confirm: '本当にこのユーザーを削除しますか？' }, class: 'btn btn-danger btn-sm mt-2' %>
             <% else %>
               <p>ユーザー情報がありません</p>
@@ -37,9 +37,9 @@
         <%= paginate @group_users %>
       </div>
 
-      <!-- ユーザー追加フォーム（自動招待） -->
+      <!-- ユーザー追加フォーム -->
       <h3 class="mt-5 mb-3">ユーザー追加</h3>
-      <div class="form-container mb-4" style="background-color: white; border: 2px solid #007bff; padding: 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+      <div class="form-container mb-4">
         <%= form_with url: add_user_to_group_admin_group_path(@group), method: :post, local: true do |f| %>
           <div class="form-group mb-3">
             <%= f.label :email, '追加するユーザーのメールアドレス', class: 'form-label' %>
@@ -53,72 +53,6 @@
       <div class="text-center mt-4">
         <%= link_to '戻る', admin_groups_path, class: 'btn btn-secondary' %>
       </div>
-
     </div>
   </div>
 </div>
-
-<style>
-  /* グループ詳細ページのスタイル */
-  .form-container {
-    background-color: #fff; /* 白背景 */
-    border: 2px solid #007bff; /* 青い枠線 */
-    padding: 25px; /* 十分なパディング */
-    border-radius: 10px; /* 角を丸くする */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 軽い影をつける */
-  }
-
-  .form-group {
-    background-color: #fff; /* 白背景 */
-    border: 2px solid #007bff; /* 青い枠線 */
-    padding: 20px; /* パディング */
-    border-radius: 10px; /* 角を丸く */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 軽い影 */
-  }
-
-  /* メンバーリストの項目スタイル */
-  .d-flex.flex-column {
-    background-color: #f8f9fa; /* 明るい灰色の背景 */
-    padding: 15px 25px; /* パディングを広めに */
-    border-radius: 8px; /* 角を丸く */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 軽い影 */
-    flex: 0 0 30%; /* メンバーが横並びに表示されるように調整 */
-  }
-
-  /* メンバー名 */
-  .h5 {
-    font-size: 1.2rem;
-    font-weight: 600;
-  }
-
-  /* フォームラベル */
-  .form-label {
-    font-weight: 500;
-  }
-
-  /* ページネーション */
-  .pagination {
-    justify-content: center;
-  }
-
-  /* ボタン */
-  .btn {
-    font-size: 1rem;
-    padding: 8px 16px;
-  }
-
-  .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-  }
-
-  .btn-secondary {
-    background-color: #6c757d;
-    border-color: #6c757d;
-  }
-
-  .btn-danger {
-    background-color: #dc3545;
-    border-color: #dc3545;
-  }
-</style>

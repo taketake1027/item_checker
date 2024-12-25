@@ -1,0 +1,41 @@
+/* app/javascript/stylesheets/_header.scss */
+
+/* ヘッダー全体 */
+.custom-header {
+  background-color: #001f3d; /* ネイビーブルーに変更 */
+  color: white;
+}
+
+/* ナビゲーションのリンク */
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link {
+  color: white !important;
+}
+
+.custom-navbar .nav-link:hover {
+  color: #ffd700 !important;
+}
+
+/* ナビゲーション全体 */
+.custom-navbar {
+  display: flex;
+  justify-content: space-between; /* 左右にスペースを分ける */
+  width: 100%; /* 幅を100%にしてスペースを均等にする */
+}
+
+.custom-navbar .navbar-nav {
+  display: flex; /* 横並びにする */
+  align-items: center; /* 垂直方向の中央揃え */
+}
+
+/* 小さい画面でナビゲーションを中央寄せ */
+@media (max-width: 767px) {
+  .custom-navbar {
+    justify-content: center; /* ナビゲーション全体を中央寄せ */
+  }
+
+  .custom-navbar .navbar-nav {
+    justify-content: center; /* ナビゲーションメニューを中央寄せ */
+    text-align: center; /* 必要に応じて追加 */
+  }
+}

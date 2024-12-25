@@ -1,59 +1,23 @@
-<!-- app/views/admin/dashboard/index.html.erb -->
-<div class="container my-4">
+<!-- app/views/top.html.erb -->
+<div class="top-page container my-4">
   <h1 class="text-center mb-4">管理者トップページ</h1>
   <p class="text-center mb-4">ここで管理者ダッシュボード機能を提供します。</p>
 
-  <nav>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item mb-3 text-center">
-        <%= link_to 'グループ管理', admin_groups_path, class: "btn btn-outline-primary w-75 text-center py-3" %>
+  <nav class="d-flex justify-content-center">
+    <ul class="list-group list-group-flush w-75 shadow-lg p-3 bg-white rounded">
+      <li class="list-group-item text-center">
+        <%= link_to 'グループ管理', admin_groups_path, class: "btn btn-primary w-100 py-3" %>
       </li>
-      <li class="list-group-item mb-3 text-center">
-        <%= link_to 'イベント管理', admin_events_path, class: "btn btn-outline-primary w-75 text-center py-3" %>
-        <p class="mt-2 text-muted">イベントに紐づいた投稿やコメントの確認・削除もここから可能です。</p> <!-- 説明を追加 -->
+      <li class="list-group-item text-center">
+        <%= link_to 'イベント管理', admin_events_path, class: "btn btn-success w-100 py-3" %>
+        <p class="mt-2 text-muted">イベントに紐づいた投稿やコメントの確認もここから可能です。</p>
       </li>
-      <li class="list-group-item mb-3 text-center">
-        <%= link_to 'アイテム管理', admin_items_path, class: "btn btn-outline-primary w-75 text-center py-3" %>
+      <li class="list-group-item text-center">
+        <%= link_to 'アイテム管理', admin_items_path, class: "btn btn-warning w-100 py-3" %>
       </li>
-      <li class="list-group-item mb-3 text-center">
-        <%= link_to 'ユーザー管理', admin_users_path, class: "btn btn-outline-primary w-75 text-center py-3" %>
+      <li class="list-group-item text-center">
+        <%= link_to 'ユーザー管理', admin_users_path, class: "btn btn-danger w-100 py-3" %>
       </li>
     </ul>
   </nav>
 </div>
-
-<style>
-  /* ナビゲーションリンクのスタイル */
-  .list-group-item {
-    background-color: transparent; /* リストアイテムの背景を透明に */
-    border: none; /* ボーダーを削除 */
-  }
-
-  /* リストリンクボタンのスタイル */
-  .btn-outline-primary {
-    display: block; /* ボタンをブロックレベルにして横幅いっぱいに広げる */
-    text-align: center; /* テキストを中央揃え */
-    font-size: 1.2rem; /* フォントサイズを大きくして視認性向上 */
-    padding: 1rem; /* パディングを追加してクリックエリアを広げる */
-    border-radius: 0.5rem; /* 角を丸く */
-    transition: background-color 0.3s ease; /* ホバー時の背景色変更をスムーズに */
-    margin: 0 auto; /* 横方向中央寄せ */
-  }
-
-  /* ボタンホバー時の背景色変更 */
-  .btn-outline-primary:hover {
-    background-color: #007bff;
-    color: white;
-  }
-
-  /* ナビゲーション全体のスタイル */
-  nav {
-    margin-top: 30px; /* 上部に余白を追加 */
-  }
-
-  /* 投稿・コメントの管理説明文のスタイル */
-  .text-muted {
-    font-size: 0.9rem;
-    color: #6c757d; /* 薄いグレーの色 */
-  }
-</style>

@@ -1,0 +1,42 @@
+/* app/assets/stylesheets/homes.scss */
+
+/* トップページ専用のスタイル */
+.top-page {
+  .list-group-item {
+    text-align: center;
+  }
+
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 1.5rem; /* ボタンの高さ */
+    border-radius: 0.5rem; /* 角を丸く */
+    font-size: 1.2rem; /* フォントサイズ */
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    color: white;
+  }
+
+  .btn-warning {
+    background-color: #ffc107;
+    color: white;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  /* 説明文スタイル */
+  .text-muted {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+}
