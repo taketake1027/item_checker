@@ -1,5 +1,4 @@
 <h1 class="text-center mb-4">プロフィール編集</h1>
-
 <%= form_for @user do |f| %>
   <% if @user.errors.any? %>
     <div class="alert alert-danger">
@@ -10,7 +9,7 @@
       </ul>
     </div>
   <% end %>
-
+  
   <div class="row justify-content-center">
     <div class="col-md-6">
       <!-- フォーム全体に白背景と枠を追加 -->
