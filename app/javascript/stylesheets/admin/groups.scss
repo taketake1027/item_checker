@@ -1,0 +1,55 @@
+/* グループ管理ページのカードデザインを青に変更 */
+.card {
+  background-color: #007bff; /* 背景色を青に変更 */
+  border-radius: 8px; /* 角を丸くする */
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 軽い影をつけて立体感を出す */
+  color: white; /* 文字色を白に変更 */
+}
+
+/* グループ名の文字色を強調 */
+.card .table th, .card .table td {
+  color: white; /* テーブル内の文字色を白に変更 */
+}
+
+/* 検索フォームのスタイル */
+.form-control {
+  font-size: 1rem;
+  color: #495057; /* フォーム内の文字色をダークに */
+  background-color: #ffffff; /* 背景色を白にしてコントラストを強く */
+  border-color: #ced4da; /* ボーダーの色を少し薄いグレーに */
+}
+
+/* 検索ボタンのスタイル */
+.btn-secondary {
+  background-color: #6c757d; /* グレー色に */
+  border-color: #6c757d;
+  color: white; /* 文字色を白に */
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268; /* ホバー時に少し濃いグレーに */
+}
+
+/* 操作ボタンのスタイル */
+.btn-sm {
+  font-size: 0.875rem;
+  padding: 5px 10px;
+}
+
+/* ページネーション */
+.pagination {
+  justify-content: center;
+  color: #007bff; /* ページネーションの文字色を青に */
+}
+
+/* ヘッダーの背景色 */
+.thead-dark {
+  background-color: #343a40; /* ヘッダー背景色 */
+  color: white; /* ヘッダー文字色を白に変更 */
+}
+
+/* 削除ボタンのホバー時の背景色変更 */
+.btn-danger:hover {
+  background-color: #c82333; /* ホバー時に赤色を少し濃く */
+}
