@@ -1,15 +1,15 @@
 @use '~bootstrap/scss/bootstrap';  // Bootstrapのスタイルをインポート
 /* ログイン前TOPページ */
-@import "landing-page";
+@use "landing-page";
 /* application全体 */
-@import 'background';
-@import "stylesheets/custom.scss";
-@import "stylesheets/admin/admin.scss";
-@import 'header';
-@import 'admin/admin-navbar';
+@use 'background';
+@use "stylesheets/custom.scss";
+@use "stylesheets/admin/admin.scss";
+@use 'header';
+@use 'admin/admin-navbar';
 /* ユーザー側 */
 
 
 /* 管理者側 */
-@import 'admin/homes.scss';
-@import 'admin/group_show';
+@use 'admin/homes.scss';
+@use 'admin/group_show';
