@@ -29,16 +29,24 @@ class PostsController < ApplicationController
     @event = Event.find(params[:event_id])
     @comment = @post.comments.build(comment_params)
     @comment.user = current_user
-    @comment.event_id = @event.id
+    @comment.event = @event  # 明示的に関連付け
   
     if @comment.save
-      redirect_to event_post_path(@event, @post), notice: "コメントを投稿しました。"
+      respond_to do |format|
+        format.html { redirect_to event_post_path(@event, @post), notice: "コメントを投稿しました。" }
+        format.js   # create_comment.js.erb を探します
+      end
     else
       @comments = @post.comments.page(params[:page]).per(4).includes(:user)
-      redirect_to event_post_path(@event, @post), alert: 'コメント内容を入力してください'
-      #render :show
+      respond_to do |format|
+        format.html { redirect_to event_post_path(@event, @post), alert: 'コメント内容を入力してください' }
+        format.js   # create_comment.js.erb でエラー表示を処理します
+      end
     end
   end
+  
+  
+  
   
   def destroy
     if @post.user == current_user  # 投稿したユーザーだけが削除できる
@@ -66,6 +74,6 @@ class PostsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:content)
-  end
+    params.require(:comment).permit(:content, :event_id)
+  end  
 end

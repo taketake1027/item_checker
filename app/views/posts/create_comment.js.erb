@@ -1,0 +1,17 @@
+<% if @comment.persisted? %>
+  // 新しく追加されたコメントをコメント一覧に追加
+  $("#comments").prepend("<%= j render @comment %>");
+
+  // フォームをリセット
+  $("#new_comment_form")[0].reset();
+
+  // エラーメッセージがあれば削除
+  $(".alert").remove();
+
+  // コメント投稿完了メッセージを表示
+  $("body").prepend('<div class="alert alert-success">コメントを投稿しました。</div>');
+<% else %>
+  // エラーメッセージを表示
+  $(".alert").remove();
+  $("body").prepend('<div class="alert alert-danger">コメント内容を入力してください。</div>');
+<% end %>
