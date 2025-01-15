@@ -15,6 +15,7 @@ class Admin::GroupsController < ApplicationController
 
   def new
     @group = Group.new
+    @users = User.page(params[:page]).per(10)
   end
 
   def create
@@ -22,12 +23,24 @@ class Admin::GroupsController < ApplicationController
     @group.creator_id = current_admin.id
   
     if @group.save
+      # 選ばれたユーザーが存在すれば、グループに追加
+      if params[:group][:user_ids].present?
+        # 空の値を除外
+        user_ids = params[:group][:user_ids].reject(&:blank?)
+  
+        user_ids.each do |user_id|
+          # group_users に追加
+          @group.group_users.create(user_id: user_id, status: 'active', joined_date: Date.today)
+        end
+      end
       redirect_to admin_groups_path, notice: 'グループが作成されました'
     else
       flash.now[:alert] = 'グループの作成に失敗しました。'
       render :new
     end
   end
+  
+  
 
   def show
     @group_users = @group.group_users.includes(:user).page(params[:page]).per(3)
@@ -62,6 +75,7 @@ class Admin::GroupsController < ApplicationController
     elsif @group.group_users.exists?(user_id: user.id)
       flash[:alert] = "#{email}さんは既にこのグループに参加しています。"
     else
+      # `joined_date` を設定
       group_user = @group.group_users.new(user_id: user.id, status: 'active', joined_date: Date.today)
       if group_user.save
         flash[:notice] = "#{email}さんをグループに追加しました。"
@@ -72,6 +86,7 @@ class Admin::GroupsController < ApplicationController
   
     redirect_to admin_group_path(@group)
   end
+  
   
   private
 
