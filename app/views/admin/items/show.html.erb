@@ -28,18 +28,25 @@
       <!-- 関連イベントの表示 -->
       <div class="mb-3 p-3 bg-white rounded shadow-sm">
         <p><strong>関連イベント:</strong> 
-          <%= @item.event.name %>（開催日: <%= @item.event.start_date.strftime('%Y-%m-%d') %>）
-        </p>
+          <%= @item.event.name %>（開催日: <%= @item.event.start_date.strftime('%Y-%m-%d') if @item.event.start_date %>）</p>
       </div>
     </div>
 
     <!-- アイテム画像 -->
     <div class="col-md-4">
       <% if @item.image.attached? %>
-        <%= image_tag @item.image, class: 'img-fluid rounded shadow', alt: @item.name %>
+        <%= image_tag @item.image, class: 'img-fluid rounded shadow', alt: @item.name, style: 'max-width: 100%; height: auto;' %>
       <% else %>
-        <p>画像は登録されていません。</p>
+        <!-- 画像がない場合の処理 -->
+        <div class="text-center">
+          <%= image_tag 'sample.png', class: 'img-fluid rounded shadow', alt: 'サンプル画像', style: 'max-width: 100%; height: auto;' %>
+          <p class="mt-2 text-muted"><strong>画像が登録されていません。</strong></p>
+        </div>
       <% end %>
     </div>
+  </div>
+
+  <div class="text-center mt-4">
+    <%= link_to '戻る', event_items_path(@item.event), class: 'btn btn-secondary' %>
   </div>
 </div>
