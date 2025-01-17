@@ -100,6 +100,8 @@ GEM
     ffi (1.17.0)
     ffi (1.17.0-arm64-darwin)
     ffi (1.17.0-x86_64-darwin)
+    font-awesome-sass (6.7.2)
+      sassc (~> 2.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.6)
@@ -271,6 +273,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   devise
   dotenv-rails
+  font-awesome-sass (~> 6.7)
   jbuilder (~> 2.7)
   kaminari
   listen (~> 3.3)
