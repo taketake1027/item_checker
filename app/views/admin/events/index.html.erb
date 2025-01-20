@@ -1,6 +1,11 @@
 <div class="container d-flex flex-column align-items-center mt-4">
   <h1 class="mb-4">イベント管理ページ</h1>
 
+  <!-- 管理者トップページに戻るボタン -->
+  <div class="mb-3">
+    <%= link_to '管理者トップページに戻る', admin_root_path, class: 'btn btn-secondary' %>
+  </div>
+
   <!-- 新規イベント作成ボタン -->
   <div class="mb-3">
     <%= link_to '新規イベント作成', new_admin_event_path, class: 'btn btn-primary' %>

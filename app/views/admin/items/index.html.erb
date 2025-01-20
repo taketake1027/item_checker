@@ -1,6 +1,11 @@
 <div class="container my-4">
   <h1 class="text-center mb-4">アイテム管理ページ</h1>
 
+  <!-- 管理者トップページに戻るボタン -->
+  <div class="mb-3 text-center">
+    <%= link_to '管理者トップページに戻る', admin_root_path, class: 'btn btn-secondary' %>
+  </div>
+
   <!-- 新規アイテム追加ボタン -->
   <div class="mb-3 text-center">
     <%= link_to '新規アイテム追加', new_admin_item_path, class: 'btn btn-primary' %>
