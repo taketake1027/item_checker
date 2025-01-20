@@ -1,59 +1,56 @@
 <div class="container d-flex justify-content-center align-items-center" style="margin-top: 20px;">
-  <div class="card shadow p-4" style="max-width: 600px; width: 100%;"> <!-- 最大横幅600px、幅は100% -->
+  <div class="card shadow p-4" style="max-width: 500px; width: 100%;"> <!-- 幅を少し狭めて集中感を強調 -->
     <h2 class="text-center mb-4">ログイン</h2>
 
-    <div class="d-flex justify-content-center mb-3">
-      <%= button_to 'ゲストログイン', guest_login_path, method: :post, class: 'btn btn-secondary w-100' %>
+    <!-- ゲストログインボタン -->
+    <div class="d-flex justify-content-center mb-4">
+      <%= button_to 'ゲストログイン', guest_login_path, method: :post, class: 'btn btn-outline-secondary btn-lg w-100' %>
     </div>
 
-    <%# エラーメッセージが存在する場合に表示 %>
+    <!-- エラーメッセージ -->
     <% if flash[:alert] %>
-      <div class="alert alert-danger">
+      <div class="alert alert-danger text-center">
         <%= flash[:alert] %>
       </div>
     <% end %>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <!-- メールアドレス入力 -->
       <div class="form-group mb-3">
-        <%= f.label :email, "メールアドレス", class: "form-label" %>
-        <%= f.email_field :email, autofocus: true, class: "form-control" %>
-
-        <%# メールアドレスのエラーメッセージが存在する場合に表示 %>
+        <%= f.label :email, "メールアドレス", class: "form-label fw-bold" %>
+        <%= f.email_field :email, autofocus: true, class: "form-control form-control-lg", placeholder: "例: user@example.com" %>
         <% if resource.errors[:email].any? %>
-          <div class="alert alert-danger mt-2">
-            <ul class="mb-0">
-              <% resource.errors[:email].each do |error| %>
-                <li><%= error %></li>
-              <% end %>
-            </ul>
+          <div class="text-danger mt-2">
+            <% resource.errors[:email].each do |error| %>
+              <div><i class="bi bi-exclamation-circle"></i> <%= error %></div>
+            <% end %>
           </div>
         <% end %>
       </div>
 
+      <!-- パスワード入力 -->
       <div class="form-group mb-3">
-        <%= f.label :password, "パスワード", class: "form-label" %>
-        <%= f.password_field :password, class: "form-control" %>
-
-        <%# パスワードのエラーメッセージが存在する場合に表示 %>
+        <%= f.label :password, "パスワード", class: "form-label fw-bold" %>
+        <%= f.password_field :password, class: "form-control form-control-lg", placeholder: "6文字以上のパスワードを入力" %>
         <% if resource.errors[:password].any? %>
-          <div class="alert alert-danger mt-2">
-            <ul class="mb-0">
-              <% resource.errors[:password].each do |error| %>
-                <li><%= error %></li>
-              <% end %>
-            </ul>
+          <div class="text-danger mt-2">
+            <% resource.errors[:password].each do |error| %>
+              <div><i class="bi bi-exclamation-circle"></i> <%= error %></div>
+            <% end %>
           </div>
         <% end %>
       </div>
 
+      <!-- ログインボタン -->
       <div class="d-grid">
-        <%= f.submit "ログイン", class: "btn btn-primary w-100" %>
-      </div>
-
-      <!-- 新規登録ページへのボタン -->
-      <div class="d-flex justify-content-center mt-3">
-        <%= link_to '新規登録はこちら', new_user_registration_path, class: 'btn btn-secondary w-100' %> <!-- ログインボタンと同じ色に変更 -->
+        <%= f.submit "ログイン", class: "btn btn-primary btn-lg w-100" %>
       </div>
     <% end %>
+
+    <!-- 新規登録リンク -->
+    <div class="text-center mt-4">
+      <p class="mb-2">アカウントをお持ちでない場合:</p>
+      <%= link_to '新規登録はこちら', new_user_registration_path, class: 'btn btn-outline-primary btn-lg' %>
+    </div>
   </div>
 </div>

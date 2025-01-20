@@ -1,38 +1,37 @@
-<div class="container mt-4">
+<div class="container mt-3">
   <div class="row">
-    <div class="col-md-6 col-12">
-      <div class="card p-4 shadow-sm">
-        <h1><%= @post.title %></h1> 
+    <!-- 左側: 投稿内容 -->
+    <div class="col-md-4 col-8">
+      <div class="card p-3 shadow-sm">
+        <h1 class="h5"><%= @post.title %></h1>
         <p class="text-muted">投稿者: <%= @post.user.name %></p>
-        <p><%= @post.content %></p>
+        <p class="text-truncate"><%= @post.content %></p>
 
-        <% if @post.image.attached? %> <!-- 投稿に画像が添付されていれば表示 -->
-          <p><%= image_tag(@post.image, class: 'img-fluid') %></p>
+        <% if @post.image.attached? %>
+          <!-- 画像に最大幅を設定し、縦横比を維持 -->
+          <p><%= image_tag(@post.image, class: 'img-fluid', style: 'max-width: 100%; height: auto;') %></p>
         <% else %>
-          <!-- 画像が添付されていない場合はサンプル画像を表示 -->
-          <p>
-            <%= image_tag 'sample.png', class: 'img-fluid', alt: 'サンプル画像', style: 'max-width: 80%; height: auto;' %>
-          </p>
-          <p class="text-muted">投稿には画像が添付されていません。
+          <p><%= image_tag 'sample.png', class: 'img-fluid', alt: 'サンプル画像', style: 'max-width: 50%; height: auto;' %></p>
+          <p class="text-muted">投稿には画像が添付されていません。</p>
         <% end %>
 
         <p class="text-muted"><%= @post.created_at.strftime('%Y-%m-%d %H:%M') %></p>
-        <%= link_to 'イベント詳細に戻る', event_path(@event), class: 'btn btn-outline-secondary' %> <!-- イベントページへのリンク -->
+        <%= link_to 'イベント詳細に戻る', event_path(@event), class: 'btn btn-outline-secondary btn-sm' %>
       </div>
     </div>
 
     <!-- 右側: コメントフォーム -->
-    <div class="col-md-6 col-12">
-      <div class="card mt-4 p-4 shadow-sm">
-        <h3>コメント</h3>
+    <div class="col-md-8 col-12">
+      <div class="card mt-4 p-3 shadow-sm">
+        <h3 class="h5">コメント</h3>
         <%= form_with(model: [@post, @comment], url: create_comment_event_post_path(@event, @post), method: :post, remote: true, id: "new_comment_form") do |f| %>
           <div class="form-group">
-            <%= f.text_area :content, placeholder: "コメントを入力", class: "form-control", rows: 4 %>
+            <%= f.text_area :content, placeholder: "コメントを入力", class: "form-control", rows: 3 %> <!-- フォームの高さを少し小さく -->
           </div>
 
           <% if @comment.errors.any? %>
-            <div class="alert alert-danger">
-              <ul>
+            <div class="alert alert-danger p-2">
+              <ul class="mb-0">
                 <% @comment.errors.full_messages.each do |message| %>
                   <li><%= message %></li>
                 <% end %>
@@ -40,7 +39,7 @@
             </div>
           <% end %>
 
-          <%= f.submit 'コメントする', class: 'btn btn-primary mt-2' %>
+          <%= f.submit 'コメントする', class: 'btn btn-primary btn-sm w-100 mt-2' %> <!-- ボタンのサイズを小さく -->
         <% end %>
       </div>
     </div>
@@ -48,7 +47,7 @@
 
   <!-- コメント一覧 -->
   <div id="comments" class="mt-4">
-    <h4>コメント一覧</h4>
+    <h4 class="h6">コメント一覧</h4>
     <% if @comments.any? %>
       <% @comments.each do |comment| %>
         <%= render 'posts/comment', comment: comment %> <!-- posts/_comment.html.erbを明示的に指定 -->

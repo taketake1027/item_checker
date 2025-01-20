@@ -1,18 +1,21 @@
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
-  <div class="border border-white rounded shadow-sm p-4" style="background-color: rgba(255, 255, 255, 0.9);">
-    <h1 class="my-5 text-center">このアプリについて</h1>
-    <p class="lead text-center">アイテムチェッカーは、イベントごとのアイテムリストを管理し、準備状況を可視化するツールです。</p>
-    <p class="text-center">例えば、以下の場面で活用できます：</p>
-    <ul class="list-unstyled text-center">
-      <li>🎉 社内イベントの備品管理</li>
-      <li>🛍️ 販促キャンペーンの物品準備</li>
-      <li>🎓 学校行事の準備物チェック</li>
-    </ul>
-    <p class="text-center">管理者と参加者が協力して効率的に準備を進めることができます。</p>
-  </div>
+  <div class="card shadow-sm p-4" style="max-width: 600px; width: 100%; background-color: rgba(255, 255, 255, 0.95);">
+    <!-- ボタンをカードの上部に配置 -->
+    <div class="d-flex justify-content-center mb-4">
+      <%= link_to 'イベント一覧に戻る', homes_top_path, class: 'btn btn-primary btn-lg w-75' %>
+    </div>
 
-  <!-- ホームページへのリンクボタン -->
-  <div class="text-center mt-4 mb-5">
-    <%= link_to 'イベント一覧に戻る', homes_top_path, class: 'btn btn-outline-primary' %>
+    <h1 class="my-4 text-center text-primary">このアプリについて</h1>
+
+    <p class="lead text-center mb-4">アイテムチェッカーは、イベントごとのアイテムリストを管理し、準備状況を可視化するツールです。</p>
+
+    <p class="text-center mb-4">例えば、以下の場面で活用できます：</p>
+    <ul class="list-unstyled text-center mb-4">
+      <li>🎉 <strong>社内イベントの備品管理</strong></li>
+      <li>🛍️ <strong>販促キャンペーンの物品準備</strong></li>
+      <li>🎓 <strong>学校行事の準備物チェック</strong></li>
+    </ul>
+
+    <p class="text-center mb-4">管理者と参加者が協力して効率的に準備を進めることができます。</p>
   </div>
 </div>
