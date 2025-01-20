@@ -48,7 +48,9 @@
         <% end %>
       </tbody>
     </table>
-    <%= paginate @events %> <!-- ページネーションを追加 -->
+    <div class="d-flex justify-content-center">
+      <%= paginate @events %> <!-- ページネーションを中央寄せ -->
+    </div>
   </div>
 
   <!-- ユーザーの投稿 -->
@@ -76,6 +78,11 @@
         <% end %>
       </tbody>
     </table>
-    <%= paginate @posts %> <!-- ページネーションを追加 -->
+    <div class="d-flex justify-content-center">
+      <%= paginate @posts %> 
+    </div>
+  </div>
+  <div class="text-center mt-4">
+    <%= link_to '戻る', admin_users_path, class: 'btn btn-secondary' %>
   </div>
 </div>

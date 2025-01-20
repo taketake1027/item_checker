@@ -2,7 +2,6 @@
   <h1 class="text-center mb-4">新規グループ作成</h1>
 
   <%= form_with model: @group, url: admin_groups_path, local: true do |f| %>
-    <!-- バリデーションエラーメッセージの表示 -->
     <% if @group.errors.any? %>
       <div class="alert alert-danger">
         <strong><%= @group.errors.count %>件のエラーがあります。</strong>
@@ -42,8 +41,6 @@
       <%= f.submit '作成', class: 'btn btn-primary' %>
     </div>
   <% end %>
-
-  <!-- 戻るボタン -->
   <div class="text-center">
     <%= link_to '戻る', admin_groups_path, class: 'btn btn-secondary' %>
   </div>
