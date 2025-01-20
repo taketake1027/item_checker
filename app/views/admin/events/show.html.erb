@@ -20,7 +20,11 @@
         <p><strong>グループ:</strong> <%= @event.group.name if @event.group %></p>
 
         <br>
-        <%= link_to '戻る', admin_events_path, class: 'btn btn-secondary' %>
+
+        <!-- 戻るボタン -->
+        <div class="d-flex justify-content-center">
+          <%= link_to '戻る', admin_events_path, class: 'btn btn-secondary' %>
+        </div>
       </div>
     </div>
   </div>

@@ -12,7 +12,6 @@
   
   <div class="row justify-content-center">
     <div class="col-md-6">
-      <!-- フォーム全体に白背景と枠を追加 -->
       <div class="form-container p-4 rounded shadow-sm bg-white">
         <div class="form-group">
           <%= f.label :name, '名前', class: 'form-label' %>
@@ -41,3 +40,6 @@
     </div>
   </div>
 <% end %>
+<div class="text-center mt-4">
+  <%= link_to '戻る', request.referer || root_path, class: 'btn btn-outline-secondary' %>
+</div>

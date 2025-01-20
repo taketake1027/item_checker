@@ -29,14 +29,14 @@
         <h3>イベントに関する投稿</h3>
 
         <% if @post.errors.any? %>
-            <div class="alert alert-danger">
-              <ul>
-                <% @post.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
+          <div class="alert alert-danger">
+            <ul>
+              <% @post.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
 
         <%= form_with(model: [@event, @event.posts.build], remote: true, html: { multipart: true }) do |f| %>
           <div class="form-group mb-3">
@@ -93,11 +93,12 @@
           <% end %>
         </div>
       <% end %>
-
-      <!-- ページネーションボタンを中央に配置 -->
       <div class="d-flex justify-content-center mt-4">
         <%= paginate @posts %>
       </div>
     <% end %>
+  </div>
+  <div class="text-center mt-4">
+    <%= link_to 'イベント一覧に戻る', homes_top_path, class: 'btn btn-secondary' %>
   </div>
 </div>

@@ -60,4 +60,9 @@
   <div class="mt-3 d-flex justify-content-center">
     <%= paginate @items %>
   </div>
+
+  <!-- 画面下部の戻るボタン -->
+  <div class="text-center mt-4">
+    <%= link_to '戻る', event_path(@event), class: 'btn btn-secondary' %>
+  </div>
 </div>
