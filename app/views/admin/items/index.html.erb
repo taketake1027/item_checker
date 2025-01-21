@@ -1,5 +1,5 @@
 <div class="container my-4">
-  <h1 class="text-center mb-4">アイテム管理ページ</h1>
+  <h1 class="text-center mb-4 display-4">アイテム管理ページ</h1>
   <div class="mb-3 text-center">
     <%= link_to '管理者トップページに戻る', admin_root_path, class: 'btn btn-secondary' %>
   </div>
@@ -22,53 +22,50 @@
   </div>
 
   <!-- アイテム一覧テーブル -->
-  <div class="table-responsive">
-    <table class="table table-bordered table-striped table-hover text-center">
-      <thead class="bg-dark text-white">
-        <tr>
-          <th>アイテム名</th>
-          <th>イベント名</th>
-          <th>進捗状況</th> <!-- 進捗状況列 -->
-          <th>操作</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% if @items.any? %>
-          <% @items.each do |item| %>
-            <tr class="<%= 'bg-success' if item.status == '完了' %> <%= 'bg-light' if item.status == '未完了' %>">
-              <!-- アイテム名 -->
-              <td><%= item.name %></td>
-              <!-- イベント名 -->
-              <td><%= item.event ? item.event.name : '未設定' %></td>
-
-              <!-- 進捗状況 -->
-              <td>
-                <% if item.status == '完了' %>
-                  <span class="text-dark"><%= item.prepared_amount %> 個 準備完了</span>
-                <% elsif item.status == '未完了' %>
-                  <span class="text-dark"><%= "#{item.prepared_amount}/#{item.amount}" %> 個 準備中</span>
-                <% else %>
-                  <span class="text-muted">進捗なし</span>
-                <% end %>
-              </td>
-
-              <!-- 操作 -->
-              <td>
-                <%= link_to '詳細', admin_item_path(item), class: 'btn btn-info btn-sm' %>
-                <%= link_to '編集', edit_admin_item_path(item), class: 'btn btn-warning btn-sm' %>
-                <%= link_to '削除', admin_item_path(item), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
-              </td>
+  <div class="d-flex justify-content-center">
+    <div class="table-responsive w-75 mb-4 bg-white border p-3">
+      <table class="table table-bordered table-striped table-hover text-center">
+        <thead class="bg-dark text-white">
+          <tr>
+            <th>アイテム名</th>
+            <th>イベント名</th>
+            <th>進捗状況</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @items.any? %>
+            <% @items.each do |item| %>
+              <tr class="<%= 'bg-success' if item.status == '完了' %> <%= 'bg-light' if item.status == '未完了' %>">
+                <td><%= item.name %></td>
+                <td><%= item.event ? item.event.name : '未設定' %></td>
+                <td>
+                  <% if item.status == '完了' %>
+                    <span class="text-dark"><%= item.prepared_amount %> 個 準備完了</span>
+                  <% elsif item.status == '未完了' %>
+                    <span class="text-dark"><%= "#{item.prepared_amount}/#{item.amount}" %> 個 準備中</span>
+                  <% else %>
+                    <span class="text-muted">進捗なし</span>
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to '詳細', admin_item_path(item), class: 'btn btn-info btn-sm' %>
+                  <%= link_to '編集', edit_admin_item_path(item), class: 'btn btn-warning btn-sm' %>
+                  <%= link_to '削除', admin_item_path(item), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="4">検索結果が見つかりませんでした。</td>
             </tr>
           <% end %>
-        <% else %>
-          <tr>
-            <td colspan="4">検索結果が見つかりませんでした。</td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
 
+  <!-- ページネーション -->
   <div class="d-flex justify-content-center">
     <%= paginate @items, class: 'pagination' %>
   </div>
