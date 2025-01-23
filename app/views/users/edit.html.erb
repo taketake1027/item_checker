@@ -23,14 +23,15 @@
           <%= f.email_field :email, class: 'form-control' %>
         </div>
 
+        <!-- パスワード欄に条件を追加 -->
         <div class="form-group">
-          <%= f.label :password, 'パスワード', class: 'form-label' %>
-          <%= f.password_field :password, class: 'form-control' %>
+          <%= f.label :password, 'パスワード (変更時のみ記載)', class: 'form-label' %>
+          <%= f.password_field :password, class: 'form-control', placeholder: '変更時のみ入力' %>
         </div>
 
         <div class="form-group">
-          <%= f.label :password_confirmation, 'パスワード確認', class: 'form-label' %>
-          <%= f.password_field :password_confirmation, class: 'form-control' %>
+          <%= f.label :password_confirmation, 'パスワード確認 (変更時のみ記載)', class: 'form-label' %>
+          <%= f.password_field :password_confirmation, class: 'form-control', placeholder: '変更時のみ入力' %>
         </div>
 
         <div class="form-group text-center">
@@ -40,6 +41,7 @@
     </div>
   </div>
 <% end %>
+
 <div class="text-center mt-4">
   <%= link_to '戻る', request.referer || root_path, class: 'btn btn-outline-secondary' %>
 </div>
