@@ -12,7 +12,7 @@
       <%= select_tag :role, options_for_select([["役職で検索", ""]]+User.roles.keys.map { |role| [role_to_japanese(role), role] }, params[:role]), class: "form-select" %>
     </div>
     <div class="col-auto">
-      <%= submit_tag "検索", class: "btn btn-primary" %>
+      <%= submit_tag "検索", class: "btn btn-secondary" %>
     </div>
   <% end %>
 
