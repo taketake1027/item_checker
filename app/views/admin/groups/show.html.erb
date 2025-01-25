@@ -39,13 +39,15 @@
 
       <!-- ユーザー追加フォーム -->
       <h3 class="mt-5 mb-3">ユーザー追加</h3>
-      <div class="form-container mb-4">
+      <div class="mb-4">
         <%= form_with url: add_user_to_group_admin_group_path(@group), method: :post, local: true do |f| %>
           <div class="form-group mb-3">
             <%= f.label :email, '追加するユーザーのメールアドレス', class: 'form-label' %>
-            <%= f.email_field :email, class: 'form-control'%>
+            <%= f.email_field :email, class: 'form-control', placeholder: 'メールアドレスを入力してください' %>
           </div>
-          <%= f.submit 'ユーザー追加', class: 'btn btn-primary' %>
+          <div class="text-center">
+            <%= f.submit 'ユーザー追加', class: 'btn btn-primary' %>
+          </div>
         <% end %>
       </div>
       <div class="text-center mt-4">

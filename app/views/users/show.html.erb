@@ -1,17 +1,22 @@
 <h1 class="text-center mb-5"><%= @user.name %>さんのプロフィール</h1>
+
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8">
+      
       <!-- メールアドレス -->
       <div class="card mb-4">
         <div class="card-body">
           <p><strong>メールアドレス:</strong> <%= @user.email %></p>
         </div>
       </div>
+
       <!-- 2カラムレイアウト: 左にイベント、右に投稿 -->
       <div class="row mt-5">
-        <div class="col-md-6">
-          <div class="card mb-4">
+        
+        <!-- 招待されているイベント -->
+        <div class="col-md-6 mb-4">
+          <div class="card">
             <div class="card-body">
               <h3 class="card-title">招待されているイベント</h3>
               <% if @events.present? %>
@@ -32,8 +37,9 @@
           </div>
         </div>
 
-        <div class="col-md-6">
-          <div class="card mb-4">
+        <!-- あなたの投稿履歴 -->
+        <div class="col-md-6 mb-4">
+          <div class="card">
             <div class="card-body">
               <h3 class="card-title">あなたの投稿履歴</h3>
               <% if @posts.present? %>
@@ -54,12 +60,14 @@
           </div>
         </div>
       </div>
+
       <!-- プロフィール編集ボタン -->
       <% unless current_user.email == 'guest@example.com' %>
         <div class="text-center mt-4">
           <%= link_to 'プロフィール編集', mypage_edit_path(@user), class: 'btn btn-primary btn-lg mb-3' %>
         </div>
       <% end %>
+
       <!-- アカウント削除ボタン -->
       <% unless current_user.email == 'guest@example.com' %>
         <div class="text-center mt-4">
