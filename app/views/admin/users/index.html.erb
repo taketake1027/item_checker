@@ -10,11 +10,13 @@
       <%= select_tag :role, options_for_select([["役職で検索", ""]]+User.roles.keys.map { |role| [role_to_japanese(role), role] }, params[:role]), class: "form-select" %>
     </div>
     <div class="col-auto">
-      <%= submit_tag "検索", class: "btn btn-secondary" %>
+      <%= text_field_tag :name, params[:name], class: 'form-control', placeholder: '名前で検索' %>
+    </div>
+    <div class="col-auto">
+      <%= submit_tag "検索", class: "btn btn-danger" %>
     </div>
   <% end %>
 
-  <!-- ユーザー一覧テーブル -->
   <div class="d-flex justify-content-center">
     <div class="table-responsive w-75 mb-4 bg-white border p-3">
       <table class="table table-bordered table-striped table-hover text-center">

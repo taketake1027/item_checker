@@ -4,7 +4,7 @@ class Admin::PostsController < ApplicationController
   def index
     @event = Event.find_by(id: params[:event_id])
     if @event
-      @posts = @event.posts.page(params[:page]).per(4) 
+      @posts = @event.posts.page(params[:page]).per(2) 
   else
     @posts = []
     end

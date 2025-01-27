@@ -17,7 +17,7 @@
       <%= select_tag :sort_by, options_for_select([['新着順', 'newest'], ['準備未完了', 'incomplete'], ['準備完了', 'complete']], selected: params[:sort_by]), class: 'form-control w-25 me-2' %>
 
       <!-- 検索と並べ替えのボタン -->
-      <%= submit_tag '検索・並べ替え', class: 'btn btn-secondary' %>
+      <%= submit_tag '検索・並べ替え', class: 'btn btn-warning' %>
     <% end %>
   </div>
 

@@ -14,8 +14,8 @@ class User < ApplicationRecord
   before_destroy :remove_from_groups
 
   enum role: { employee: 0, staff: 1, leader: 2 }
-  paginates_per 2 # 1ページあたり5件表示（イベント）
-  paginates_per 2 # 1ページあたり5件表示（投稿）
+  paginates_per 2 
+  paginates_per 2 
   def guest?
     self.role == 'guest'  
   end
