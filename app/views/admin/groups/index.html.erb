@@ -1,7 +1,5 @@
 <div class="container d-flex flex-column align-items-center mt-4">
   <h1 class="mb-4 display-4">グループ管理ページ</h1>
-
-  <!-- ボタン: 中央寄せ -->
   <div class="mb-4 text-center">
     <div class="mb-3">
       <%= link_to '管理者トップページに戻る', admin_root_path, class: 'btn btn-secondary' %>
@@ -10,16 +8,13 @@
       <%= link_to '新規グループ作成', new_admin_group_path, class: 'btn btn-primary' %>
     </div>
   </div>
-
   <div class="mb-3 w-50">
     <%= form_with url: admin_groups_path, method: :get, class: 'd-flex' do %>
       <%= select_tag :search, options_for_select(@groups.pluck(:name), params[:search]), 
         include_blank: 'グループを選択', class: 'form-control me-2' %>
-      <%= submit_tag '検索', class: 'btn btn-secondary' %>
+      <%= submit_tag '検索', class: 'btn btn-primary' %>
     <% end %>
   </div>
-
-  <!-- グループ一覧 -->
   <div class="table-responsive w-75 mb-4 bg-white border p-3">
     <table class="table table-bordered text-center">
       <thead class="bg-dark text-white">
