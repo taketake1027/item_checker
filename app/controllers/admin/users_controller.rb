@@ -17,7 +17,7 @@ class Admin::UsersController < ApplicationController
     if params[:role].present?
       @users = @users.where(role: params[:role])
     end
-    @users = @users.page(params[:page]).per(5)  
+    @users = @users.page(params[:page]).per(4)  
   end
 
   def show
