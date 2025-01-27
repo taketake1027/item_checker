@@ -1,12 +1,10 @@
 <div class="container mt-4">
   <h2 class="text-center mb-4 display-4">ユーザー管理ページ</h2>
 
-  <!-- 管理者トップページに戻るボタン -->
   <div class="text-center mb-3">
     <%= link_to '管理者トップページに戻る', admin_root_path, class: 'btn btn-secondary' %>
   </div>
 
-  <!-- 検索フォーム -->
   <%= form_with(url: admin_users_path, method: :get, local: true, class: 'row justify-content-center g-3 mb-4') do %>
     <div class="col-auto">
       <%= select_tag :role, options_for_select([["役職で検索", ""]]+User.roles.keys.map { |role| [role_to_japanese(role), role] }, params[:role]), class: "form-select" %>
@@ -45,10 +43,8 @@
                   <% end %>
                 </div>
                 <div class="btn-group" role="group">
-                  <!-- 詳細ページへのリンク -->
                   <%= link_to '詳細', admin_user_path(user), class: "btn btn-sm btn-info" %>
-                  <!-- 削除ボタン -->
-                  <%= button_to '削除', admin_user_path(user), method: :delete, 
+                  <%= link_to '削除', admin_user_path(user), method: :delete, 
                         data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-danger" %>
                 </div>
               </td>
@@ -59,7 +55,6 @@
     </div>
   </div>
 
-  <!-- ページネーション -->
   <div class="d-flex justify-content-center mt-3">
     <%= paginate @users, class: 'pagination' %>
   </div>
