@@ -9,7 +9,7 @@
   <div class="mb-3 w-50">
     <%= form_with url: admin_events_path, method: :get, class: 'd-flex' do %>
       <%= select_tag :event_id, options_from_collection_for_select(Event.all, :id, :name, selected: params[:event_id]), include_blank: "イベントを選択", class: 'form-control me-2' %>
-      <%= submit_tag '検索', class: 'btn btn-secondary' %>
+      <%= submit_tag '検索', class: 'btn btn-success' %>
     <% end %>
   </div>
   <div class="event-table-container table-responsive w-75 mb-4 bg-white border p-3">

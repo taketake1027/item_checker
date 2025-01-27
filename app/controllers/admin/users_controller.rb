@@ -4,10 +4,7 @@ class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:update_role, :destroy]
 
   def index
-    @user = User.find_by(id: params[:id]) # find_byを使ってユーザーが存在しない場合はnilを返す
-    @users = User.all
-    @users = User.where.not(email: 'guest@example.com')
-    # 検索機能
+    @users = User.where.not(email: 'guest@example.com') # ゲストユーザー除外
     if params[:name].present?
       @users = @users.where('name LIKE ?', "%#{params[:name]}%")
     end
@@ -17,7 +14,8 @@ class Admin::UsersController < ApplicationController
     if params[:role].present?
       @users = @users.where(role: params[:role])
     end
-    @users = @users.page(params[:page]).per(4)  
+
+    @users = @users.page(params[:page]).per(4)
   end
 
   def show
@@ -29,7 +27,6 @@ class Admin::UsersController < ApplicationController
     @posts = @user.posts.page(params[:page]).per(2)
   end
   
-  # ユーザーを更新
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
@@ -39,14 +36,12 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  # ユーザーを削除
   def destroy
     @user = User.find(params[:id])
     @user.destroy
     redirect_to admin_users_path, notice: 'ユーザーが削除されました。'
   end
 
-  # 役職の更新
   def update_role
     if @user.update(role: params[:user][:role])
       flash[:notice] = '役職が更新されました。'
@@ -68,7 +63,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find_by(id: params[:id]) # find_byを使ってユーザーが存在しない場合はnilを返す
+    @user = User.find_by(id: params[:id])
     unless @user
       redirect_to admin_users_path, alert: '指定されたユーザーは存在しません。'
     end
