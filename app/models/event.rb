@@ -6,7 +6,7 @@ class Event < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :items, dependent: :destroy
   has_many :users, through: :group_participations
-
+  has_many :event_requests
   # 開始日時が終了日時より前でないことを確認するバリデーション
   validate :end_date_after_start_date
   validates :name, presence: true

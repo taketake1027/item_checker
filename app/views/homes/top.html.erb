@@ -9,7 +9,9 @@
       <% end %>
     </div>
   </div>
+
   <h2 class="my-3 text-dark">イベント一覧</h2>
+
   <div class="row">
     <% @events.each do |event| %>
       <div class="col-md-4 mb-3">
@@ -21,21 +23,24 @@
               <strong>終了日:</strong> <%= event.end_date.strftime('%Y-%m-%d') if event.end_date %><br>
               <strong>場所:</strong> <%= event.location %>
             </p>
-            <% if current_user.events.include?(event) %>
-              <!-- すでに参加済みの場合 -->
+
+            <% if current_user.event_requests.exists?(event_id: event.id, status: 'approved') || current_user.events.include?(event) %>
+              <!-- 参加済み（承認済みまたは招待された場合） -->
               <%= link_to '詳細を見る', event_path(event), class: 'btn btn-primary' %>
-            <% elsif current_user.event_requests.exists?(event_id: event.id) %>
+            <% elsif current_user.event_requests.exists?(event_id: event.id, status: 'pending') %>
               <!-- 申請中の場合 -->
               <button class="btn btn-secondary" disabled>申請中</button>
+              <%= button_to '参加申請取り消し', event_event_request_path(event, current_user.event_requests.find_by(event_id: event.id)), method: :delete, class: 'btn btn-danger', data: { confirm: '本当に申請を取り消しますか？' } %>
             <% else %>
               <!-- 参加申請がまだの場合 -->
-              <%= button_to '参加申請', event_event_requests_path(event), method: :post, class: 'btn btn-light' %>
+              <%= button_to '参加申請', event_event_requests_path(event), method: :post, class: 'btn btn-light', data: { confirm: 'このイベントに参加申請をしますか？' } %>
             <% end %>
           </div>
         </div>
       </div>
     <% end %>
   </div>
+
   <div class="d-flex justify-content-center mb-3">
     <%= paginate @events, class: 'pagination' %>
   </div>

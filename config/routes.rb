@@ -4,25 +4,32 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     get 'homes/top', to: 'homes#top'
     resources :items
-
+  
     resources :events do
       resources :posts, only: [:index, :show, :destroy] do
         resources :comments, only: [:index, :show, :destroy]
       end
       resources :comments, only: [:index, :destroy], controller: 'event_comments'
+      resources :event_requests, only: [] do
+        member do
+          patch :approve
+          patch :reject
+        end
+      end
     end
-  
+    
     resources :groups do
       post 'add_user_to_group', on: :member
       resources :group_users, only: [:destroy], as: 'remove_user'
     end
-
+  
     resources :users, only: [:index, :show, :edit, :update, :destroy] do
       member do
         patch 'update_role', to: 'users#update_role'
       end
     end
   end
+  
 
   # ユーザー用のDevise設定
   devise_for :users
@@ -42,7 +49,7 @@ Rails.application.routes.draw do
 
   # イベント関連（アイテム一覧をネスト）
   resources :events do
-    resources :event_requests, only: :create
+    resources :event_requests, only: [:create, :destroy]
     resources :items, only: [:index, :show]
     resources :posts, only: [:show, :create, :destroy] do
       resources :likes, only: [:create, :destroy]
