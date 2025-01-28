@@ -18,7 +18,7 @@
           <tr>
             <td><%= request.user.name %></td>
             <td><%= request.event.name %></td>
-            <td><%= request.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+            <td><%= request.created_at.in_time_zone('Asia/Tokyo').strftime('%Y-%m-%d %H:%M') %></td>
             <td>
               <%= button_to '承認', approve_admin_event_event_request_path(request.event_id, request), method: :patch, class: 'btn btn-success btn-sm' %>
               <%= button_to '却下', reject_admin_event_event_request_path(request.event_id, request), method: :patch, class: 'btn btn-danger btn-sm' %>
@@ -32,21 +32,20 @@
   <% end %>
 </div>
 
-  <nav class="d-flex justify-content-center">
-    <ul class="list-group list-group-flush w-75 shadow-lg p-3 bg-white rounded">
-      <li class="list-group-item text-center">
-        <%= link_to 'グループ管理', admin_groups_path, class: "btn btn-primary w-100 py-3" %>
-      </li>
-      <li class="list-group-item text-center">
-        <%= link_to 'イベント管理', admin_events_path, class: "btn btn-success w-100 py-3" %>
-        <p class="mt-2 text-muted">イベントに紐づいた投稿やコメントの確認もここから可能です。</p>
-      </li>
-      <li class="list-group-item text-center">
-        <%= link_to 'アイテム管理', admin_items_path, class: "btn btn-warning w-100 py-3" %>
-      </li>
-      <li class="list-group-item text-center">
-        <%= link_to 'ユーザー管理', admin_users_path, class: "btn btn-danger w-100 py-3" %>
-      </li>
-    </ul>
-  </nav>
-</div>
+<nav class="d-flex justify-content-center">
+  <ul class="list-group list-group-flush w-75 shadow-lg p-3 bg-white rounded">
+    <li class="list-group-item text-center">
+      <%= link_to 'グループ管理', admin_groups_path, class: "btn btn-primary w-100 py-3" %>
+    </li>
+    <li class="list-group-item text-center">
+      <%= link_to 'イベント管理', admin_events_path, class: "btn btn-success w-100 py-3" %>
+      <p class="mt-2 text-muted">イベントに紐づいた投稿やコメントの確認もここから可能です。</p>
+    </li>
+    <li class="list-group-item text-center">
+      <%= link_to 'アイテム管理', admin_items_path, class: "btn btn-warning w-100 py-3" %>
+    </li>
+    <li class="list-group-item text-center">
+      <%= link_to 'ユーザー管理', admin_users_path, class: "btn btn-danger w-100 py-3" %>
+    </li>
+  </ul>
+</nav>
