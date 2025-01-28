@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :events, through: :groups
   has_many :likes, dependent: :destroy
   has_many :liked_posts, through: :likes, source: :post
+  has_many :event_requests
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   validates :name, presence: true

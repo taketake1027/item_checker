@@ -42,6 +42,7 @@ Rails.application.routes.draw do
 
   # イベント関連（アイテム一覧をネスト）
   resources :events do
+    resources :event_requests, only: :create
     resources :items, only: [:index, :show]
     resources :posts, only: [:show, :create, :destroy] do
       resources :likes, only: [:create, :destroy]
