@@ -1,11 +1,6 @@
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
-  <div class="card shadow-lg p-5" style="max-width: 800px; width: 100%; background-color: rgba(255, 255, 255, 0.95);">
+  <div class="card shadow-lg p-5 d-flex flex-column" style="max-width: 800px; width: 100%; background-color: rgba(255, 255, 255, 0.95);">
     
-    <!-- ボタンをカードの上部に配置 -->
-    <div class="d-flex justify-content-center mb-4">
-      <%= link_to 'イベント一覧に戻る', homes_top_path, class: 'btn btn-primary btn-lg w-100' %>
-    </div>
-
     <h1 class="my-4 text-center text-primary" style="font-size: 2.5rem;">このアプリについて</h1>
 
     <p class="lead text-center mb-4" style="font-size: 1.25rem;">アイテムチェッカーは、イベントごとのアイテムリストを管理し、準備状況を可視化するツールです。</p>
@@ -17,6 +12,27 @@
       <li>🎓 <strong>学校行事の準備物チェック</strong></li>
     </ul>
 
+    <div class="alert alert-warning text-center mb-4" role="alert">
+      <strong>重要:</strong> イベントに参加していないと、以下の主要な機能をご利用いただけません：
+    </div>
+
+    <ul class="list-unstyled text-center mb-4" style="font-size: 1.1rem;">
+      <li class="fw-bold">投稿の作成</li>
+      <li class="fw-bold">コメントの投稿</li>
+      <li class="fw-bold">いいねの付け外し</li>
+      <li class="fw-bold">アイテムの在庫確認</li>
+    </ul>
+
     <p class="text-center mb-0" style="font-size: 1.15rem;">管理者と参加者が協力して効率的に準備を進めることができます。</p>
+
+    <!-- 参加申請の案内 -->
+    <div class="alert alert-info text-center mt-4" role="alert">
+      <strong>注意:</strong> 管理者に招待してもらっていない場合は、参加申請を行ってください。
+    </div>
+
+    <!-- ボタンをカードの真下に配置 -->
+    <div class="d-flex justify-content-center mt-auto">
+      <%= link_to 'イベント一覧に戻る', homes_top_path, class: 'btn btn-primary btn-lg w-100' %>
+    </div>
   </div>
 </div>
