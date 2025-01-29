@@ -23,6 +23,7 @@
           <th>アイテム名</th>
           <th>進捗状況</th>
           <th>詳細</th>
+          <th>準備申請</th>
         </tr>
       </thead>
       <tbody>
@@ -45,11 +46,22 @@
               <td>
                 <%= link_to '詳細', event_item_path(@event, item), class: 'btn btn-info btn-sm' %>
               </td>
+
+              <!-- 準備申請ボタン -->
+              <td>
+                <% if item.status == '未完了' && !item.item_requests.exists?(user_id: current_user.id) %>
+                  <%= button_to '準備申請', create_request_event_item_path(item.event.id, item.id), method: :post, class: 'btn btn-warning btn-sm' %>
+                <% elsif item.item_requests.exists?(user_id: current_user.id) %>
+                  <span class="text-success">申請済み</span>
+                  <%= button_to '申請取り消し', item_request_path(item.event.id, item.id), method: :delete, class: 'btn btn-danger btn-sm' %>
+                <% end %>
+              </td>
+              </td>
             </tr>
           <% end %>
         <% else %>
           <tr>
-            <td colspan="3">検索結果が見つかりませんでした。</td>
+            <td colspan="4">検索結果が見つかりませんでした。</td>
           </tr>
         <% end %>
       </tbody>

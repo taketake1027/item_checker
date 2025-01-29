@@ -30,7 +30,6 @@ Rails.application.routes.draw do
     end
   end
   
-
   # ユーザー用のDevise設定
   devise_for :users
 
@@ -50,11 +49,22 @@ Rails.application.routes.draw do
   # イベント関連（アイテム一覧をネスト）
   resources :events do
     resources :event_requests, only: [:create, :destroy]
-    resources :items, only: [:index, :show]
+    resources :items, only: [:index, :show] do
+      # アイテムリクエストの作成アクション
+      post 'create_request', on: :member
+    end
     resources :posts, only: [:show, :create, :destroy] do
       resources :likes, only: [:create, :destroy]
       post 'create_comment', on: :member
       resources :comments, only: [:create, :destroy]
+    end
+  end
+
+  # アイテムリクエスト関連
+  resources :item_requests, only: [:create, :destroy], param: :id do
+    # event_idを渡すルートのために、アイテムリクエストのdestroyアクションでevent_idを受け取れるようにする
+    member do
+      delete :destroy, to: 'item_requests#destroy', param: :id
     end
   end
 

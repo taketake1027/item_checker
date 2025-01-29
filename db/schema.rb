@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_01_28_010626) do
+ActiveRecord::Schema.define(version: 2025_01_29_210606) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2025_01_28_010626) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
+    t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -126,6 +126,15 @@ ActiveRecord::Schema.define(version: 2025_01_28_010626) do
     t.index ["name"], name: "index_groups_on_name"
   end
 
+  create_table "item_requests", force: :cascade do |t|
+    t.integer "item_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_item_requests_on_item_id"
+    t.index ["user_id"], name: "index_item_requests_on_user_id"
+  end
+
   create_table "items", force: :cascade do |t|
     t.string "name", null: false
     t.string "introduction", null: false
@@ -180,6 +189,8 @@ ActiveRecord::Schema.define(version: 2025_01_28_010626) do
   add_foreign_key "event_members", "users"
   add_foreign_key "event_requests", "events"
   add_foreign_key "event_requests", "users"
+  add_foreign_key "item_requests", "items"
+  add_foreign_key "item_requests", "users"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
   add_foreign_key "posts", "events"
