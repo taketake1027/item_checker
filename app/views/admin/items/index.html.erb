@@ -44,8 +44,6 @@
                     <span class="text-dark"><%= item.prepared_amount %> 個 準備完了</span>
                   <% elsif item.status == '未完了' %>
                     <span class="text-dark"><%= "#{item.prepared_amount}/#{item.amount}" %> 個 準備中</span>
-                  <% else %>
-                    <span class="text-muted">進捗なし</span>
                   <% end %>
                 </td>
                 <td>
