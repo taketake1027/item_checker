@@ -17,10 +17,10 @@
       <!-- 進捗状況 -->
       <div class="mb-3 p-3 bg-white rounded shadow-sm">
         <p><strong>進捗状況:</strong>
-          <% if @item.status == '完了' %>
-            <span class="text-success"><%= @item.prepared_amount %> 個 準備完了</span>
-          <% elsif @item.status == '未完了' %>
-            <span class="text-warning"><%= "#{@item.prepared_amount}/#{@item.amount}" %> 個 準備中</span>
+          <% if @item.prepared_amount >= @item.amount || (@item.item_requests.find_by(user_id: current_user.id)&.status == 'approved') %>
+            <span class="fw-bold"><%= "#{@item.amount}" %> 個 準備完了</span>
+          <% else %>
+            <span class="fw-bold"><%= "#{@item.prepared_amount}/#{@item.amount}" %> 個 準備中</span>
           <% end %>
         </p>
       </div>

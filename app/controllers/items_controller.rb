@@ -32,4 +32,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])  # アイテムを取得
     @event = @item.event            # アイテムに紐づくイベントを取得
   end
+
+  
+  
 end
