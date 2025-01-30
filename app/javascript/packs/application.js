@@ -16,13 +16,4 @@ Rails.start()                      // 正しくRailsをスタート
 Turbolinks.start()
 ActiveStorage.start()
 
-document.addEventListener("DOMContentLoaded", function() {
-  const buttons = document.querySelectorAll(".btn-warning");
-  buttons.forEach(function(button) {
-    button.addEventListener("click", function(event) {
-      if (!confirm("準備申請を行いますか？この操作は取り消せません。")) {
-        event.preventDefault();
-      }
-    });
-  });
-});
+

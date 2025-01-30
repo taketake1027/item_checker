@@ -1,88 +1,61 @@
 <div class="container my-4 event-items">
   <h1 class="text-center mb-4"><%= @event.name %> のアイテム一覧</h1>
 
-  <!-- 検索とソートフォーム -->
   <div class="mb-3 text-center">
     <%= form_with url: event_items_path(@event), method: :get, class: 'd-flex justify-content-center' do %>
-      <!-- アイテム名検索 -->
       <%= text_field_tag :search, params[:search], placeholder: "アイテム名で検索", class: 'form-control w-50 me-2' %>
-
-      <!-- 進捗状況でソート -->
       <%= select_tag :sort_by, options_for_select([['新着順', 'newest'], ['準備完了', 'complete'], ['準備中', 'incomplete']], selected: params[:sort_by]), class: 'form-control w-50 me-2' %>
-
-      <!-- 検索と並べ替えのボタン -->
       <%= submit_tag '検索・並べ替え', class: 'btn btn-secondary' %>
     <% end %>
   </div>
 
-  <!-- アイテム一覧テーブル -->
   <div class="table-responsive">
-    <table class="table table-bordered table-striped table-hover text-center border border-white">
+    <table class="table table-bordered table-striped table-hover text-center border border-light">
       <thead class="bg-dark text-white">
         <tr>
-          <th class="border-white">アイテム名</th>
-          <th class="border-white">進捗状況</th>
-          <th class="border-white">詳細</th>
-          <th class="border-white">アイテム準備申請</th>
+          <th class="border-light">アイテム名</th>
+          <th class="border-light">進捗状況</th>
+          <th class="border-light">詳細</th>
+          <th class="border-light">アイテム準備申請</th>
         </tr>
       </thead>
       <tbody>
-  <% if @items.any? %>
-    <% @items.each do |item| %>
-      <tr class="<%= item.prepared_amount >= item.amount || (item.item_requests.find_by(user_id: current_user.id)&.status == 'approved') ? 'bg-success text-dark' : 'bg-white text-dark' %>">
-        <!-- アイテム名 -->
-        <td class="border-white"><%= item.name %></td>
+        <% if @items.any? %>
+          <% @items.each do |item| %>
+            <tr class="<%= item.prepared_amount >= item.amount || (item.item_requests.find_by(user_id: current_user.id)&.status == 'approved') ? 'bg-success text-dark' : 'bg-white text-dark' %>">
+              
+              <td class="border-light"><%= item.name %></td>
 
-        <!-- 進捗状況 -->
-        <td class="border-white">
-          <% if item.prepared_amount >= item.amount || (item.item_requests.find_by(user_id: current_user.id)&.status == 'approved') %>
-            <span class="fw-bold"><%= "#{item.amount}" %> 個 準備完了</span>
-          <% else %>
-            <span class="fw-bold"><%= "#{item.prepared_amount}/#{item.amount}" %> 個 準備中</span>
+              <td class="border-light">
+                <% if item.prepared_amount >= item.amount || (item.item_requests.find_by(user_id: current_user.id)&.status == 'approved') %>
+                  <span class="fw-bold"><%= "#{item.amount}" %> 個 準備完了</span>
+                <% else %>
+                  <span class="fw-bold"><%= "#{item.prepared_amount}/#{item.amount}" %> 個 準備中</span>
+                <% end %>
+              </td>
+
+              <td class="border-light">
+                <%= link_to '詳細', event_item_path(@event, item), class: 'btn btn-info btn-sm' %>
+              </td>
+
+              <td class="border-light">
+                <%= render 'request_button', item: item %>
+              </td>
+            </tr>
           <% end %>
-        </td>
-
-        <!-- 詳細ボタン -->
-        <td class="border-white">
-          <%= link_to '詳細', event_item_path(@event, item), class: 'btn btn-info btn-sm' %>
-        </td>
-
-        <!-- 準備申請ボタン -->
-        <td class="border-white">
-          <% user_request = item.item_requests.find_by(user_id: current_user.id) %>
-          <% if item.prepared_amount < item.amount %>
-            <% if user_request.nil? || user_request.status == 'rejected' %>
-              <!-- 申請がない、または却下されている場合のみ表示 -->
-              <%= button_to '準備申請', create_request_event_item_path(item.event.id, item.id), method: :post, class: 'btn btn-warning btn-sm' %>
-            <% elsif user_request.status == 'pending' %>
-              <!-- 申請中の場合 -->
-              <span class="text-success">申請済み（承認待ち）</span>
-              <%= button_to '申請取り消し', destroy_request_event_item_path(item.event.id, item.id), method: :delete, class: 'btn btn-danger btn-sm' %>
-            <% elsif user_request.status == 'approved' %>
-              <!-- 承認済みの場合 -->
-              <span class="text-primary">承認済み</span>
-            <% end %>
-          <% else %>
-            <span class="text-success">準備完了</span>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  <% else %>
-    <tr>
-      <td colspan="4" class="border-white text-dark">検索結果が見つかりませんでした。</td>
-    </tr>
-  <% end %>
-</tbody>
+        <% else %>
+          <tr>
+            <td colspan="4" class="border-light text-dark">検索結果が見つかりませんでした。</td>
+          </tr>
+        <% end %>
+      </tbody>
     </table>
   </div>
 
-  <!-- ページネーション -->
   <div class="mt-3 d-flex justify-content-center">
     <%= paginate @items %>
   </div>
 
-  <!-- 画面下部の戻るボタン -->
   <div class="text-center mt-4">
     <%= link_to '戻る', event_path(@event), class: 'btn btn-secondary' %>
   </div>

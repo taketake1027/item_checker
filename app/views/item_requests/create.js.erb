@@ -1,4 +1,11 @@
-// ボタンの内容を更新
-$("#request-button-<%= @item.id %>").replaceWith('<span class="text-success">申請済み（承認待ち）</span>' +
-  '<%= j button_to "申請取り消し", event_item_item_request_path(@item.event.id, @item.id), method: :delete, remote: true, class: "btn btn-danger btn-sm", id: "request-button-#{@item.id}" %>'
-);
+// app/views/item_requests/create.js.erb
+
+// 申請ボタンを「申請済み」に変更
+$("#request-button-<%= @item.id %>").replaceWith('<button class="btn btn-secondary btn-sm" disabled>申請済み（承認待ち）</button>');
+
+// アイテムの進捗状況が「準備完了」に切り替わる場合
+if (<%= @item.prepared_amount %> >= <%= @item.amount %>) {
+  $(".item-status-<%= @item.id %>").html("<span class='text-success'>準備完了</span>");
+} else {
+  $(".item-status-<%= @item.id %>").html("<span class='text-success'>申請済み（承認待ち）</span>");
+}

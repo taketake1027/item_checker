@@ -57,9 +57,7 @@ Rails.application.routes.draw do
   resources :events do
     resources :event_requests, only: [:create, :destroy]
     resources :items, only: [:index, :show] do
-      # アイテムリクエストの作成アクション
-      post 'create_request', on: :member, to: 'item_requests#create' 
-      delete 'destroy_request', on: :member, to: 'item_requests#destroy' 
+      resources :item_requests, only: [:create, :destroy]  # create と destroy アクションのパス
     end
     resources :posts, only: [:show, :create, :destroy] do
       resources :likes, only: [:create, :destroy]
