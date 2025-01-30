@@ -65,6 +65,7 @@ class Admin::ItemsController < ApplicationController
   def destroy
     @item = Item.find_by(id: params[:id])
     if @item
+      @item.item_requests.destroy_all  # ItemRequestを削除
       @item.destroy
       redirect_to admin_items_path, notice: 'アイテムが正常に削除されました。'
     else
