@@ -4,24 +4,20 @@
     <%= link_to '管理者トップページに戻る', admin_root_path, class: 'btn btn-secondary' %>
   </div>
   <div class="mb-3 text-center">
-    <%= link_to '新規アイテム追加', new_admin_item_path, class: 'btn btn-warning' %>
+    <%= link_to '新規アイテム追加', new_admin_item_path, class: 'btn btn-primary' %>
   </div>
 
-  <!-- 検索とソートフォーム -->
   <div class="mb-3 text-center">
     <%= form_with url: admin_items_path, method: :get, class: 'd-flex justify-content-center' do %>
-      <!-- イベントで検索フォーム -->
+
       <%= select_tag :event_id, options_from_collection_for_select(Event.all, :id, :name, selected: params[:event_id]), include_blank: "アイテムに紐づくイベントを選択", class: 'form-control w-25 me-2' %>
 
-      <!-- ソートオプション -->
       <%= select_tag :sort_by, options_for_select([['新着順', 'newest'], ['準備未完了', 'incomplete'], ['準備完了', 'complete']], selected: params[:sort_by]), class: 'form-control w-25 me-2' %>
 
-      <!-- 検索と並べ替えのボタン -->
-      <%= submit_tag '検索・並べ替え', class: 'btn btn-warning' %>
+      <%= submit_tag '検索・並べ替え', class: 'btn btn-primary' %>
     <% end %>
   </div>
 
-  <!-- アイテム一覧テーブル -->
   <div class="d-flex justify-content-center">
     <div class="table-responsive w-75 mb-4 bg-white border p-3">
       <table class="table table-bordered table-striped table-hover text-center">
@@ -40,10 +36,10 @@
                 <td><%= item.name %></td>
                 <td><%= item.event ? item.event.name : '未設定' %></td>
                 <td>
-                  <% if item.status == '完了' %>
-                    <span class="text-dark"><%= item.prepared_amount %> 個 準備完了</span>
-                  <% elsif item.status == '未完了' %>
-                    <span class="text-dark"><%= "#{item.prepared_amount}/#{item.amount}" %> 個 準備中</span>
+                  <% if item.prepared_amount >= item.amount || (item.item_requests.find_by(user_id: current_user.id)&.status == 'approved') %>
+                    <span class="fw-bold"><%= "#{item.amount}" %> 個 準備完了</span>
+                  <% else %>
+                    <span class="fw-bold"><%= "#{item.prepared_amount}/#{item.amount}" %> 個 準備中</span>
                   <% end %>
                 </td>
                 <td>
