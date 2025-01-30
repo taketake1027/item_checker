@@ -33,13 +33,14 @@
   <% end %>
 
   <!-- アイテム申請の未処理リスト -->
-<h2 class="my-4">未処理のアイテム申請</h2>
+<h2 class="my-4">未処理のアイテム準備申請</h2>
 <% if @pending_item_requests.present? && @pending_item_requests.any? %>
   <table class="table table-striped table-hover">
     <thead>
       <tr>
         <th>申請者</th>
         <th>アイテム名</th>
+        <th>イベント名</th> <!-- 追加: イベント名 -->
         <th>申請日</th>
         <th>操作</th>
       </tr>
@@ -49,6 +50,7 @@
         <tr>
           <td><%= request.user.name %></td>
           <td><%= request.item.name %></td>
+          <td><%= request.item.event.name %></td> <!-- 追加: イベント名を表示 -->
           <td><%= request.created_at.in_time_zone('Asia/Tokyo').strftime('%Y-%m-%d %H:%M') %></td>
           <td>
             <%= button_to '承認', approve_admin_item_item_request_path(request.item_id, request), method: :patch, class: 'btn btn-success btn-sm' %>
@@ -61,7 +63,6 @@
 <% else %>
   <p class="text-center text-muted">未処理の申請はありません。</p>
 <% end %>
-
 </div>
 
 <!-- 管理者用ナビゲーションメニュー -->

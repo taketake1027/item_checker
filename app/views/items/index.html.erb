@@ -23,7 +23,7 @@
           <th class="border-white">アイテム名</th>
           <th class="border-white">進捗状況</th>
           <th class="border-white">詳細</th>
-          <th class="border-white">準備申請</th>
+          <th class="border-white">アイテム準備申請</th>
         </tr>
       </thead>
       <tbody>
@@ -52,11 +52,14 @@
           <% user_request = item.item_requests.find_by(user_id: current_user.id) %>
           <% if item.prepared_amount < item.amount %>
             <% if user_request.nil? || user_request.status == 'rejected' %>
+              <!-- 申請がない、または却下されている場合のみ表示 -->
               <%= button_to '準備申請', create_request_event_item_path(item.event.id, item.id), method: :post, class: 'btn btn-warning btn-sm' %>
             <% elsif user_request.status == 'pending' %>
+              <!-- 申請中の場合 -->
               <span class="text-success">申請済み（承認待ち）</span>
               <%= button_to '申請取り消し', destroy_request_event_item_path(item.event.id, item.id), method: :delete, class: 'btn btn-danger btn-sm' %>
             <% elsif user_request.status == 'approved' %>
+              <!-- 承認済みの場合 -->
               <span class="text-primary">承認済み</span>
             <% end %>
           <% else %>
