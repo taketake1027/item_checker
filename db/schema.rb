@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(version: 2025_01_29_210606) do
   create_table "item_requests", force: :cascade do |t|
     t.integer "item_id", null: false
     t.integer "user_id", null: false
+    t.string "status", default: "pending"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["item_id"], name: "index_item_requests_on_item_id"

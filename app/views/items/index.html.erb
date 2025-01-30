@@ -17,54 +17,60 @@
 
   <!-- アイテム一覧テーブル -->
   <div class="table-responsive">
-    <table class="table table-bordered table-striped table-hover text-center">
+    <table class="table table-bordered table-striped table-hover text-center border border-white">
       <thead class="bg-dark text-white">
         <tr>
-          <th>アイテム名</th>
-          <th>進捗状況</th>
-          <th>詳細</th>
-          <th>準備申請</th>
+          <th class="border-white">アイテム名</th>
+          <th class="border-white">進捗状況</th>
+          <th class="border-white">詳細</th>
+          <th class="border-white">準備申請</th>
         </tr>
       </thead>
       <tbody>
-        <% if @items.any? %>
-          <% @items.each do |item| %>
-            <tr class="<%= 'bg-success' if item.status == '完了' %> <%= 'bg-light' if item.status == '未完了' %>">
-              <!-- アイテム名 -->
-              <td><%= item.name %></td>
+  <% if @items.any? %>
+    <% @items.each do |item| %>
+      <tr class="<%= item.prepared_amount >= item.amount || (item.item_requests.find_by(user_id: current_user.id)&.status == 'approved') ? 'bg-success text-dark' : 'bg-white text-dark' %>">
+        <!-- アイテム名 -->
+        <td class="border-white"><%= item.name %></td>
 
-              <!-- 進捗状況 -->
-              <td>
-                <% if item.status == '完了' %>
-                  <span class="text-dark"><%= item.prepared_amount %> 個 準備完了</span>
-                <% elsif item.status == '未完了' %>
-                  <span class="text-dark"><%= "#{item.prepared_amount}/#{item.amount}" %> 個 準備中</span>
-                <% end %>
-              </td>
-
-              <!-- 詳細ボタン -->
-              <td>
-                <%= link_to '詳細', event_item_path(@event, item), class: 'btn btn-info btn-sm' %>
-              </td>
-
-              <!-- 準備申請ボタン -->
-              <td>
-                <% if item.status == '未完了' && !item.item_requests.exists?(user_id: current_user.id) %>
-                  <%= button_to '準備申請', create_request_event_item_path(item.event.id, item.id), method: :post, class: 'btn btn-warning btn-sm' %>
-                <% elsif item.item_requests.exists?(user_id: current_user.id) %>
-                  <span class="text-success">申請済み</span>
-                  <%= button_to '申請取り消し', item_request_path(item.event.id, item.id), method: :delete, class: 'btn btn-danger btn-sm' %>
-                <% end %>
-              </td>
-              </td>
-            </tr>
+        <!-- 進捗状況 -->
+        <td class="border-white">
+          <% if item.prepared_amount >= item.amount || (item.item_requests.find_by(user_id: current_user.id)&.status == 'approved') %>
+            <span class="fw-bold"><%= "#{item.amount}" %> 個 準備完了</span>
+          <% else %>
+            <span class="fw-bold"><%= "#{item.prepared_amount}/#{item.amount}" %> 個 準備中</span>
           <% end %>
-        <% else %>
-          <tr>
-            <td colspan="4">検索結果が見つかりませんでした。</td>
-          </tr>
-        <% end %>
-      </tbody>
+        </td>
+
+        <!-- 詳細ボタン -->
+        <td class="border-white">
+          <%= link_to '詳細', event_item_path(@event, item), class: 'btn btn-info btn-sm' %>
+        </td>
+
+        <!-- 準備申請ボタン -->
+        <td class="border-white">
+          <% user_request = item.item_requests.find_by(user_id: current_user.id) %>
+          <% if item.prepared_amount < item.amount %>
+            <% if user_request.nil? || user_request.status == 'rejected' %>
+              <%= button_to '準備申請', create_request_event_item_path(item.event.id, item.id), method: :post, class: 'btn btn-warning btn-sm' %>
+            <% elsif user_request.status == 'pending' %>
+              <span class="text-success">申請済み（承認待ち）</span>
+              <%= button_to '申請取り消し', destroy_request_event_item_path(item.event.id, item.id), method: :delete, class: 'btn btn-danger btn-sm' %>
+            <% elsif user_request.status == 'approved' %>
+              <span class="text-primary">承認済み</span>
+            <% end %>
+          <% else %>
+            <span class="text-success">準備完了</span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  <% else %>
+    <tr>
+      <td colspan="4" class="border-white text-dark">検索結果が見つかりませんでした。</td>
+    </tr>
+  <% end %>
+</tbody>
     </table>
   </div>
 

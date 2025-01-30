@@ -3,8 +3,15 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'homes#top'
     get 'homes/top', to: 'homes#top'
-    resources :items
-  
+    resources :items do
+      resources :item_requests, only: [] do
+        member do
+          patch :approve, to: 'items#approve_item_request'
+          patch :reject, to: 'items#reject_item_request'
+        end
+      end
+    end
+
     resources :events do
       resources :posts, only: [:index, :show, :destroy] do
         resources :comments, only: [:index, :show, :destroy]
@@ -51,20 +58,13 @@ Rails.application.routes.draw do
     resources :event_requests, only: [:create, :destroy]
     resources :items, only: [:index, :show] do
       # アイテムリクエストの作成アクション
-      post 'create_request', on: :member
+      post 'create_request', on: :member, to: 'item_requests#create' 
+      delete 'destroy_request', on: :member, to: 'item_requests#destroy' 
     end
     resources :posts, only: [:show, :create, :destroy] do
       resources :likes, only: [:create, :destroy]
       post 'create_comment', on: :member
       resources :comments, only: [:create, :destroy]
-    end
-  end
-
-  # アイテムリクエスト関連
-  resources :item_requests, only: [:create, :destroy], param: :id do
-    # event_idを渡すルートのために、アイテムリクエストのdestroyアクションでevent_idを受け取れるようにする
-    member do
-      delete :destroy, to: 'item_requests#destroy', param: :id
     end
   end
 

@@ -3,6 +3,7 @@ class Admin::HomesController < ApplicationController
   before_action :authenticate_admin!
 
   def top
-    @pending_requests = EventRequest.includes(:user, :event).where(status: :pending)
+    @pending_requests = EventRequest.pending
+    @pending_item_requests = ItemRequest.where(status: 'pending')
   end
 end

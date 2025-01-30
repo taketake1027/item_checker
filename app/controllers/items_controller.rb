@@ -33,14 +33,6 @@ class ItemsController < ApplicationController
     @event = @item.event            # アイテムに紐づくイベントを取得
   end
 
-  def create_request
-    item = Item.find(params[:id])
-    item_request = item.item_requests.new(user: current_user)
-    
-    if item_request.save
-      redirect_to event_items_path(item.event), notice: '準備申請が完了しました。'
-    else
-      redirect_to event_items_path(item.event), alert: '申請に失敗しました。'
-    end
-  end
+  
+  
 end
