@@ -1,25 +1,21 @@
-<div class="group-edit-container container my-4"> <!-- 新しいクラスを追加 -->
+<div class="group-edit-container container my-4">
   <h1 class="text-center mb-4">グループ情報編集</h1>
 
-  <!-- フォームの周りの枠線のスタイルを改善 -->
   <div class="form-container border p-4 rounded shadow mx-auto" style="max-width: 600px; background-color: white;">
     <%= form_with model: @group, url: admin_group_path(@group), method: :patch, local: true do |f| %>
       
-      <!-- グループ名 -->
       <div class="form-group mb-3">
         <%= f.label :name, 'グループ名', class: 'form-label' %>
         <%= f.text_field :name, class: 'form-control'%>
       </div>
 
-      <!-- グループ紹介 -->
       <div class="form-group mb-3">
         <%= f.label :introduction, 'グループ紹介', class: 'form-label' %>
         <%= f.text_area :introduction, class: 'form-control', rows: 4 %>
       </div>
 
-      <!-- 更新ボタン -->
       <div class="text-center mb-3">
-        <%= f.submit '更新', class: 'btn btn-primary w-100' %> <!-- ボタンの幅を100%に -->
+        <%= f.submit '更新', class: 'btn btn-primary w-100' %>
       </div>
     <% end %>
   </div>

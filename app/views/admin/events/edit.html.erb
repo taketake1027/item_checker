@@ -15,31 +15,26 @@
         </div>
       <% end %>
 
-      <!-- イベント名 -->
       <div class="form-group mb-3" style="background-color: #fff; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
         <%= form.label :name, 'イベント名' %>
         <%= form.text_field :name, class: 'form-control'%>
       </div>
 
-      <!-- イベント紹介 -->
       <div class="form-group mb-3" style="background-color: #fff; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
         <%= form.label :introduction, 'イベント紹介' %>
         <%= form.text_area :introduction, class: 'form-control', rows: 4%>
       </div>
 
-      <!-- 開始日時 -->
       <div class="form-group mb-3" style="background-color: #fff; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
         <%= form.label :start_date, '開始日時' %>
         <%= form.datetime_local_field :start_date, class: 'form-control'%>
       </div>
 
-      <!-- 終了日時 -->
       <div class="form-group mb-3" style="background-color: #fff; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
         <%= form.label :end_date, '終了日時' %>
         <%= form.datetime_local_field :end_date, class: 'form-control' %>
       </div>
 
-      <!-- 場所 -->
       <div class="form-group mb-3" style="background-color: #fff; border: 2px solid #007bff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
         <%= form.label :location, '場所' %>
         <%= form.text_field :location, class: 'form-control'%>
@@ -55,12 +50,10 @@
       <% end %>
     </div>
 
-      <!-- 送信ボタン -->
       <div class="form-group mb-4">
         <%= form.submit 'イベントを更新', class: 'btn btn-primary w-100' %>
       </div>
 
-      <!-- イベント管理ページに戻るボタン -->
       <div class="form-group text-center">
         <%= link_to '戻る', admin_events_path, class: 'btn btn-secondary' %>
       </div>

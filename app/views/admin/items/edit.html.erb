@@ -13,25 +13,21 @@
       </div>
     <% end %>
 
-    <!-- アイテム名 -->
     <div class="form-group mb-3">
       <%= form.label :name, 'アイテム名' %>
       <%= form.text_field :name, class: 'form-control' %>
     </div>
 
-    <!-- アイテム説明 -->
     <div class="form-group mb-3">
       <%= form.label :introduction, 'アイテム説明' %>
       <%= form.text_area :introduction, class: 'form-control' %>
     </div>
 
-    <!-- 準備状態 -->
     <div class="form-group mb-3">
       <%= form.label :status, '準備状態' %>
       <%= form.select :status, options_for_select(['完了', '未完了'], @item.status), class: 'form-control' %>
     </div>
 
-    <!-- 準備数と残数 -->
     <div class="form-group mb-3">
       <%= form.label :prepared_amount, '準備数' %>
       <%= form.number_field :prepared_amount, class: 'form-control', min: 0, max: @item.amount, step: 1, 

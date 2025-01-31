@@ -1,8 +1,6 @@
-<!-- app/views/admin/homes/top.html.erb -->
 <div class="container my-4">
   <h1 class="text-center mb-4 display-4">管理者トップページ</h1>
 
-  <!-- イベント参加申請の未処理リスト -->
   <h2 class="my-4">未処理のイベント参加申請</h2>
   <% if @pending_requests.any? %>
     <table class="table table-striped table-hover">
@@ -32,7 +30,6 @@
     <p class="text-center text-muted">未処理の申請はありません。</p>
   <% end %>
 
-  <!-- アイテム申請の未処理リスト -->
 <h2 class="my-4">未処理のアイテム準備申請</h2>
 <% if @pending_item_requests.present? && @pending_item_requests.any? %>
   <table class="table table-striped table-hover">
@@ -40,7 +37,7 @@
       <tr>
         <th>申請者</th>
         <th>アイテム名</th>
-        <th>イベント名</th> <!-- 追加: イベント名 -->
+        <th>イベント名</th>
         <th>申請日</th>
         <th>操作</th>
       </tr>
@@ -50,7 +47,7 @@
         <tr>
           <td><%= request.user.name %></td>
           <td><%= request.item.name %></td>
-          <td><%= request.item.event.name %></td> <!-- 追加: イベント名を表示 -->
+          <td><%= request.item.event.name %></td>
           <td><%= request.created_at.in_time_zone('Asia/Tokyo').strftime('%Y-%m-%d %H:%M') %></td>
           <td>
             <%= button_to '承認', approve_admin_item_item_request_path(request.item_id, request), method: :patch, class: 'btn btn-success btn-sm' %>
@@ -65,7 +62,6 @@
 <% end %>
 </div>
 
-<!-- 管理者用ナビゲーションメニュー -->
 <nav class="d-flex justify-content-center">
   <ul class="list-group list-group-flush w-75 shadow-lg p-3 bg-white rounded">
     <li class="list-group-item text-center">

@@ -1,5 +1,4 @@
 class Users::SessionsController < Devise::SessionsController
-  # ゲストログイン用のアクション
   def guest_login
     user = User.find_by(email: 'guest@example.com')
     sign_in user
@@ -8,7 +7,6 @@ class Users::SessionsController < Devise::SessionsController
   def create
     # Deviseのデフォルト認証メソッドを使用
     self.resource = warden.authenticate(auth_options)
-    
     # 認証成功時
     if resource
       super

@@ -1,4 +1,3 @@
-# app/controllers/comments_controller.rb
 class CommentsController < ApplicationController
   before_action :set_event
   before_action :set_post

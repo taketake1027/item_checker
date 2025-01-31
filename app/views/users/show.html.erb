@@ -4,17 +4,13 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       
-      <!-- メールアドレス -->
       <div class="card mb-4">
         <div class="card-body">
           <p><strong>メールアドレス:</strong> <%= @user.email %></p>
         </div>
       </div>
 
-      <!-- 2カラムレイアウト: 左にイベント、右に投稿 -->
       <div class="row mt-5">
-        
-        <!-- 招待されているイベント -->
         <div class="col-md-6 mb-4">
           <div class="card">
             <div class="card-body">
@@ -26,7 +22,6 @@
                   <% end %>
                 </ul>
 
-                <!-- ページネーションリンク -->
                 <div class="mt-3">
                   <%= paginate @events %>
                 </div>
@@ -49,7 +44,6 @@
                   <% end %>
                 </ul>
 
-                <!-- ページネーションリンク -->
                 <div class="mt-3">
                   <%= paginate @posts %>
                 </div>
@@ -61,7 +55,6 @@
         </div>
       </div>
 
-      <!-- プロフィール編集ボタン -->
       <% unless current_user.email == 'guest@example.com' %>
         <div class="text-center mt-4">
           <%= link_to 'プロフィール編集', mypage_edit_path(@user), class: 'btn btn-primary btn-lg mb-3' %>
@@ -82,7 +75,6 @@
   </div>
 </div>
 
-<!-- イベント一覧ページへ戻るボタン -->
 <div class="text-center mt-5">
   <%= link_to 'イベント一覧ページに戻る', homes_top_path, class: 'btn btn-outline-primary btn-lg' %>
 </div>
