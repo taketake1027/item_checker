@@ -15,7 +15,6 @@
         </div>
       <% end %>
 
-      <!-- イベント名 -->
       <div class="form-group mb-3">
         <%= form.label :name, 'イベント名' %>
         <%= form.text_field :name, class: 'form-control'%>
@@ -24,7 +23,6 @@
         <% end %>
       </div>
 
-      <!-- イベント紹介 -->
       <div class="form-group mb-3">
         <%= form.label :introduction, 'イベント紹介' %>
         <%= form.text_area :introduction, class: 'form-control', rows: 4 %>
@@ -33,7 +31,6 @@
         <% end %>
       </div>
 
-      <!-- 開始日と時間 -->
       <div class="form-group mb-3">
         <%= form.label :start_date, '開始日時' %>
         <%= form.datetime_local_field :start_date, class: 'form-control' %>
@@ -42,7 +39,6 @@
         <% end %>
       </div>
 
-      <!-- 終了日と時間 -->
       <div class="form-group mb-3">
         <%= form.label :end_date, '終了日時' %>
         <%= form.datetime_local_field :end_date, class: 'form-control' %>
@@ -51,7 +47,6 @@
         <% end %>
       </div>
 
-      <!-- 場所 -->
       <div class="form-group mb-3">
         <%= form.label :location, '場所' %>
         <%= form.text_field :location, class: 'form-control' %>
@@ -60,7 +55,6 @@
         <% end %>
       </div>
 
-      <!-- グループ追加 -->
       <div class="form-group mb-3">
         <%= form.label :group_id, 'グループ' %>
         <%= form.collection_select :group_id, @groups, :id, :name, { include_blank: true }, class: 'form-control' %>
@@ -69,12 +63,10 @@
         <% end %>
       </div>
 
-      <!-- 送信ボタン -->
       <div class="form-group mb-4">
         <%= form.submit 'イベントを作成', class: 'btn btn-primary w-100' %>
       </div>
 
-      <!-- 戻るボタン -->
       <div class="mb-4 text-center">
         <%= link_to '戻る', admin_events_path, class: 'btn btn-secondary' %>
       </div>

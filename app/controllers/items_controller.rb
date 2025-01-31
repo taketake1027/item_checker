@@ -26,7 +26,7 @@ class ItemsController < ApplicationController
      @items = @items.order(created_at: :desc)  # デフォルトで新着順
    end
 
-    @items = @items.page(params[:page])  # ページネーションを適用
+    @items = @items.page(params[:page])
   end
   def show
     @item = Item.find(params[:id])  # アイテムを取得
