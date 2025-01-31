@@ -1,8 +1,8 @@
 <div class="container d-flex justify-content-center">
-  <div class="col-md-8 col-lg-6">
+  <div class="col-md-10 col-lg-8">  <!-- サイズを大きく調整 -->
     <h1 class="text-center mb-4"><%= @event.name %></h1>
 
-    <div class="card" style="border: 2px solid #007bff; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+    <div class="card" style="border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
       <div class="card-body">
         <p><strong>イベント紹介:</strong> <%= @event.introduction %></p>
 
@@ -13,6 +13,7 @@
         <p><strong>場所:</strong> <%= @event.location %></p>
 
         <p><strong>グループ:</strong> <%= @event.group.name if @event.group %></p>
+
         <div class="d-flex justify-content-center">
           <%= link_to '戻る', admin_events_path, class: 'btn btn-secondary' %>
         </div>

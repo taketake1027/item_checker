@@ -38,13 +38,14 @@
         <%= form_with url: add_user_to_group_admin_group_path(@group), method: :post, local: true do |f| %>
           <div class="form-group mb-3">
             <%= f.label :email, '追加するユーザーのメールアドレス', class: 'form-label' %>
-            <%= f.email_field :email, class: 'form-control', placeholder: 'メールアドレスを入力してください' %>
+            <%= f.email_field :email, class: 'form-control' %> <!-- 青枠を消した -->
           </div>
           <div class="text-center">
             <%= f.submit 'ユーザー追加', class: 'btn btn-primary' %>
           </div>
         <% end %>
       </div>
+
       <div class="text-center mt-4">
         <%= link_to '戻る', admin_groups_path, class: 'btn btn-secondary' %>
       </div>

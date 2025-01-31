@@ -5,9 +5,12 @@ class UsersController < ApplicationController
   def show
   @events = @user.events 
   @posts = @user.posts
-
+  @comments = @user.comments
+  @liked_posts = @user.liked_posts 
   @events = @user.events.page(params[:page]).per(5)
   @posts = @user.posts.page(params[:page]).per(5)
+  @comments = @user.comments.page(params[:page]).per(5)
+  @liked_posts = @user.liked_posts.page(params[:page]).per(5)
   end
 
   def edit
