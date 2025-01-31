@@ -5,19 +5,16 @@
         <%= @group.present? ? @group.name : 'グループ名が設定されていません' %>の詳細
       </h1>
 
-      <!-- グループ紹介 -->
       <div class="form-group mb-4">
         <p class="lead text-center">
           <%= @group.introduction.present? ? @group.introduction : '紹介文はありません' %>
         </p>
       </div>
 
-      <!-- グループに追加された人数 -->
       <div class="mb-4">
         <h4>グループに追加された人数: <%= @group.users.count %>人</h4>
       </div>
 
-      <!-- グループメンバー -->
       <h4 class="mb-3">グループメンバー</h4>
       <ul class="d-flex flex-wrap justify-content-start gap-3">
         <% @group_users.each do |group_user| %>
@@ -32,24 +29,23 @@
         <% end %>
       </ul>
 
-      <!-- ページネーション -->
       <div class="pagination justify-content-center mt-3">
         <%= paginate @group_users %>
       </div>
 
-      <!-- ユーザー追加フォーム -->
       <h3 class="mt-5 mb-3">ユーザー追加</h3>
       <div class="mb-4">
         <%= form_with url: add_user_to_group_admin_group_path(@group), method: :post, local: true do |f| %>
           <div class="form-group mb-3">
             <%= f.label :email, '追加するユーザーのメールアドレス', class: 'form-label' %>
-            <%= f.email_field :email, class: 'form-control', placeholder: 'メールアドレスを入力してください' %>
+            <%= f.email_field :email, class: 'form-control' %> <!-- 青枠を消した -->
           </div>
           <div class="text-center">
             <%= f.submit 'ユーザー追加', class: 'btn btn-primary' %>
           </div>
         <% end %>
       </div>
+
       <div class="text-center mt-4">
         <%= link_to '戻る', admin_groups_path, class: 'btn btn-secondary' %>
       </div>

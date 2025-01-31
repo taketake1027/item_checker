@@ -45,6 +45,6 @@ class EventsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:content)  # コメントのパラメーター
+    params.require(:comment).permit(:content)
   end
 end

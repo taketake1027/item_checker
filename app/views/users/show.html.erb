@@ -1,4 +1,4 @@
-<h1 class="text-center mb-5"><%= @user.name %>さんのプロフィール</h1>
+<h1 class="text-center mb-5"><%= @user.name %>さんのmypage</h1>
 
 <div class="container">
   <div class="row justify-content-center">
@@ -11,57 +11,127 @@
         </div>
       </div>
 
-      <!-- 2カラムレイアウト: 左にイベント、右に投稿 -->
-      <div class="row mt-5">
-        
-        <!-- 招待されているイベント -->
-        <div class="col-md-6 mb-4">
-          <div class="card">
-            <div class="card-body">
-              <h3 class="card-title">招待されているイベント</h3>
-              <% if @events.present? %>
-                <ul>
-                  <% @events.each do |event| %>
-                    <li><%= link_to event.name, event_path(event), class: 'text-decoration-none' %> - 開催日: <%= event.start_date.strftime('%Y-%m-%d') if event.start_date %></li>
-                  <% end %>
-                </ul>
-
-                <!-- ページネーションリンク -->
-                <div class="mt-3">
-                  <%= paginate @events %>
-                </div>
-              <% else %>
-                <p>参加しているイベントはありません。</p>
-              <% end %>
+      <!-- 参加しているイベント -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h3 class="card-title">加入済みイベント</h3>
+          <% if @events.present? %>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>イベント名</th>
+                  <th>開催日</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @events.each do |event| %>
+                  <tr>
+                    <td><%= link_to event.name, event_path(event), class: 'text-decoration-none' %></td>
+                    <td><%= event.start_date.strftime('%Y-%m-%d') if event.start_date %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <div class="mt-3">
+              <%= paginate @events %>
             </div>
-          </div>
-        </div>
-
-        <!-- あなたの投稿履歴 -->
-        <div class="col-md-6 mb-4">
-          <div class="card">
-            <div class="card-body">
-              <h3 class="card-title">あなたの投稿履歴</h3>
-              <% if @posts.present? %>
-                <ul>
-                  <% @posts.each do |post| %>
-                    <li><%= link_to post.title, event_post_path(post.event, post), class: 'text-decoration-none' %></li>
-                  <% end %>
-                </ul>
-
-                <!-- ページネーションリンク -->
-                <div class="mt-3">
-                  <%= paginate @posts %>
-                </div>
-              <% else %>
-                <p>まだ投稿がありません。</p>
-              <% end %>
-            </div>
-          </div>
+          <% else %>
+            <p>加入しているイベントはありません。</p>
+          <% end %>
         </div>
       </div>
 
-      <!-- プロフィール編集ボタン -->
+      <!-- 投稿履歴 -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h3 class="card-title">投稿履歴</h3>
+          <% if @posts.present? %>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>投稿タイトル</th>
+                  <th>イベント名</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @posts.each do |post| %>
+                  <tr>
+                    <td><%= link_to post.title, event_post_path(post.event, post), class: 'text-decoration-none' %></td>
+                    <td><%= post.event.name if post.event %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <div class="mt-3">
+              <%= paginate @posts %>
+            </div>
+          <% else %>
+            <p>まだ投稿がありません。</p>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- コメント履歴 -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h3 class="card-title">コメント履歴</h3>
+          <% if @comments.present? %>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>コメント内容</th>
+                  <th>投稿タイトル</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @comments.each do |comment| %>
+                  <tr>
+                    <td><%= link_to comment.content.truncate(30), event_post_path(comment.post.event, comment.post), class: 'text-decoration-none' %></td>
+                    <td><%= comment.post.title if comment.post %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <div class="mt-3">
+              <%= paginate @comments %>
+            </div>
+          <% else %>
+            <p>まだコメントがありません。</p>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- いいねした投稿 -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h3 class="card-title">いいねした投稿</h3>
+          <% if @liked_posts.present? %>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>投稿タイトル</th>
+                  <th>イベント名</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @liked_posts.each do |post| %>
+                  <tr>
+                    <td><%= link_to post.title, event_post_path(post.event, post), class: 'text-decoration-none' %></td>
+                    <td><%= post.event.name if post.event %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <div class="mt-3">
+              <%= paginate @liked_posts %>
+            </div>
+          <% else %>
+            <p>まだ「いいね」した投稿はありません。</p>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- プロフィール編集 -->
       <% unless current_user.email == 'guest@example.com' %>
         <div class="text-center mt-4">
           <%= link_to 'プロフィール編集', mypage_edit_path(@user), class: 'btn btn-primary btn-lg mb-3' %>
@@ -82,7 +152,6 @@
   </div>
 </div>
 
-<!-- イベント一覧ページへ戻るボタン -->
 <div class="text-center mt-5">
   <%= link_to 'イベント一覧ページに戻る', homes_top_path, class: 'btn btn-outline-primary btn-lg' %>
 </div>
