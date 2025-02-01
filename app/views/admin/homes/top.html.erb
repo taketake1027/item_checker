@@ -2,6 +2,9 @@
   <h1 class="text-center mb-4 display-4">管理者トップページ</h1>
 
   <h2 class="my-4">未処理のイベント参加申請</h2>
+  <% # ゲストユーザーの申請を除外する %>
+  <% @pending_requests = @pending_requests.joins(:user).where.not(users: { email: 'guest@example.com' }) %>  <!-- ゲストユーザーの申請を除外 -->
+  
   <% if @pending_requests.any? %>
     <table class="table table-striped table-hover">
       <thead>
@@ -14,7 +17,6 @@
       </thead>
       <tbody>
         <% @pending_requests.each do |request| %>
-          <% next if request.user.email == 'guest@example.com' %> <!-- ゲストユーザーの申請をスキップ -->
           <tr>
             <td><%= request.user.name %></td>
             <td><%= request.event.name %></td>
@@ -32,7 +34,10 @@
   <% end %>
 
   <h2 class="my-4">未処理のアイテム準備申請</h2>
-  <% if @pending_item_requests.present? && @pending_item_requests.any? %>
+  <% # ゲストユーザーの申請を除外する %>
+  <% @pending_item_requests = @pending_item_requests.joins(:user).where.not(users: { email: 'guest@example.com' }) %>  <!-- ゲストユーザーの申請を除外 -->
+  
+  <% if @pending_item_requests.any? %>
     <table class="table table-striped table-hover">
       <thead>
         <tr>
@@ -45,7 +50,6 @@
       </thead>
       <tbody>
         <% @pending_item_requests.each do |request| %>
-          <% next if request.user.email == 'guest@example.com' %> <!-- ゲストユーザーの申請をスキップ -->
           <tr>
             <td><%= request.user.name %></td>
             <td><%= request.item.name %></td>
