@@ -32,7 +32,7 @@
         <%= image_tag @item.image, class: 'img-fluid rounded shadow', alt: @item.name %>
       <% else %>
         <div class="text-center">
-          <%= image_tag 'sample.png', class: 'img-fluid rounded shadow', alt: 'サンプル画像' %>
+          <%= image_tag 'sample.png', alt: 'サンプル画像', style: 'max-width: 100%; height: auto;'  %>
           <p class="mt-2 text-muted"><strong>画像が登録されていません。</strong></p>
         </div>
       <% end %>
