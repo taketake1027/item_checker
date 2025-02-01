@@ -9,50 +9,52 @@
     <% end %>
   </div>
 
-  <div class="table-responsive">
-    <table class="table table-bordered table-striped table-hover text-center border border-light">
-      <thead class="bg-dark text-white">
-        <tr>
-          <th class="border-light">アイテム名</th>
-          <th class="border-light">進捗状況</th>
-          <th class="border-light">詳細</th>
-          <th class="border-light">アイテム準備申請</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% if @items.any? %>
-          <% @items.each do |item| %>
-            <tr class="<%= item.prepared_amount >= item.amount || (item.item_requests.find_by(user_id: current_user.id)&.status == 'approved') ? 'bg-success text-dark' : 'bg-white text-dark' %>">
-              
-              <td class="border-light"><%= item.name %></td>
+  <div class="d-flex justify-content-center">
+    <div class="table-responsive w-75 mb-4 bg-white border p-3">
+      <table class="table table-bordered table-striped table-hover text-center">
+        <thead class="bg-dark text-white">
+          <tr>
+            <th>アイテム名</th>
+            <th>進捗状況</th>
+            <th>詳細</th>
+            <th>アイテム準備申請</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @items.any? %>
+            <% @items.each do |item| %>
+              <tr class="<%= item.prepared_amount >= item.amount || (item.item_requests.find_by(user_id: current_user.id)&.status == 'approved') ? 'bg-success text-dark' : 'bg-light text-dark' %>">
+                
+                <td><%= item.name %></td>
 
-              <td class="border-light">
-                <% if item.prepared_amount >= item.amount || (item.item_requests.find_by(user_id: current_user.id)&.status == 'approved') %>
-                  <span class="fw-bold"><%= "#{item.amount}" %> 個 準備完了</span>
-                <% else %>
-                  <span class="fw-bold"><%= "#{item.prepared_amount}/#{item.amount}" %> 個 準備中</span>
-                <% end %>
-              </td>
+                <td>
+                  <% if item.prepared_amount >= item.amount || (item.item_requests.find_by(user_id: current_user.id)&.status == 'approved') %>
+                    <span class="fw-bold"><%= "#{item.amount}" %> 個 準備完了</span>
+                  <% else %>
+                    <span class="fw-bold"><%= "#{item.prepared_amount}/#{item.amount}" %> 個 準備中</span>
+                  <% end %>
+                </td>
 
-              <td class="border-light">
-                <%= link_to '詳細', event_item_path(@event, item), class: 'btn btn-info btn-sm' %>
-              </td>
+                <td>
+                  <%= link_to '詳細', event_item_path(@event, item), class: 'btn btn-info btn-sm' %>
+                </td>
 
-              <td class="border-light">
-                <%= render 'request_button', item: item %>
-              </td>
+                <td>
+                  <%= render 'request_button', item: item %>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="4">検索結果が見つかりませんでした。</td>
             </tr>
           <% end %>
-        <% else %>
-          <tr>
-            <td colspan="4" class="border-light text-dark">検索結果が見つかりませんでした。</td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
 
-  <div class="mt-3 d-flex justify-content-center">
+  <div class="d-flex justify-content-center">
     <%= paginate @items %>
   </div>
 
