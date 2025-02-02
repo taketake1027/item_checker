@@ -1,4 +1,5 @@
-// app/views/item_requests/destroy.js.erb
+// 申請ボタンを元の「準備申請」ボタンに変更
+$("#request-button-container-<%= @item.id %>").html("<%= j render 'items/request_button', item: @item %>");
 
-// 申請取り消しボタンを非表示にし、再度申請ボタンを表示
-$("#request-button-<%= @item.id %>").replaceWith('<%= j(render "request_button", item: @item) %>');
+// 進捗状況を「準備中」に更新
+$(".item-status-<%= @item.id %>").html("<span class='fw-bold'><%= @item.prepared_amount %>/ <%= @item.amount %> 個 準備中</span>");

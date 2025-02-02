@@ -1,11 +1,5 @@
-// app/views/item_requests/create.js.erb
+// 申請ボタンの部分を非同期で更新
+$("#request-button-container-<%= @item.id %>").html("<%= j render 'items/request_button', item: @item %>");
 
-// 申請ボタンを「申請済み」に変更
-$("#request-button-<%= @item.id %>").replaceWith('<button class="btn btn-secondary btn-sm" disabled>申請済み（承認待ち）</button>');
-
-// アイテムの進捗状況が「準備完了」に切り替わる場合
-if (<%= @item.prepared_amount %> >= <%= @item.amount %>) {
-  $(".item-status-<%= @item.id %>").html("<span class='text-success'>準備完了</span>");
-} else {
-  $(".item-status-<%= @item.id %>").html("<span class='text-success'>申請済み（承認待ち）</span>");
-}
+// 進捗状況を更新
+$(".item-status-<%= @item.id %>").html("<span class='text-success'>申請済み（承認待ち）</span>");

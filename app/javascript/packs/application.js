@@ -15,5 +15,3 @@ import "../stylesheets/application";
 Rails.start()                      // 正しくRailsをスタート
 Turbolinks.start()
 ActiveStorage.start()
-
-
