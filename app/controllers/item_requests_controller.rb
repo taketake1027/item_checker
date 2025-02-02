@@ -2,25 +2,21 @@ class ItemRequestsController < ApplicationController
   before_action :set_item, only: [:create, :destroy]
   
   def create
-  @item = Item.find(params[:item_id])  # アイテムを取得
-  @user = current_user  # 現在のユーザーを取得
-  # アイテム準備申請を作成
-  @item_request = ItemRequest.create(item_id: @item.id, user_id: @user.id)
-  respond_to do |format|
-    format.js  # create.js.erb をレンダリング
+    @item_request = @item.item_requests.new(user: current_user, status: 'pending')
+
+    if @item_request.save
+      respond_to do |format|
+        format.js { render 'create' }  # create.js.erb を実行
+      end
     end
   end
 
   def destroy
     @item_request = @item.item_requests.find_by(user_id: current_user.id)
-    if @item_request
-      @item_request.destroy
+
+    if @item_request&.destroy
       respond_to do |format|
-        format.js # destroy.js.erb が呼ばれます
-      end
-    else
-      respond_to do |format|
-        format.js
+        format.js { render 'destroy' }  # destroy.js.erb を実行
       end
     end
   end
