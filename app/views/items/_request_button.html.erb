@@ -1,12 +1,20 @@
 <% user_request = item.item_requests.find_by(user_id: current_user.id) %>
 <% if item.prepared_amount < item.amount %>
-  <% if user_request.nil? || user_request.status == 'rejected' %>
-    <!-- 申請していない、または却下された場合の申請ボタン -->
+  <% if user_request.nil? %>
+    <!-- 申請していない場合 -->
     <%= button_to '準備申請', event_item_item_requests_path(item.event.id, item.id), 
       method: :post, remote: true, 
       class: 'btn btn-warning btn-sm request-button',
       id: "request-button-#{item.id}",
       data: { confirm: 'こちらでこのアイテムに準備申請しますか？' } %>
+  <% elsif user_request.status == 'rejected' %>
+    <!-- 却下された場合のみ「申請却下」＋再申請ボタンを表示 -->
+    <span class="text-danger">申請却下</span>
+    <%= button_to '再申請', event_item_item_requests_path(item.event.id, item.id), 
+      method: :post, remote: true, 
+      class: 'btn btn-warning btn-sm request-button',
+      id: "request-button-#{item.id}",
+      data: { confirm: '却下された申請を再申請しますか？' } %>
   <% elsif user_request.status == 'pending' %>
     <!-- 申請中の場合 -->
     <span class="text-success">申請済み（承認待ち）</span>

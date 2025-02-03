@@ -1,5 +1,12 @@
-// 申請ボタンを元の「準備申請」ボタンに変更
+// 申請ボタンの部分を非同期で更新
+console.log("キャンセル後のステータス: <%= @item.item_requests.find_by(user_id: current_user.id)&.status %>");
 $("#request-button-container-<%= @item.id %>").html("<%= j render 'items/request_button', item: @item %>");
 
-// 進捗状況を「準備中」に更新
+// 進捗状況を元に戻す
 $(".item-status-<%= @item.id %>").html("<span class='fw-bold'><%= @item.prepared_amount %>/ <%= @item.amount %> 個 準備中</span>");
+
+// 通知メッセージを正しい位置に表示
+$("body").append('<div id="flash-message" class="alert alert-warning position-fixed top-0 start-50 translate-middle-x" style="z-index: 1000;">申請を取り消しました！</div>');
+setTimeout(function() {
+  $("#flash-message").fadeOut();
+}, 3000);
