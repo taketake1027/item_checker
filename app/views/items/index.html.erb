@@ -1,7 +1,6 @@
 <div class="container my-4 event-items">
   <h1 class="text-center mb-4"><%= @event.name %> のアイテム一覧</h1>
 
-  <!-- 検索フォーム -->
   <div class="mb-3 text-center">
     <%= form_with url: event_items_path(@event), method: :get, class: 'd-flex justify-content-center' do %>
       <%= text_field_tag :search, params[:search], placeholder: "アイテム名で検索", class: 'form-control w-50 me-2' %>
@@ -10,7 +9,6 @@
     <% end %>
   </div>
 
-  <!-- アイテム一覧 -->
   <div class="d-flex justify-content-center">
     <div class="table-responsive w-75 mb-4 bg-white border p-3">
       <table class="table table-bordered table-striped table-hover text-center">
@@ -25,11 +23,12 @@
         <tbody>
           <% if @items.any? %>
             <% @items.each do |item| %>
-              <tr class="<%= item.prepared_amount >= item.amount ? 'bg-success text-dark' : 'bg-light text-dark' %>">
+              <tr class="<%= item.prepared_amount >= item.amount || (item.item_requests.find_by(user_id: current_user.id)&.status == 'approved') ? 'bg-success text-dark' : 'bg-light text-dark' %>">
+                
                 <td><%= item.name %></td>
 
                 <td class="item-status-<%= item.id %>">
-                  <% if item.prepared_amount >= item.amount %>
+                  <% if item.prepared_amount >= item.amount || (item.item_requests.find_by(user_id: current_user.id)&.status == 'approved') %>
                     <span class="fw-bold"><%= "#{item.amount}" %> 個 準備完了</span>
                   <% else %>
                     <span class="fw-bold"><%= "#{item.prepared_amount}/#{item.amount}" %> 個 準備中</span>
@@ -55,12 +54,10 @@
     </div>
   </div>
 
-  <!-- ページネーション -->
   <div class="d-flex justify-content-center">
     <%= paginate @items %>
   </div>
 
-  <!-- 戻るボタン -->
   <div class="text-center mt-4">
     <%= link_to '戻る', event_path(@event), class: 'btn btn-secondary' %>
   </div>
