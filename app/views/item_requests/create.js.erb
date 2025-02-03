@@ -8,7 +8,8 @@ if ("<%= @item.item_requests.find_by(user_id: current_user.id)&.status %>" === "
 }
 
 // 通知メッセージを正しい位置に表示
-$("body").append('<div id="flash-message" class="alert alert-success position-fixed top-0 start-50 translate-middle-x" style="z-index: 1000;">申請が完了しました！</div>');
+$("body").append('<div id="flash-message" class="alert alert-success position-fixed top-0 start-50 translate-middle-x" style="z-index: 1000; width: 80%; max-width: 500px; text-align: center;">申請が完了しました</div>');
 setTimeout(function() {
   $("#flash-message").fadeOut();
 }, 3000);
+

@@ -6,7 +6,7 @@ $("#request-button-container-<%= @item.id %>").html("<%= j render 'items/request
 $(".item-status-<%= @item.id %>").html("<span class='fw-bold'><%= @item.prepared_amount %>/ <%= @item.amount %> 個 準備中</span>");
 
 // 通知メッセージを正しい位置に表示
-$("body").append('<div id="flash-message" class="alert alert-warning position-fixed top-0 start-50 translate-middle-x" style="z-index: 1000;">申請を取り消しました！</div>');
+$("body").append('<div id="flash-message" class="alert alert-warning position-fixed top-0 start-50 translate-middle-x" style="z-index: 1000; width: 80%; max-width: 500px; text-align: center;">申請を取り消しました</div>');
 setTimeout(function() {
   $("#flash-message").fadeOut();
 }, 3000);
