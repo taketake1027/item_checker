@@ -2,22 +2,30 @@ class ItemRequestsController < ApplicationController
   before_action :set_item, only: [:create, :destroy]
   
   def create
-    @item_request = @item.item_requests.new(user: current_user, status: 'pending')
-
+    @item_request = @item.item_requests.find_or_initialize_by(user: current_user)
+    @item_request.status = 'pending'  # ここで確実に 'pending' に変更
+  
     if @item_request.save
+      Rails.logger.debug "申請成功: #{@item_request.inspect}"  # デバッグ用
       respond_to do |format|
-        format.js { render 'create' }  # create.js.erb を実行
+        format.js
       end
+    else
+      Rails.logger.debug "申請失敗: #{@item_request.errors.full_messages}"
+      head :unprocessable_entity
     end
   end
-
+  
   def destroy
-    @item_request = @item.item_requests.find_by(user_id: current_user.id)
-
-    if @item_request&.destroy
+    user_request = @item.item_requests.find_by(user_id: current_user.id)
+    if user_request
+      user_request.update(status: 'rejected') # ステータスを「rejected」に変更
       respond_to do |format|
-        format.js { render 'destroy' }  # destroy.js.erb を実行
+        format.js   # create.js.erb や destroy.js.erb を実行するため
+        format.html { redirect_to event_item_path(@item.event, @item), notice: '申請がキャンセルされました' }
       end
+    else
+      redirect_to event_item_path(@item.event, @item), alert: '申請が見つかりませんでした'
     end
   end
 

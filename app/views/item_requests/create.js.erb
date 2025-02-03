@@ -1,5 +1,15 @@
 // 申請ボタンの部分を非同期で更新
+console.log("申請後のステータス: <%= @item.item_requests.find_by(user_id: current_user.id)&.status %>");
 $("#request-button-container-<%= @item.id %>").html("<%= j render 'items/request_button', item: @item %>");
 
-// 進捗状況を更新
-$(".item-status-<%= @item.id %>").html("<span class='text-success'>申請済み（承認待ち）</span>");
+// 進捗状況の更新
+if ("<%= @item.item_requests.find_by(user_id: current_user.id)&.status %>" === "pending") {
+  $(".item-status-<%= @item.id %>").html("<span class='text-success'>申請済み（承認待ち）</span>");
+}
+
+// 通知メッセージを正しい位置に表示
+$("body").append('<div id="flash-message" class="alert alert-success position-fixed top-0 start-50 translate-middle-x" style="z-index: 1000; width: 80%; max-width: 500px; text-align: center;">申請が完了しました</div>');
+setTimeout(function() {
+  $("#flash-message").fadeOut();
+}, 3000);
+
