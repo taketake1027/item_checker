@@ -23,10 +23,8 @@
         <tbody>
           <% if @items.any? %>
             <% @items.each do |item| %>
-              <tr class="<%= item.prepared_amount >= item.amount || (item.item_requests.find_by(user_id: current_user.id)&.status == 'approved') ? 'bg-success text-dark' : 'bg-light text-dark' %>">
-                
+              <tr class="<%= item.prepared_amount >= item.amount || (item.item_requests.find_by(user_id: current_user.id)&.status == 'approved') ? 'bg-success text-dark' : 'bg-light text-dark' %>">               
                 <td><%= item.name %></td>
-
                 <td class="item-status-<%= item.id %>">
                   <% if item.prepared_amount >= item.amount || (item.item_requests.find_by(user_id: current_user.id)&.status == 'approved') %>
                     <span class="fw-bold"><%= "#{item.amount}" %> 個 準備完了</span>
@@ -34,11 +32,9 @@
                     <span class="fw-bold"><%= "#{item.prepared_amount}/#{item.amount}" %> 個 準備中</span>
                   <% end %>
                 </td>
-
                 <td>
                   <%= link_to '詳細', event_item_path(@event, item), class: 'btn btn-info btn-sm' %>
                 </td>
-
                 <td id="request-button-container-<%= item.id %>">
                   <%= render 'items/request_button', item: item %>
                 </td>

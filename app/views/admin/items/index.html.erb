@@ -9,11 +9,8 @@
 
   <div class="mb-3 text-center">
     <%= form_with url: admin_items_path, method: :get, class: 'd-flex justify-content-center' do %>
-
       <%= select_tag :event_id, options_from_collection_for_select(Event.all, :id, :name, selected: params[:event_id]), include_blank: "アイテムに紐づくイベントを選択", class: 'form-control w-25 me-2' %>
-
       <%= select_tag :sort_by, options_for_select([['新着順', 'newest'], ['準備未完了', 'incomplete'], ['準備完了', 'complete']], selected: params[:sort_by]), class: 'form-control w-25 me-2' %>
-
       <%= submit_tag '検索・並べ替え', class: 'btn btn-primary' %>
     <% end %>
   </div>
@@ -32,9 +29,9 @@
         <tbody>
           <% if @items.any? %>
             <% @items.each do |item| %>
-              <tr class="<%= 'bg-success' if item.status == '完了' %> <%= 'bg-light' if item.status == '未完了' %>">
+              <tr class="<%= 'bg-success text-dark' if item.status == '完了' %> <%= 'bg-light text-dark' if item.status == '未完了' %>">
                 <td><%= item.name %></td>
-                <td><%= item.event ? item.event.name : '未設定' %></td>
+                <td><%= item.event.present? ? item.event.name : '未設定' %></td>
                 <td>
                   <% if item.prepared_amount >= item.amount || (item.item_requests.find_by(user_id: current_user.id)&.status == 'approved') %>
                     <span class="fw-bold"><%= "#{item.amount}" %> 個 準備完了</span>
