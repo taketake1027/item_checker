@@ -73,26 +73,19 @@ class Admin::ItemsController < ApplicationController
     end
   end
 
-   # アイテム申請の承認
-   def approve_item_request
+  # アイテム申請の承認
+  def approve_item_request
     request = ItemRequest.find(params[:id])
     item = request.item
+
+    # アイテムステータスを「完了」に更新
     if request.update(status: 'approved')
-      item.update(status: '準備済み')
+      item.update(status: '完了')  # アイテムのステータスを「完了」に更新
+      item.update(prepared_amount: item.amount)  # 準備済み数量を総数に設定
+      
       redirect_to admin_root_path, notice: 'アイテム申請が承認されました。'
     else
       redirect_to admin_root_path, alert: 'アイテム申請の承認に失敗しました。'
-    end
-  end
-
-  # アイテム申請の却下
-  def reject_item_request
-    request = ItemRequest.find(params[:id])
-    item = request.item
-    if request.update(status: 'rejected')
-      redirect_to admin_root_path, notice: 'アイテム申請が却下されました。'
-    else
-      redirect_to admin_root_path, alert: 'アイテム申請の却下に失敗しました。'
     end
   end
 

@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   validates :status, presence: true
   validates :amount, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validate :validate_amounts
-
+  validates :event, presence: true  # eventが必須
   private
 
   def validate_amounts
