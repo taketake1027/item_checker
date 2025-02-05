@@ -1,21 +1,11 @@
 <div class="container d-flex justify-content-center align-items-center" style="margin-top: 20px;">
-  <div class="card shadow p-4" style="max-width: 500px; width: 100%;"> <!-- 幅を少し狭めて集中感を強調 -->
+  <div class="card shadow p-4" style="max-width: 500px; width: 100%;">
     <h2 class="text-center mb-4">ログイン</h2>
 
-    <!-- ゲストログインボタン -->
     <div class="d-flex justify-content-center mb-4">
       <%= button_to 'ゲストログイン', guest_login_path, method: :post, class: 'btn btn-outline-secondary btn-lg w-100' %>
     </div>
-
-    <!-- エラーメッセージ -->
-    <% if flash[:alert] %>
-      <div class="alert alert-danger text-center">
-        <%= flash[:alert] %>
-      </div>
-    <% end %>
-
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <!-- メールアドレス入力 -->
       <div class="form-group mb-3">
         <%= f.label :email, "メールアドレス", class: "form-label fw-bold" %>
         <%= f.email_field :email, autofocus: true, class: "form-control form-control-lg", placeholder: "例: user@example.com" %>

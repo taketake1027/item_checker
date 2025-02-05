@@ -14,9 +14,9 @@
               <li class="nav-item">
                 <span class="nav-link">ようこそ、<%= current_user.name %>さん</span>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<%= mypage_path(current_user) %>">Mypage</a>
-              </li>
+             <li class="nav-item">
+              <a class="nav-link" href="<%= mypage_path %>">Mypage</a>
+            </li>
             <% end %>
             <li class="nav-item">
               <a class="nav-link" href="<%= about_path %>">About</a>

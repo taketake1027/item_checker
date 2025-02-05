@@ -74,8 +74,8 @@ Rails.application.routes.draw do
   get '/about', to: 'homes#about'
 
   # マイページ
-  get 'mypage', to: 'users#show', as: 'mypage'
-  get '/mypage/edit', to: 'users#edit'
+  get '/mypage', to: 'users#show', as: 'mypage'
+  get '/mypage/edit', to: 'users#edit', as: 'mypage_edit'
   patch '/mypage', to: 'users#update'
 
   # ゲストログイン

@@ -2,7 +2,7 @@
 <% if item.prepared_amount < item.amount %>
   <% if user_request.nil? || user_request.status == 'rejected' %>
     <!-- 申請していない、または却下された場合は「準備申請」ボタン -->
-    <%= button_to '準備申請', event_item_item_requests_path(item.event.id, item.id), 
+    <%= button_to '準備完了申請', event_item_item_requests_path(item.event.id, item.id), 
       method: :post, remote: true, 
       class: 'btn btn-warning btn-sm request-button',
       id: "request-button-#{item.id}",
