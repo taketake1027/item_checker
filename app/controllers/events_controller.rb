@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
+  before_action :authorize_event_access, only: [:show]
 
   def show
     @event = Event.find(params[:id])
@@ -40,6 +41,16 @@ class EventsController < ApplicationController
   
   private
 
+  def authorize_event_access
+    @event = Event.find(params[:id])
+  
+    # イベントのグループに参加しているユーザーかどうかをチェック
+    unless @event.group.users.exists?(id: current_user.id)
+      flash[:alert] = "このイベントにはアクセスできません。"
+      redirect_to homes_top_path
+    end
+  end
+  
   def post_params
     params.require(:post).permit(:content)
   end
