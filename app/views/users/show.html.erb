@@ -1,13 +1,17 @@
-<h1 class="text-center mb-5"><%= @user.name %>さんのmypage</h1>
-
+<h1 class="text-center mb-4"><%= @user.name %>さんのマイページ</h1>
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8">
       
-      <!-- メールアドレス -->
+      <!-- メールアドレス & プロフィール編集 -->
       <div class="card mb-4">
         <div class="card-body">
           <p><strong>メールアドレス:</strong> <%= @user.email %></p>
+          <% unless current_user.email == 'guest@example.com' %>
+            <div class="text-end">
+              <%= link_to 'プロフィール編集', mypage_edit_path, class: 'btn btn-primary' %>
+            </div>
+          <% end %>
         </div>
       </div>
 
@@ -131,19 +135,12 @@
         </div>
       </div>
 
-      <!-- プロフィール編集 -->
-      <% unless current_user.email == 'guest@example.com' %>
-        <div class="text-center mt-4">
-          <%= link_to 'プロフィール編集', mypage_edit_path, class: 'btn btn-primary btn-lg mb-3' %>
-        </div>
-      <% end %>
-
-      <!-- アカウント削除ボタン -->
+      <!-- アカウント削除 -->
       <% unless current_user.email == 'guest@example.com' %>
         <div class="text-center mt-4">
           <%= form_for(@user, url: user_registration_path, html: { method: :delete }) do |f| %>
             <div class="form-group">
-              <%= f.submit 'アカウントを削除する', class: 'btn btn-danger btn-lg', data: { confirm: '本当にアカウントを削除しますか？ この操作は取り消せません。' } %>
+              <%= f.submit 'アカウントを削除する', class: 'btn btn-danger', data: { confirm: '本当にアカウントを削除しますか？ この操作は取り消せません。' } %>
             </div>
           <% end %>
         </div>
@@ -152,6 +149,7 @@
   </div>
 </div>
 
+<!-- 戻るボタン（ページ下部） -->
 <div class="text-center mt-5">
-  <%= link_to 'イベント一覧ページに戻る', homes_top_path, class: 'btn btn-outline-primary btn-lg' %>
+  <%= link_to '← イベント一覧に戻る', homes_top_path, class: 'btn btn-secondary' %>
 </div>
