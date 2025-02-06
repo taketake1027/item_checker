@@ -15,11 +15,11 @@
   <main>
     <% if flash[:notice] %>
       <div class="alert alert-success text-center" role="alert">
-        <%= flash[:notice] %>
+        <%= t('flash.notice', default: flash[:notice]) %>
       </div>
     <% elsif flash[:alert] %>
       <div class="alert alert-danger text-center" role="alert">
-        <%= flash[:alert] %>
+        <%= t('flash.alert', default: flash[:alert]) %>
       </div>
     <% end %>
 

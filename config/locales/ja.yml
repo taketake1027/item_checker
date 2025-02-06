@@ -1,0 +1,33 @@
+ja:
+  flash:
+    success:
+      create: "%{resource}が作成されました。"
+      update: "%{resource}が更新されました。"
+      delete: "%{resource}が削除されました。"
+      login: "ログインしました。"
+      logout: "ログアウトしました。"
+    error:
+      create: "%{resource}の作成に失敗しました。"
+      update: "%{resource}の更新に失敗しました。"
+      delete: "%{resource}の削除に失敗しました。"
+      login: "ログインに失敗しました。"
+      logout: "ログアウトに失敗しました。"
+
+  devise:
+    sessions:
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+      already_signed_out: "すでにログアウトしています。"
+    registrations:
+      signed_up: "アカウント登録が完了しました。"
+      updated: "アカウント情報が更新されました。"
+      destroyed: "アカウントを削除しました。"
+    passwords:
+      send_instructions: "パスワード再設定の案内を送信しました。"
+      updated: "パスワードが変更されました。"
+    failure:
+      invalid: "メールアドレスまたはパスワードが正しくありません。"
+      unauthenticated: "ログインが必要です。"
+      not_found_in_database: "メールアドレスまたはパスワードが正しくありません。"
+      already_authenticated: "すでにログインしています。"
+      unconfirmed: "アカウントの確認が必要です。"
