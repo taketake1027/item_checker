@@ -15,24 +15,24 @@
                 <span class="nav-link">ようこそ、<%= current_user.name %>さん</span>
               </li>
              <li class="nav-item">
-              <a class="nav-link" href="<%= mypage_path %>">Mypage</a>
+              <a class="nav-link" href="<%= mypage_path %>">マイページ</a>
             </li>
             <% end %>
             <li class="nav-item">
-              <a class="nav-link" href="<%= about_path %>">About</a>
+              <a class="nav-link" href="<%= about_path %>">アバウト</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<%= homes_top_path %>">Event</a>
+              <a class="nav-link" href="<%= homes_top_path %>">イベント</a>
             </li>
             <li class="nav-item">
-              <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "nav-link" %>
+              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-link" %>
             </li>
           <% else %>
             <li class="nav-item">
-              <%= link_to 'Login', new_user_session_path, class: "nav-link" %>
+              <%= link_to 'ログイン', new_user_session_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
-              <%= link_to 'Signup', new_user_registration_path, class: "nav-link" %>
+              <%= link_to '新規登録', new_user_registration_path, class: "nav-link" %>
             </li>
           <% end %>
         </ul>
