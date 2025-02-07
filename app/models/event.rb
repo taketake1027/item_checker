@@ -14,6 +14,7 @@ class Event < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
   validates :location, presence: true
+  validates :group_id, presence: true
 
    # イベントに参加しているかを確認
   def user_participating?(user)
