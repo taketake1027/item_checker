@@ -1,0 +1,68 @@
+ja:
+  flash:
+    success:
+      create: "%{resource}が作成されました。"
+      update: "%{resource}が更新されました。"
+      delete: "%{resource}が削除されました。"
+      login: "ログインしました。"
+      logout: "ログアウトしました。"
+    error:
+      create: "%{resource}の作成に失敗しました。"
+      update: "%{resource}の更新に失敗しました。"
+      delete: "%{resource}の削除に失敗しました。"
+      login: "ログインに失敗しました。"
+      logout: "ログアウトに失敗しました。"
+
+  devise:
+    sessions:
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+      already_signed_out: "すでにログアウトしています。"
+    registrations:
+      signed_up: "アカウント登録が完了しました。"
+      updated: "アカウント情報が更新されました。"
+      destroyed: "アカウントを削除しました。"
+    passwords:
+      send_instructions: "パスワード再設定の案内を送信しました。"
+      updated: "パスワードが変更されました。"
+    failure:
+      invalid: "メールアドレスまたはパスワードが正しくありません。"
+      unauthenticated: "ログインが必要です。"
+      not_found_in_database: "メールアドレスまたはパスワードが正しくありません。"
+      already_authenticated: "すでにログインしています。"
+      unconfirmed: "アカウントの確認が必要です。"
+
+  activerecord:
+    models:
+      group: "グループ"
+      event: "イベント"
+      item: "アイテム"
+    attributes:
+      group:
+        name: "グループ名"
+        introduction: "グループの詳細"
+      event:
+        name: "イベント名"
+        introduction: "イベント紹介"
+        start_date: "開始日時"
+        end_date: "終了日時"
+        location: "場所"
+        group_id: "グループ"  # group_id の翻訳を追加
+      item:
+        name: "アイテム名"
+        introduction: "アイテム説明"
+        status: "準備状態"
+        amount: "必要数量"
+        prepared_amount: "準備済み数量"
+        event_id: "イベント"  # event_idの翻訳を追加
+        image: "アイテム画像"
+    errors:
+      messages:
+        blank: "を入力してください"
+        too_short: "は%{count}文字以上で入力してください"
+        too_long: "は%{count}文字以下で入力してください"
+        not_a_number: "は数値で入力してください"
+        taken: "はすでに使用されています"
+        greater_than: "%{count}より多い数値を入力してください"
+        invalid: "が無効です"
+        required: "%{attribute}は必須です"  # 必須フィールドに対するメッセージ
