@@ -23,7 +23,9 @@
   <% end %>
 
   <main>
+  <body class="<%= admin_signed_in? ? 'logged-in' : 'logged-out' %>">
     <%= yield %> <!-- コンテンツ部分 -->
+  </body>
   </main>
 
   <!-- フッター部分 -->
