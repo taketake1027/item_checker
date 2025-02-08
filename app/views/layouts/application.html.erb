@@ -22,8 +22,9 @@
         <%= t('flash.alert', default: flash[:alert]) %>
       </div>
     <% end %>
-
+  <body class="<%= user_signed_in? ? 'logged-in' : 'logged-out' %>">
     <%= yield %> <!-- コンテンツの表示 -->
+  </body>
   </main>
 
   <!-- フッター -->
