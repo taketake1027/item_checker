@@ -12,7 +12,7 @@
           <% if user_signed_in? %>
             <% unless current_user.email == 'guest@example.com' %>
               <li class="nav-item">
-                <span class="nav-link">ようこそ、<%= current_user.name %>さん</span>
+                <span class=>ようこそ<%= current_user.name %>さん</span>
               </li>
              <li class="nav-item">
               <a class="nav-link" href="<%= mypage_path %>">マイページ</a>
