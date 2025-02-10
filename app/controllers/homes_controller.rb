@@ -11,6 +11,12 @@ class HomesController < ApplicationController
     @events = @events.order(start_date: :asc).page(params[:page]).per(6)
   end
 
+  def landing
+    if user_signed_in?
+      redirect_to homes_top_path
+    end
+  end
+  
   private
 
   def guest_user?
