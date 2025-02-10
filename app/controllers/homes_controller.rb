@@ -1,29 +1,14 @@
 class HomesController < ApplicationController
   before_action :authenticate_user!, only: [:top]  # トップページはログイン必須
-  before_action :restrict_guest_access, except: [:top, :about]
+  before_action :restrict_guest_access, except: [:top] # 検索ページはゲストアクセス制限
 
   def top
     if params[:search].present?
       @events = Event.where('name LIKE ?', "%#{params[:search]}%")
-      flash.now[:alert] = '該当するイベントがありませんでした。' if @events.empty?
     else
       @events = Event.all
     end
     @events = @events.order(start_date: :asc).page(params[:page]).per(6)
-  end  
-  
-  def landing
-    if user_signed_in?
-      redirect_to homes_top_path
-    end
-  end
-
-  def about
-    
-  end
-
-  def index
-    @events = Event.page(params[:page]).per(6)
   end
 
   private
