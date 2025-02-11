@@ -1,6 +1,6 @@
 <div class="container my-4">
   <h1 class="text-center mb-4 display-4">管理者トップページ</h1>
-  <!-- イベント申請があるか確認 -->
+  <!-- イベント参加申請があるか確認 -->
   <% # ゲストユーザーの申請を除外する %>
   <% @pending_requests = @pending_requests.joins(:user).where.not(users: { email: 'guest@example.com' }) %>  <!-- ゲストユーザーの申請を除外 -->
   
