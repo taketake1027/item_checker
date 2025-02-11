@@ -3,20 +3,36 @@ class HomesController < ApplicationController
   before_action :restrict_guest_access, except: [:top] # 検索ページはゲストアクセス制限
 
   def top
+    # 検索機能
     if params[:search].present?
-      @events = Event.where('name LIKE ?', "%#{params[:search]}%")
+      events = Event.where('name LIKE ?', "%#{params[:search]}%")
     else
-      @events = Event.all
+      events = Event.all
     end
-    @events = @events.order(start_date: :asc).page(params[:page]).per(6)
+
+    current_time = Time.current
+
+    # デフォルト: 新しい順
+    events = events.order(created_at: :desc)
+
+    # ソート条件の適用
+    case params[:sort]
+    when "upcoming"
+      @events = events.where("end_date >= ?", current_time)
+    when "past"
+      @events = events.where("end_date < ?", current_time)
+    else
+      @events = events  # デフォルト
+    end
+
+    # ページネーション
+    @events = @events.page(params[:page]).per(6)
   end
 
   def landing
-    if user_signed_in?
-      redirect_to homes_top_path
-    end
+    redirect_to homes_top_path if user_signed_in?
   end
-  
+
   private
 
   def guest_user?
