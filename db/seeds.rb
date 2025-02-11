@@ -66,8 +66,8 @@ event_data = [
   {
     name: "Annual Sales Meeting",
     introduction: "Review of sales performance and strategy planning for the next year.",
-    start_date: DateTime.new(2024, 1, 15, 9, 0),
-    end_date: DateTime.new(2024, 1, 15, 17, 0),
+    start_date: DateTime.new(2026, 1, 15, 9, 0),
+    end_date: DateTime.new(2026, 1, 15, 17, 0),
     location: "Tokyo HQ Conference Room",
     group: groups[0],  # Team Alpha
     user: User.find_by(email: "kenta.kobayashi@example.com")
@@ -102,8 +102,8 @@ event_data = [
   {
     name: "Marketing Strategy Meeting",
     introduction: "Planning for marketing campaigns for the upcoming season.",
-    start_date: DateTime.new(2024, 5, 12, 10, 0),
-    end_date: DateTime.new(2024, 5, 12, 15, 0),
+    start_date: DateTime.new(2025, 5, 12, 10, 0),
+    end_date: DateTime.new(2025, 5, 12, 15, 0),
     location: "Osaka Branch",
     group: groups[1],  # Team Beta
     user: User.find_by(email: "kenta.kobayashi@example.com")
@@ -111,8 +111,8 @@ event_data = [
   {
     name: "Leadership Development Program",
     introduction: "A session designed to develop leadership skills within the team.",
-    start_date: DateTime.new(2024, 6, 18, 9, 0),
-    end_date: DateTime.new(2024, 6, 18, 17, 0),
+    start_date: DateTime.new(2030, 6, 18, 9, 0),
+    end_date: DateTime.new(2030, 6, 18, 17, 0),
     location: "Tokyo HQ Conference Room",
     group: groups[2],  # Team Gamma
     user: User.find_by(email: "misaki.tanaka@example.com")
@@ -120,8 +120,8 @@ event_data = [
   {
     name: "Marketing Strategy Overview",
     introduction: "An overview of the upcoming marketing strategies and goals.",
-    start_date: DateTime.new(2024, 7, 25, 10, 0),
-    end_date: DateTime.new(2024, 7, 25, 15, 0),
+    start_date: DateTime.new(2025, 7, 25, 10, 0),
+    end_date: DateTime.new(2025, 7, 25, 15, 0),
     location: "Osaka Branch",
     group: groups[1],  # Team Beta
     user: User.find_by(email: "kenta.kobayashi@example.com")
