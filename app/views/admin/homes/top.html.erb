@@ -70,17 +70,20 @@
 <nav class="d-flex justify-content-center">
   <ul class="list-group list-group-flush w-75 shadow-lg p-3 bg-white rounded">
     <li class="list-group-item text-center">
-      <%= link_to 'グループ管理', admin_groups_path, class: "btn btn-primary w-100 py-3" %>
+      <%= link_to 'グループ管理', admin_groups_path, class: "btn btn-primary w-100 py-3 fw-bold" %>
+      <p class="mt-2 text-muted">イベントに参加するメンバーを集めてグループを作成してみましょう。</p>
     </li>
     <li class="list-group-item text-center">
-      <%= link_to 'イベント管理', admin_events_path, class: "btn btn-success w-100 py-3" %>
-      <p class="mt-2 text-muted">イベントに紐づいた投稿やコメントの確認もここから可能です。</p>
+      <%= link_to 'イベント管理', admin_events_path, class: "btn btn-success w-100 py-3 fw-bold" %>
+      <p class="mt-2 text-muted">招待するグループを選択してイベントを作成できます。<br>イベントに紐づいた投稿やコメントの確認も可能です。</p>
     </li>
     <li class="list-group-item text-center">
-      <%= link_to 'アイテム管理', admin_items_path, class: "btn btn-warning w-100 py-3" %>
+      <%= link_to 'アイテム管理', admin_items_path, class: "btn btn-warning w-100 py-3 fw-bold" %>
+      <p class="mt-2 text-muted">イベントに紐づけたアイテムを作成・管理できます。</p>
     </li>
     <li class="list-group-item text-center">
-      <%= link_to 'ユーザー管理', admin_users_path, class: "btn btn-danger w-100 py-3" %>
+      <%= link_to 'ユーザー管理', admin_users_path, class: "btn btn-danger w-100 py-3 fw-bold" %>
+      <p class="mt-2 text-muted">登録ユーザーの管理や権限設定を行えます。</p>
     </li>
   </ul>
 </nav>
