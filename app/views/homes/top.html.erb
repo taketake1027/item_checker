@@ -1,7 +1,12 @@
-<div class="container text-center mt-3">
-  <div class="row justify-content-center mb-3">
+<div class="container text-center mt-0">
+  <div class="row justify-content-center">
     <div class="col-md-8">
-      <%= form_with url: homes_top_path, method: :get, class: 'd-flex justify-content-center', remote: true do %>
+      <div class="bg-light p-4 rounded mb-1">
+        <h2 class="text-dark">気になるイベントを探してみよう！</h2>
+        <p class="text-muted mb-0">過去のイベントから開催予定のイベントまで、あなたにぴったりのイベントを見つけましょう。</p>
+      </div>
+
+      <%= form_with url: homes_top_path, method: :get, class: 'd-flex justify-content-center mb-0', remote: true do %>
         <div class="input-group w-100">
           <%= text_field_tag :search, params[:search], placeholder: "イベント名で検索", class: 'form-control form-control-lg' %>
           <button type="submit" class="btn btn-primary btn-lg ms-2">検索</button>
@@ -10,10 +15,8 @@
     </div>
   </div>
 
-  <h2 class="my-3 text-dark">イベント一覧</h2>
-
   <!-- ソートボタン -->
-  <div class="mb-3">
+  <div class="mb-2">
     <%= link_to "すべて", homes_top_path(sort: nil), class: "btn #{params[:sort].nil? ? 'btn-primary' : 'btn-outline-primary'}" %>
     <%= link_to "開催予定", homes_top_path(sort: "upcoming"), class: "btn #{params[:sort] == 'upcoming' ? 'btn-primary' : 'btn-outline-primary'}" %>
     <%= link_to "終了済み", homes_top_path(sort: "past"), class: "btn #{params[:sort] == 'past' ? 'btn-primary' : 'btn-outline-primary'}" %>
@@ -22,7 +25,7 @@
   <!-- イベントリスト -->
   <%= render 'events_list', events: @events || [] %>
 
-  <div class="d-flex justify-content-center mb-3">
+  <div class="d-flex justify-content-center">
     <%= paginate @events, class: 'pagination' %>
   </div>
 </div>

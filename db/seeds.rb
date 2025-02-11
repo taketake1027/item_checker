@@ -15,11 +15,11 @@ puts admin.persisted? ? "管理者アカウントを作成しました" : "管�
 
 # 一般ユーザーを作成
 users = [
-  { name: "Misaki Tanaka", email: "misaki.tanaka@example.com", role: "employee" },
-  { name: "Taro Yamada", email: "test@test", role: "employee" },
-  { name: "Hanako Suzuki", email: "hanako.suzuki@example.com", role: "staff" },
-  { name: "Kenta Kobayashi", email: "kenta.kobayashi@example.com", role: "leader" },
-  { name: "Yuki Matsumoto", email: "yuki.matsumoto@example.com", role: "employee" }
+  { name: "田中 美咲", email: "misaki.tanaka@example.com", role: "employee" },
+  { name: "山田 太郎", email: "test@test", role: "employee" },
+  { name: "鈴木 花子", email: "hanako.suzuki@example.com", role: "staff" },
+  { name: "小林 健太", email: "kenta.kobayashi@example.com", role: "leader" },
+  { name: "松本 優希", email: "yuki.matsumoto@example.com", role: "employee" }
 ]
 users.each do |user_data|
   user = User.find_or_create_by(email: user_data[:email]) do |user|
@@ -33,9 +33,9 @@ end
 
 # グループ情報を作成
 group_data = [
-  { name: "Team Alpha", introduction: "Team responsible for sales and marketing." },
-  { name: "Team Beta", introduction: "Team responsible for product development." },
-  { name: "Team Gamma", introduction: "Team responsible for customer support." }
+  { name: "チームアルファ", introduction: "営業とマーケティングを担当するチーム。" },
+  { name: "チームベータ", introduction: "製品開発を担当するチーム。" },
+  { name: "チームガンマ", introduction: "顧客サポートを担当するチーム。" }
 ]
 
 groups = group_data.map do |data|
@@ -48,7 +48,6 @@ groups.each do |group|
   puts group.persisted? ? "グループ '#{group.name}' を作成しました" : "グループ '#{group.name}' の作成に失敗しました"
 end
 
-
 # 各グループにユーザーを追加
 user_ids = User.all.ids
 Group.all.each do |group|
@@ -58,72 +57,72 @@ Group.all.each do |group|
       gu.status = "active"
       gu.joined_date = Date.today
     end
-  end 
+  end
 end
 
 # イベントデータを作成
 event_data = [
   {
-    name: "Annual Sales Meeting",
-    introduction: "Review of sales performance and strategy planning for the next year.",
-    start_date: DateTime.new(2024, 1, 15, 9, 0),
-    end_date: DateTime.new(2024, 1, 15, 17, 0),
-    location: "Tokyo HQ Conference Room",
-    group: groups[0],  # Team Alpha
+    name: "年間売上会議",
+    introduction: "売上実績の確認と来年の戦略計画。",
+    start_date: DateTime.new(2026, 1, 15, 9, 0),
+    end_date: DateTime.new(2026, 1, 15, 17, 0),
+    location: "東京本社 会議室",
+    group: groups[0],  # チームアルファ
     user: User.find_by(email: "kenta.kobayashi@example.com")
   },
   {
-    name: "Team Building Workshop",
-    introduction: "A fun and interactive workshop to improve team dynamics and communication.",
+    name: "チームビルディングワークショップ",
+    introduction: "チームダイナミクスとコミュニケーションを改善するためのインタラクティブなワークショップ。",
     start_date: DateTime.new(2024, 2, 10, 10, 0),
     end_date: DateTime.new(2024, 2, 10, 16, 0),
-    location: "Osaka Branch",
-    group: groups[1],  # Team Beta
+    location: "大阪支社",
+    group: groups[1],  # チームベータ
     user: User.find_by(email: "yuki.matsumoto@example.com")
   },
   {
-    name: "Client Feedback Session",
-    introduction: "Gathering feedback from clients to improve our product offerings.",
+    name: "クライアントフィードバックセッション",
+    introduction: "製品の改善のためにクライアントからフィードバックを集める。",
     start_date: DateTime.new(2024, 3, 5, 14, 0),
     end_date: DateTime.new(2024, 3, 5, 18, 0),
-    location: "Kyoto Office",
-    group: groups[2],  # Team Gamma
+    location: "京都オフィス",
+    group: groups[2],  # チームガンマ
     user: User.find_by(email: "hanako.suzuki@example.com")
   },
   {
-    name: "Quarterly Financial Review",
-    introduction: "Review of company financials for the last quarter.",
+    name: "四半期財務レビュー",
+    introduction: "過去四半期の会社の財務状況のレビュー。",
     start_date: DateTime.new(2024, 4, 20, 9, 0),
     end_date: DateTime.new(2024, 4, 20, 17, 0),
-    location: "Tokyo HQ Conference Room",
-    group: groups[0],  # Team Alpha
+    location: "東京本社 会議室",
+    group: groups[0],  # チームアルファ
     user: User.find_by(email: "test@test")
   },
   {
-    name: "Marketing Strategy Meeting",
-    introduction: "Planning for marketing campaigns for the upcoming season.",
-    start_date: DateTime.new(2024, 5, 12, 10, 0),
-    end_date: DateTime.new(2024, 5, 12, 15, 0),
-    location: "Osaka Branch",
-    group: groups[1],  # Team Beta
+    name: "マーケティング戦略会議",
+    introduction: "次のシーズンのマーケティングキャンペーン計画。",
+    start_date: DateTime.new(2025, 5, 12, 10, 0),
+    end_date: DateTime.new(2025, 5, 12, 15, 0),
+    location: "大阪支社",
+    group: groups[1],  # チームベータ
     user: User.find_by(email: "kenta.kobayashi@example.com")
   },
   {
-    name: "Leadership Development Program",
-    introduction: "A session designed to develop leadership skills within the team.",
-    start_date: DateTime.new(2024, 6, 18, 9, 0),
-    end_date: DateTime.new(2024, 6, 18, 17, 0),
-    location: "Tokyo HQ Conference Room",
-    group: groups[2],  # Team Gamma
+    name: "リーダーシップ開発プログラム",
+    introduction: "チーム内でリーダーシップスキルを開発するためのセッション。",
+    start_date: DateTime.new(2030, 6, 18, 9, 0),
+    end_date: DateTime.new(2030, 6, 18, 17, 0),
+    location: "東京本社 会議室",
+    group: groups[2],  # チームガンマ
     user: User.find_by(email: "misaki.tanaka@example.com")
   },
   {
-    name: "Marketing Strategy Overview",
-    introduction: "An overview of the upcoming marketing strategies and goals.",
-    start_date: DateTime.new(2024, 7, 25, 10, 0),
-    end_date: DateTime.new(2024, 7, 25, 15, 0),
-    location: "Osaka Branch",
-    group: groups[1],  # Team Beta
+    name: "マーケティング戦略概観",
+    introduction: "次のマーケティング戦略と目標の概観。",
+    start_date: DateTime.new(2025, 7, 25, 10, 0),
+    end_date: DateTime.new(2025, 7, 25, 15, 0),
+    location: "大阪支社",
+    group: groups[1],  # チームベータ
     user: User.find_by(email: "kenta.kobayashi@example.com")
   }
 ]
@@ -171,125 +170,27 @@ end
 # 投稿データの作成
 posts_data = [
   {
-    title: "Annual Meeting Highlights",
+    title: "年間会議のハイライト",
     content: "今年の年次総会のハイライトをお伝えします。",
     user_email: "misaki.tanaka@example.com",
-    event_name: "Annual Sales Meeting"
+    event_name: "年間売上会議"
   },
   {
-    title: "Team Building Workshop Recap",
+    title: "チームビルディングワークショップの振り返り",
     content: "チームビルディングワークショップの振り返り。",
-    user_email: "kenta.kobayashi@example.com",
-    event_name: "Team Building Workshop"
-  },
-  {
-    title: "Projector Setup Tips",
-    content: "プロジェクターのセットアップ方法について。",
-    user_email: "test@test",
-    event_name: "Annual Sales Meeting"
-  },
-  {
-    title: "Client Feedback Summary",
-    content: "クライアントからのフィードバックの要約。",
-    user_email: "hanako.suzuki@example.com",
-    event_name: "Client Feedback Session"
-  },
-  {
-    title: "Financial Review Insights",
-    content: "四半期の財務レビューの詳細。",
     user_email: "yuki.matsumoto@example.com",
-    event_name: "Quarterly Financial Review"
-  },
-  {
-    title: "Marketing Strategy Overview",
-    content: "次期マーケティング戦略の概要。",
-    user_email: "kenta.kobayashi@example.com",
-    event_name: "Marketing Strategy Overview"
-  },
-  {
-    title: "Leadership Development Key Points",
-    content: "リーダーシップ開発プログラムの要点。",
-    user_email: "misaki.tanaka@example.com",
-    event_name: "Leadership Development Program"
+    event_name: "チームビルディングワークショップ"
   }
 ]
 
 posts_data.each do |post_data|
-  user = User.find_by(email: post_data[:user_email])
   event = Event.find_by(name: post_data[:event_name])
+  user = User.find_by(email: post_data[:user_email])
   
-  if user && event
-    post = event.posts.create!(
-      title: post_data[:title],
-      content: post_data[:content],
-      user: user
-    )
-    puts "投稿 '#{post.title}' を作成しました"
-  else
-    puts "イベントまたはユーザーが見つかりません"
+  post = Post.find_or_create_by(title: post_data[:title], event: event, user: user) do |p|
+    p.content = post_data[:content]
   end
+  puts post.persisted? ? "投稿 '#{post.title}' を作成しました" : "投稿 '#{post.title}' の作成に失敗しました"
 end
 
 puts "データの作成が完了しました"
-
-
-Comment.destroy_all
-
-# 複数のコメントを一度に作成
-comments = Comment.create(
-  [
-    {
-      content: "年次総会のハイライト、非常に興味深いです！来年の計画も気になります。",
-      user_id: 5,
-      post_id: 1,
-      event_id: 1
-    },
-    {
-      content: "チームビルディングワークショップの振り返り、次回の改善点を共有してほしいです。",
-      user_id: 3,
-      post_id: 2,
-      event_id: 2
-    },
-    {
-      content: "プロジェクターのセットアップに関して、実際の事例を見てみたいです。",
-      user_id: 2,
-      post_id: 3,
-      event_id: 1
-    },
-    {
-      content: "クライアントからのフィードバック、どのように改善点を取り入れたか気になります。",
-      user_id: 3,
-      post_id: 4,
-      event_id: 3
-    },
-    {
-      content: "財務レビューは詳細で分かりやすかったです。次回の予算案についても知りたいです。",
-      user_id: 4,
-      post_id: 5,
-      event_id: 4
-    },
-    {
-      content: "次期マーケティング戦略について、更なる戦略の具体例が知りたいです。",
-      user_id: 2,
-      post_id: 6,
-      event_id: 5
-    },
-    {
-      content: "リーダーシップ開発プログラム、次のステップで何を学ぶか楽しみです。",
-      user_id: 1,
-      post_id: 7,
-      event_id: 6
-    }
-  ]
-)
-
-# 作成されたコメントを確認
-if comments.all?(&:persisted?)
-  puts "コメントが正常に作成されました"
-else
-  comments.each do |comment|
-    unless comment.persisted?
-      puts "コメント作成失敗: #{comment.errors.full_messages.join(", ")}"
-    end
-  end
-end
