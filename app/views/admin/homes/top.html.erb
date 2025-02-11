@@ -1,7 +1,6 @@
 <div class="container my-4">
   <h1 class="text-center mb-4 display-4">管理者トップページ</h1>
-
-  <h2 class="my-4">未処理のイベント参加申請</h2>
+  <!-- イベント申請があるか確認 -->
   <% # ゲストユーザーの申請を除外する %>
   <% @pending_requests = @pending_requests.joins(:user).where.not(users: { email: 'guest@example.com' }) %>  <!-- ゲストユーザーの申請を除外 -->
   
@@ -30,10 +29,10 @@
       </tbody>
     </table>
   <% else %>
-    <p class="text-center text-muted">未処理の申請はありません。</p>
+    <p class="text-center text-muted">未処理のイベント申請はありません。</p>
   <% end %>
 
-  <h2 class="my-4">未処理のアイテム準備申請</h2>
+   <!-- アイテム完了申請があるか確認 -->
   <% # ゲストユーザーの申請を除外する %>
   <% @pending_item_requests = @pending_item_requests.joins(:user).where.not(users: { email: 'guest@example.com' }) %>  <!-- ゲストユーザーの申請を除外 -->
   
@@ -64,7 +63,7 @@
       </tbody>
     </table>
   <% else %>
-    <p class="text-center text-muted">未処理の申請はありません。</p>
+    <p class="text-center text-muted">未処理のアイテム完了申請はありません。</p>
   <% end %>
 </div>
 
