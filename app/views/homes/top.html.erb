@@ -12,8 +12,15 @@
 
   <h2 class="my-3 text-dark">イベント一覧</h2>
 
-  <!-- イベント一覧の部分テンプレート -->
-  <%= render 'events_list', events: @events %>
+  <!-- ソートボタン -->
+  <div class="mb-3">
+    <%= link_to "すべて", homes_top_path(sort: nil), class: "btn #{params[:sort].nil? ? 'btn-primary' : 'btn-outline-primary'}" %>
+    <%= link_to "開催予定", homes_top_path(sort: "upcoming"), class: "btn #{params[:sort] == 'upcoming' ? 'btn-primary' : 'btn-outline-primary'}" %>
+    <%= link_to "終了済み", homes_top_path(sort: "past"), class: "btn #{params[:sort] == 'past' ? 'btn-primary' : 'btn-outline-primary'}" %>
+  </div>
+
+  <!-- イベントリスト -->
+  <%= render 'events_list', events: @events || [] %>
 
   <div class="d-flex justify-content-center mb-3">
     <%= paginate @events, class: 'pagination' %>
