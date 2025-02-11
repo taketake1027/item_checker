@@ -7,7 +7,7 @@
         <p><strong>開催日:</strong> <%= @event.start_date.strftime('%Y-%m-%d %H:%M') if @event.start_date %></p>
         <p><strong>終了日:</strong> <%= @event.end_date.strftime('%Y-%m-%d %H:%M') if @event.end_date %></p>
 
-        <h2 class="text-info">イベント説明</h2>
+        <h2 class="text-info">イベント詳細</h2>
         <p><%= @event.introduction %></p>
 
         <div class="mt-3">
