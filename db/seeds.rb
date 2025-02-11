@@ -15,11 +15,11 @@ puts admin.persisted? ? "管理者アカウントを作成しました" : "管�
 
 # 一般ユーザーを作成
 users = [
-  { name: "Misaki Tanaka", email: "misaki.tanaka@example.com", role: "employee" },
-  { name: "Taro Yamada", email: "test@test", role: "employee" },
-  { name: "Hanako Suzuki", email: "hanako.suzuki@example.com", role: "staff" },
-  { name: "Kenta Kobayashi", email: "kenta.kobayashi@example.com", role: "leader" },
-  { name: "Yuki Matsumoto", email: "yuki.matsumoto@example.com", role: "employee" }
+  { name: "田中 美咲", email: "misaki.tanaka@example.com", role: "employee" },
+  { name: "山田 太郎", email: "test@test", role: "employee" },
+  { name: "鈴木 花子", email: "hanako.suzuki@example.com", role: "staff" },
+  { name: "小林 健太", email: "kenta.kobayashi@example.com", role: "leader" },
+  { name: "松本 優希", email: "yuki.matsumoto@example.com", role: "employee" }
 ]
 users.each do |user_data|
   user = User.find_or_create_by(email: user_data[:email]) do |user|
@@ -33,9 +33,9 @@ end
 
 # グループ情報を作成
 group_data = [
-  { name: "Team Alpha", introduction: "営業とマーケティングを担当するチーム。" },
-  { name: "Team Beta", introduction: "製品開発を担当するチーム。" },
-  { name: "Team Gamma", introduction: "顧客サポートを担当するチーム。" }
+  { name: "チームアルファ", introduction: "営業とマーケティングを担当するチーム。" },
+  { name: "チームベータ", introduction: "製品開発を担当するチーム。" },
+  { name: "チームガンマ", introduction: "顧客サポートを担当するチーム。" }
 ]
 
 groups = group_data.map do |data|
@@ -68,7 +68,7 @@ event_data = [
     start_date: DateTime.new(2026, 1, 15, 9, 0),
     end_date: DateTime.new(2026, 1, 15, 17, 0),
     location: "東京本社 会議室",
-    group: groups[0],  # Team Alpha
+    group: groups[0],  # チームアルファ
     user: User.find_by(email: "kenta.kobayashi@example.com")
   },
   {
@@ -77,7 +77,7 @@ event_data = [
     start_date: DateTime.new(2024, 2, 10, 10, 0),
     end_date: DateTime.new(2024, 2, 10, 16, 0),
     location: "大阪支社",
-    group: groups[1],  # Team Beta
+    group: groups[1],  # チームベータ
     user: User.find_by(email: "yuki.matsumoto@example.com")
   },
   {
@@ -86,7 +86,7 @@ event_data = [
     start_date: DateTime.new(2024, 3, 5, 14, 0),
     end_date: DateTime.new(2024, 3, 5, 18, 0),
     location: "京都オフィス",
-    group: groups[2],  # Team Gamma
+    group: groups[2],  # チームガンマ
     user: User.find_by(email: "hanako.suzuki@example.com")
   },
   {
@@ -95,7 +95,7 @@ event_data = [
     start_date: DateTime.new(2024, 4, 20, 9, 0),
     end_date: DateTime.new(2024, 4, 20, 17, 0),
     location: "東京本社 会議室",
-    group: groups[0],  # Team Alpha
+    group: groups[0],  # チームアルファ
     user: User.find_by(email: "test@test")
   },
   {
@@ -104,7 +104,7 @@ event_data = [
     start_date: DateTime.new(2025, 5, 12, 10, 0),
     end_date: DateTime.new(2025, 5, 12, 15, 0),
     location: "大阪支社",
-    group: groups[1],  # Team Beta
+    group: groups[1],  # チームベータ
     user: User.find_by(email: "kenta.kobayashi@example.com")
   },
   {
@@ -113,7 +113,7 @@ event_data = [
     start_date: DateTime.new(2030, 6, 18, 9, 0),
     end_date: DateTime.new(2030, 6, 18, 17, 0),
     location: "東京本社 会議室",
-    group: groups[2],  # Team Gamma
+    group: groups[2],  # チームガンマ
     user: User.find_by(email: "misaki.tanaka@example.com")
   },
   {
@@ -122,7 +122,7 @@ event_data = [
     start_date: DateTime.new(2025, 7, 25, 10, 0),
     end_date: DateTime.new(2025, 7, 25, 15, 0),
     location: "大阪支社",
-    group: groups[1],  # Team Beta
+    group: groups[1],  # チームベータ
     user: User.find_by(email: "kenta.kobayashi@example.com")
   }
 ]
