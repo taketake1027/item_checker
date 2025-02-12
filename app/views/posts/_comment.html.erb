@@ -1,7 +1,13 @@
-<div class="card mb-3 p-3" id="comment_<%= comment.id %>">
-  <p><strong><%= comment.user.name %></strong> <%= comment.created_at.strftime('%Y-%m-%d %H:%M') %></p>
-  <p><%= comment.content %></p>
+<div class="card mb-3 p-3 d-flex align-items-start" id="comment_<%= comment.id %>">
+  <div class="flex-grow-1">
+    <p><strong><%= comment.user.name %></strong> <%= comment.created_at.strftime('%Y-%m-%d %H:%M') %></p>
+    <p><%= comment.content %></p>
+  </div>
+  
   <% if comment.user == current_user %> 
-    <%= link_to '削除', event_post_comment_path(@event, @post, comment), method: :delete, remote: true, class: 'btn btn-danger btn-sm', data: { confirm: '削除しますか？' } %>
+    <%= link_to '削除', event_post_comment_path(@event, @post, comment), 
+                method: :delete, remote: true, 
+                class: 'btn btn-danger btn-sm p-1 small d-inline-block text-nowrap', 
+                data: { confirm: '削除しますか？' } %>
   <% end %>
 </div>
