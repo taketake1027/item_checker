@@ -16,12 +16,15 @@ class Event < ApplicationRecord
   validates :location, presence: true
   validates :group_id, presence: true
 
-   # イベントに参加しているかを確認
-  def user_participating?(user)
-    # イベントに参加しているか確認するためには、group_usersテーブルを通じて、グループに参加しているユーザーかどうかをチェック
-    self.group.users.include?(user)
+  # イベントに参加しているかを確認
+def user_participating?(user)
+  # イベントが承認されたユーザーは、グループ参加者のチェックをスルー
+  if event_requests.exists?(user_id: user.id, status: 'approved')
+    return true
   end
-
+  # 通常通り、グループ参加者のチェック
+  self.group.users.include?(user)
+end
   private
 
   def end_date_after_start_date
