@@ -1,21 +1,27 @@
 <div class="container mt-3">
   <div class="row justify-content-center">
-    <!-- 投稿内容（横幅を広げる） -->
+    <!-- 投稿内容（画像と文字を横並びに） -->
     <div class="col-12 col-md-8">
       <div class="card p-3 shadow-sm">
         <h1 class="h5"><%= @post.title %></h1>
-        <p class="text-muted">投稿者: <%= @post.user.name %></p>
-        <p><%= @post.content %></p>
+        
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+          <!-- 投稿内容のテキスト部分 -->
+          <div class="text-content mb-3 mb-md-0" style="max-width: 75%;">
+            <p><%= @post.content %></p>
+          </div>
 
-        <% if @post.image.attached? %>
-          <p><%= image_tag(@post.image, class: 'img-fluid', style: 'max-width: 100%; height: auto;') %></p>
-        <% else %>
-          <p><%= image_tag 'sample.png', class: 'img-fluid', alt: 'サンプル画像', style: 'max-width: 50%; height: auto;' %></p>
-          <p class="text-muted">投稿には画像が添付されていません。</p>
-        <% end %>
+          <!-- 投稿画像の部分 -->
+          <div class="image-content">
+            <% if @post.image.attached? %>
+              <%= image_tag(@post.image, class: 'img-fluid', style: 'max-width: 200px; height: auto;') %>
+            <% else %>
+              <%= image_tag 'sample.png', class: 'img-fluid', alt: 'サンプル画像', style: 'max-width: 200px; height: auto;' %>
+            <% end %>
+          </div>
+        </div>
 
-        <p class="text-muted"><%= @post.created_at.strftime('%Y-%m-%d %H:%M') %></p>
-        <%= link_to 'イベント詳細に戻る', event_path(@event), class: 'btn btn-outline-secondary btn-sm' %>
+        <%= link_to 'イベント詳細に戻る', event_path(@event), class: 'btn btn-outline-secondary btn-sm mt-3' %>
       </div>
     </div>
   </div>
