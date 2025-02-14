@@ -9,12 +9,9 @@ class HomesController < ApplicationController
     else
       events = Event.all
     end
-
     current_time = Time.current
-
     # デフォルト: 新しい順
     events = events.order(created_at: :desc)
-
     # ソート条件の適用
     case params[:sort]
     when "upcoming"
@@ -25,7 +22,6 @@ class HomesController < ApplicationController
       @events = events  # デフォルト
     end
 
-    # ページネーション
     @events = @events.page(params[:page]).per(6)
   end
 
