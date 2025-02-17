@@ -35,11 +35,11 @@
         <%= form_with(model: [@event, @event.posts.build], remote: true, html: { multipart: true }) do |f| %>
           <div class="form-group mb-3">
             <%= f.label :title, "投稿タイトル", class: "form-label" %>
-            <%= f.text_field :title, class: "form-control form-control-sm"%>
+            <%= f.text_field :title, class: "form-control form-control-sm", placeholder: "タイトルを入力してください" %>
           </div>
           <div class="form-group mb-3">
             <%= f.label :content, "投稿内容", class: "form-label" %>
-            <%= f.text_area :content, class: "form-control form-control-sm", rows: 3%>
+            <%= f.text_area :content, class: "form-control form-control-sm", rows: 3, placeholder: "投稿内容を入力してください" %>
           </div>
           <div class="form-group mb-3">
             <%= f.label :image, "画像を添付", class: "form-label" %>
