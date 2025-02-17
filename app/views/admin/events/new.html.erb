@@ -17,12 +17,12 @@
 
       <div class="form-group mb-3">
         <%= form.label :name, 'イベント名' %>
-        <%= form.text_field :name, class: 'form-control' %>
+        <%= form.text_field :name, class: 'form-control', placeholder: "イベント名を入力してください" %>
       </div>
 
       <div class="form-group mb-3">
         <%= form.label :introduction, 'イベント紹介' %>
-        <%= form.text_area :introduction, class: 'form-control', rows: 4 %>
+        <%= form.text_area :introduction, class: 'form-control', rows: 4, placeholder: "イベントの詳細を入力してください" %>
       </div>
 
       <div class="form-group mb-3">
@@ -37,12 +37,12 @@
 
       <div class="form-group mb-3">
         <%= form.label :location, '場所' %>
-        <%= form.text_field :location, class: 'form-control' %>
+        <%= form.text_field :location, class: 'form-control', placeholder: "イベントの開催場所を入力してください" %>
       </div>
 
       <div class="form-group mb-3">
         <%= form.label :group_id, 'グループ' %>
-        <%= form.collection_select :group_id, @groups, :id, :name, { include_blank: true }, class: 'form-control' %>
+        <%= form.collection_select :group_id, @groups, :id, :name, { include_blank: "グループを選択してください" }, class: 'form-control' %>
       </div>
 
       <div class="form-group mb-4">
