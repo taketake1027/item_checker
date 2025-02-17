@@ -15,12 +15,12 @@
 
     <div class="form-group mb-3">
       <%= form.label :name, 'アイテム名' %>
-      <%= form.text_field :name, class: 'form-control' %>
+      <%= form.text_field :name, class: 'form-control', placeholder: "アイテム名を入力してください" %>
     </div>
 
     <div class="form-group mb-3">
       <%= form.label :introduction, 'アイテム説明' %>
-      <%= form.text_area :introduction, class: 'form-control' %>
+      <%= form.text_area :introduction, class: 'form-control', placeholder: "アイテムの詳細を入力してください" %>
     </div>
 
     <div class="form-group mb-3">
@@ -30,18 +30,18 @@
 
     <div class="form-group mb-3">
       <%= form.label :amount, '必要数量' %>
-      <%= form.number_field :amount, class: 'form-control' %>
+      <%= form.number_field :amount, class: 'form-control', placeholder: "必要な数量を入力してください" %>
     </div>
 
     <!-- 準備済み数量 -->
     <div class="form-group mb-3">
       <%= form.label :prepared_amount, '準備済み数量' %>
-      <%= form.number_field :prepared_amount, class: 'form-control' %>
+      <%= form.number_field :prepared_amount, class: 'form-control', placeholder: "準備済みの数量を入力してください" %>
     </div>
 
     <div class="form-group mb-3">
       <%= form.label :event_id, 'イベント' %>
-      <%= form.collection_select :event_id, Event.all, :id, :name, prompt: 'イベントを選択', class: 'form-control' %>
+      <%= form.collection_select :event_id, Event.all, :id, :name, prompt: 'イベントを選択してください', class: 'form-control' %>
     </div>
 
     <div class="form-group mb-3">
