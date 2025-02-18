@@ -140,7 +140,7 @@
         <div class="text-center mt-4">
           <%= form_for(@user, url: user_registration_path, html: { method: :delete }) do |f| %>
             <div class="form-group">
-              <%= f.submit 'アカウントを削除する', class: 'btn btn-danger', data: { confirm: '本当にアカウントを削除しますか？ この操作は取り消せません。' } %>
+              <%= f.submit 'アカウントを削除する', class: 'btn btn-danger', data: { confirm: 'アカウントを削除すると、すべての投稿・コメント・いいね履歴が削除され、イベントメンバーからも外れます。本当に削除しますか？' } %>
             </div>
           <% end %>
         </div>
