@@ -6,7 +6,7 @@
       method: :post, remote: true, 
       class: 'btn btn-warning btn-sm request-button',
       id: "request-button-#{item.id}",
-      data: { confirm: 'こちらでこのアイテムに準備申請しますか？' } %>
+      data: { confirm: 'こちらでこのアイテムの準備完了の申請をしますか？' } %>
   <% elsif user_request.status == 'pending' %>
     <!-- 申請中の場合は「申請取り消し」ボタン -->
     <span class="text-success">申請済み（承認待ち）</span>
