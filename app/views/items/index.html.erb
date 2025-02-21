@@ -1,11 +1,25 @@
 <div class="container my-4 event-items">
   <h1 class="text-center mb-4"><%= @event.name %> のアイテム一覧</h1>
 
+<!-- 不足アイテム表示 -->
+  <% @insufficient_items = @items.select { |item| item.prepared_amount < item.amount } %>
+  <% if @insufficient_items.any? %>
+    <div class="alert alert-warning text-center">
+      <h4>⚠️ 不足しているアイテムリスト</h4>
+      <ul class="list-unstyled">
+        <% @insufficient_items.each do |item| %>
+          <li class="fw-bold text-danger">
+            <%= item.name %>：<%= item.prepared_amount %> / <%= item.amount %> 個
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="mb-3 text-center">
     <%= form_with url: event_items_path(@event), method: :get, class: 'd-flex justify-content-center' do %>
-      <%= text_field_tag :search, params[:search], placeholder: "アイテム名で検索", class: 'form-control w-50 me-2' %>
       <%= select_tag :sort_by, options_for_select([['新着順', 'newest'], ['準備完了', 'complete'], ['準備中', 'incomplete']], selected: params[:sort_by]), class: 'form-control w-50 me-2' %>
-      <%= submit_tag '検索・並べ替え', class: 'btn btn-secondary' %>
+      <%= submit_tag '並べ替え', class: 'btn btn-secondary' %>
     <% end %>
   </div>
 
@@ -29,7 +43,7 @@
                   <% if item.prepared_amount >= item.amount || (item.item_requests.find_by(user_id: current_user.id)&.status == 'approved') %>
                     <span class="fw-bold"><%= "#{item.amount}" %> 個 準備完了</span>
                   <% else %>
-                    <span class="fw-bold"><%= "#{item.prepared_amount}/#{item.amount}" %> 個 準備中</span>
+                    <span class="fw-bold text-danger"><%= "#{item.prepared_amount}/#{item.amount}" %> 個 準備中</span>
                   <% end %>
                 </td>
                 <td>
