@@ -89,6 +89,22 @@ class Admin::ItemsController < ApplicationController
     end
   end
 
+  # アイテム申請の却下
+def reject_item_request
+  request = ItemRequest.find(params[:id])
+  item = request.item
+
+  # アイテム申請を却下状態に更新
+  if request.update(status: 'rejected')
+    # 必要に応じてアイテムのステータスを変更（例: 未完了など）
+    item.update(status: '未完了') if item.status != '未完了'
+
+    redirect_to admin_root_path, notice: 'アイテム申請が却下されました。'
+  else
+    redirect_to admin_root_path, alert: 'アイテム申請の却下に失敗しました。'
+  end
+end
+
   private
 
   def set_item
