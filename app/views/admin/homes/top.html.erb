@@ -103,8 +103,11 @@
 </div>
 
 <!-- jQueryのコードでスライド表示を制御 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-  $(document).ready(function(){
+  $(document).ready(function() {
+    console.log("DOM is ready!"); // デバッグ用
+
     // イベント申請のスライド表示
     $("#toggleEventRequests").click(function(){
       $("#eventRequests").slideToggle();
@@ -119,5 +122,12 @@
     $("#toggleAdminLinks").click(function(){
       $("#adminLinks").slideToggle();
     });
+  });
+
+  // ページ遷移後にスライドを再初期化
+  $(window).on('load', function() {
+    console.log("Window loaded! Reinitializing slide toggles.");
+    // 必要に応じてスライドの状態を初期化するコードを追加
+    // 例えば、ページが再度表示されたときに開いていた状態に戻すなど
   });
 </script>
