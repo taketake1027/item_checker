@@ -14,21 +14,25 @@
     <% end %>
 
     <div class="form-group mb-3">
-      <%= f.label :name, 'グループ名', class: 'form-label' %>
-      <%= f.text_field :name, class: 'form-control', placeholder: "グループ名を入力してください" %>
+      <!-- labelのfor属性をidと一致させる -->
+      <%= f.label :name, 'グループ名', class: 'form-label', for: 'group_name' %>
+      <%= f.text_field :name, class: 'form-control', placeholder: "グループ名を入力してください", id: 'group_name' %>
     </div>
 
     <div class="form-group mb-3">
-      <%= f.label :introduction, 'グループの詳細', class: 'form-label' %>
-      <%= f.text_area :introduction, class: 'form-control', rows: 4, placeholder: "グループの詳細を入力してください" %>
+      <!-- labelのfor属性をidと一致させる -->
+      <%= f.label :introduction, 'グループの詳細', class: 'form-label', for: 'group_introduction' %>
+      <%= f.text_area :introduction, class: 'form-control', rows: 4, placeholder: "グループの詳細を入力してください", id: 'group_introduction' %>
     </div>
 
     <div class="form-group mb-3">
-      <%= f.label :user_ids, 'グループに参加するユーザーを選択', class: 'form-label' %>
+      <!-- labelのfor属性をidと一致させる -->
+      <%= f.label :user_ids, 'グループに参加するユーザーを選択', class: 'form-label', for: 'user_ids' %>
       <%= f.collection_check_boxes :user_ids, User.all, :id, :name do |cb| %>
         <div class="form-check">
-          <%= cb.check_box class: 'form-check-input' %>
-          <%= cb.label class: 'form-check-label' %>
+          <!-- check_boxのidを動的に設定し、labelのfor属性と一致させる -->
+          <%= cb.check_box class: 'form-check-input', id: "user_#{cb.object.id}" %>
+          <%= cb.label class: 'form-check-label', for: "user_#{cb.object.id}" %>
         </div>
       <% end %>
     </div>
