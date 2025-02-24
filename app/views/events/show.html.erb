@@ -1,8 +1,8 @@
 <div class="container mt-4">
   <div class="row">
-    <!-- イベント詳細カードの背景色を緑に変更、文字色を白に -->
-    <div class="col-md-6 col-12">
-      <div class="card p-4 shadow-sm" style="background-color: #28a745; border-radius: 8px;">
+    <!-- イベント詳細カード -->
+    <div class="col-md-6 col-12 mb-3">
+      <div class="card p-4 shadow" style="background-color: #28a745; border-radius: 8px;">
         <h1 class="text-white"><%= @event.name %></h1>
         <p class="text-white"><strong>場所:</strong> <%= @event.location %></p>
         <p class="text-white"><strong>開催日:</strong> <%= @event.start_date.strftime('%Y-%m-%d %H:%M') if @event.start_date %></p>
@@ -14,11 +14,16 @@
         <div class="mt-3">
           <%= link_to '関連アイテム一覧を見る', event_items_path(@event), class: 'btn btn-outline-light' %>
         </div>
+
+        <!-- Googleカレンダーに追加ボタン -->
+        <div class="mt-3">
+          <%= link_to 'Googleカレンダーに追加', google_calendar_url(@event), class: 'btn btn-warning', target: '_blank', rel: 'noopener noreferrer' %>
+        </div>
       </div>
     </div>
 
     <!-- 投稿フォームの背景色はそのまま -->
-    <div class="col-md-6 col-12">
+    <div class="col-md-6 col-12 mb-3">
       <div class="card p-4 shadow-sm" style="background-color: #f8f9fa; border-radius: 8px;">
         <h3>イベントに関する投稿</h3>
 
@@ -94,6 +99,7 @@
       </div>
     <% end %>
   </div>
+
   <!-- 戻るボタン -->
   <div class="text-center mt-4">
     <%= link_to 'イベント一覧に戻る', homes_top_path, class: 'btn btn-secondary' %>
