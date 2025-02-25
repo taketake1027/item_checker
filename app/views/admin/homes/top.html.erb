@@ -7,7 +7,7 @@
 
     <!-- イベント参加申請 -->
     <button class="btn btn-info w-75 mx-auto mb-3 d-block" id="toggleEventRequests">
-      未処理のイベント申請 (<%= @pending_requests.count %> 件)
+      未処理のイベント参加申請 (<%= @pending_requests.count %> 件)
     </button>
     <div id="eventRequests" style="display: none;">
       <% @pending_requests = @pending_requests.joins(:user).where.not(users: { email: 'guest@example.com' }) %>
