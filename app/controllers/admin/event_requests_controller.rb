@@ -5,7 +5,7 @@ class Admin::EventRequestsController < ApplicationController
 
   def approve
     @event_request.update(status: 'approved')
-    redirect_to admin_homes_top_path, notice: 'イベントイベント申請が承認されました。'
+    redirect_to admin_homes_top_path, notice: 'イベント申請が承認されました。'
   end
 
   def reject
