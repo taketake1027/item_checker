@@ -60,7 +60,8 @@
               <tbody>
                 <% @posts.each do |post| %>
                   <tr>
-                    <td><%= link_to post.title, event_post_path(post.event, post), class: 'text-decoration-none' %></td>
+                    <!-- 投稿詳細ページではなく、投稿一覧ページに遷移しつつ、投稿の位置までスクロール -->
+                    <td><%= link_to post.title, event_path(post.event, anchor: "post-#{post.id}"), class: 'text-decoration-none' %></td>
                     <td><%= post.event.name if post.event %></td>
                   </tr>
                 <% end %>
@@ -74,6 +75,7 @@
           <% end %>
         </div>
       </div>
+
 
       <!-- コメント履歴 -->
       <div class="card mb-4">
